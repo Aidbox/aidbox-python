@@ -5,6 +5,7 @@ setup(
     version='0.0.1',
     description='',
     python_requires='>=3.7',
+    entry_points={ "py.typed": ["base", "resources"] },
     install_requires=[
         'requests>=2.31.0',
         'types-requests==2.31.0.8',
