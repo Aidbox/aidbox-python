@@ -1,13 +1,11 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='python-toolkit',
     version='0.0.1',
     description='',
     python_requires='>=3.7',
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
-    package_data={"base": ["py.typed"]},
+    package_data={"base": ["py.typed"], "resources": ["py.typed"]},
     install_requires=[
         'requests>=2.31.0',
         'types-requests==2.31.0.8',
