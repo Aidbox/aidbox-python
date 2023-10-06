@@ -5,6 +5,7 @@ setup(
     version='0.0.1',
     description='',
     python_requires='>=3.7',
+    package_data={"base": ["py.typed"]},
     install_requires=[
         'requests>=2.31.0',
         'types-requests==2.31.0.8',
