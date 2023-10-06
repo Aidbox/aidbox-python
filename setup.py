@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='aidbox-python-toolkit',
+    name='python-toolkit',
     version='0.0.1',
     description='',
     python_requires='>=3.7',
