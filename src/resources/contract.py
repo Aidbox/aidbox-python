@@ -1,0 +1,68 @@
+from typing import Optional
+
+from base import Attachment
+from base import Reference
+from base import Reference
+from base import Reference
+from base import Reference
+from base import Reference
+from base import Period
+from base import Reference
+from base import BackboneElement
+from base import CodeableConcept
+from base import BackboneElement
+from base import CodeableConcept
+from base import CodeableConcept
+from base import CodeableConcept
+from base import BackboneElement
+from base import CodeableConcept
+from base import BackboneElement
+from base import Reference
+from base import BackboneElement
+from base import BackboneElement
+from base import Reference
+from base import Identifier
+from base import CodeableConcept
+from base import Reference
+from base import CodeableConcept
+from base import Reference
+from base import DomainResource
+
+
+class Contract(DomainResource):
+	legallyBindingAttachment: Optional[Attachment] = None
+	instantiatesCanonical: Optional[Reference] = None
+	instantiatesUri: Optional[str] = None
+	legallyBindingReference: Optional[Reference] = None
+	site: list[Reference] = []
+	relevantHistory: list[Reference] = []
+	supportingInfo: list[Reference] = []
+	applies: Optional[Period] = None
+	name: Optional[str] = None
+	authority: list[Reference] = []
+	rule: list[BackboneElement] = []
+	type: Optional[CodeableConcept] = None
+	legal: list[BackboneElement] = []
+	contentDerivative: Optional[CodeableConcept] = None
+	topicCodeableConcept: Optional[CodeableConcept] = None
+	legalState: Optional[CodeableConcept] = None
+	contentDefinition: Optional[BackboneElement] = None
+	scope: Optional[CodeableConcept] = None
+	title: Optional[str] = None
+	signer: list[BackboneElement] = []
+	author: Optional[Reference] = None
+	term: list[BackboneElement] = []
+	friendly: list[BackboneElement] = []
+	alias: list[str] = []
+	status: Optional[str] = None
+	subtitle: Optional[str] = None
+	topicReference: Optional[Reference] = None
+	url: Optional[str] = None
+	identifier: list[Identifier] = []
+	expirationType: Optional[CodeableConcept] = None
+	issued: Optional[str] = None
+	domain: list[Reference] = []
+	subType: list[CodeableConcept] = []
+	version: Optional[str] = None
+	subject: list[Reference] = []
+

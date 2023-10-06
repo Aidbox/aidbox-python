@@ -1,0 +1,5 @@
+.DS_Store
+aidbox
+build
+*.egg-info
+.env
