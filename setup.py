@@ -21,6 +21,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License'
+        'License :: OSI Approved :: MIT License',
+        'Typing :: Typed'
     ]
 )
