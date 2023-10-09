@@ -5,7 +5,7 @@ setup(
     version='0.0.1',
     description='',
     python_requires='>=3.7',
-    package_data={"python-toolkit": ["py.typed"]},
+    package_data={"python-toolkit": ["py.typed"], "base": ["py.typed"], "resource": ["py.typed"]},
     include_package_data=True,
     zip_safe=False,
     install_requires=[
