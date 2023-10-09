@@ -17,7 +17,7 @@ class RiskEvidenceSynthesis_Certainty(BackboneElement):
 	rating: list[CodeableConcept] = []
 
 class RiskEvidenceSynthesis_RiskEstimate_PrecisionEstimate(BackboneElement):
-	from: Optional[str] = None
+	from_: Optional[str] = None
 	level: Optional[str] = None
 	to: Optional[str] = None
 	type: Optional[CodeableConcept] = None
