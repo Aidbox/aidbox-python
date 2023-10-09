@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class DocumentManifest_Related(BackboneElement):
 	identifier: Optional[Identifier] = None

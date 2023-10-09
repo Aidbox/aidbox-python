@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class InsurancePlan_Coverage_Benefit_Limit(BackboneElement):
 	code: Optional[CodeableConcept] = None

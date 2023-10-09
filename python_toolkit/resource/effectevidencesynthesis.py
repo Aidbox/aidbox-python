@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class EffectEvidenceSynthesis_EffectEstimate_PrecisionEstimate(BackboneElement):
 	from: Optional[str] = None

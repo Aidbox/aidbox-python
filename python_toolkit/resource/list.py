@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class List_Entry(BackboneElement):
 	date: Optional[str] = None

@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class MedicationRequest_Substitution(BackboneElement):
 	allowedBoolean: Optional[bool] = None

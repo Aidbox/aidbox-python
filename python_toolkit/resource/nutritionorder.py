@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class NutritionOrder_OralDiet_Nutrient(BackboneElement):
 	amount: Optional[Quantity] = None

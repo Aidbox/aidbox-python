@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class CommunicationRequest_Payload(BackboneElement):
 	contentAttachment: Optional[Attachment] = None

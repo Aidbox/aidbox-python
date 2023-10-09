@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class SubstanceSourceMaterial_Organism_Author(BackboneElement):
 	authorDescription: Optional[str] = None

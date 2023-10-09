@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class OperationDefinition_Overload(BackboneElement):
 	comment: Optional[str] = None

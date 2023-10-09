@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ChargeItemDefinition_PropertyGroup_PriceComponent(BackboneElement):
 	amount: Optional[Money] = None

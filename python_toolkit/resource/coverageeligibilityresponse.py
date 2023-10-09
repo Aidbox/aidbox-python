@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class CoverageEligibilityResponse_Insurance_Item_Benefit(BackboneElement):
 	usedString: Optional[str] = None

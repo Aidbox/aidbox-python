@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ClaimResponse_Insurance(BackboneElement):
 	businessArrangement: Optional[str] = None
@@ -127,3 +127,4 @@ class ClaimResponse(DomainResource):
 	subType: Optional[CodeableConcept] = None
 	formCode: Optional[CodeableConcept] = None
 	addItem: list[ClaimResponse_AddItem] = []
+

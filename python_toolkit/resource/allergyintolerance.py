@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class AllergyIntolerance_Reaction(BackboneElement):
 	description: Optional[str] = None

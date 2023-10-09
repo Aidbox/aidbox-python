@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ExampleScenario_Instance_ContainedInstance(BackboneElement):
 	resourceId: str

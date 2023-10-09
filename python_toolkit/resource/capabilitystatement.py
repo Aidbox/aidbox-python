@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class CapabilityStatement_Document(BackboneElement):
 	documentation: Optional[str] = None

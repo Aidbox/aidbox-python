@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class Medication_Batch(BackboneElement):
 	expirationDate: Optional[str] = None

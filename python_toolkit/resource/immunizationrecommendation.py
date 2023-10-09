@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ImmunizationRecommendation_Recommendation_DateCriterion(BackboneElement):
 	code: CodeableConcept

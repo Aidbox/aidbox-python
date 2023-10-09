@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class MedicinalProduct_ManufacturingBusinessOperation(BackboneElement):
 	authorisationReferenceNumber: Optional[Identifier] = None

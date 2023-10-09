@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class MedicinalProductIngredient_SpecifiedSubstance_Strength_ReferenceStrength(BackboneElement):
 	country: list[CodeableConcept] = []

@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class GraphDefinition_Link_Target_Compartment(BackboneElement):
 	code: str

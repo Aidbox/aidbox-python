@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class SpecimenDefinition_TypeTested_Container_Additive(BackboneElement):
 	additiveCodeableConcept: Optional[CodeableConcept] = None

@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class SubstanceNucleicAcid_Subunit_Linkage(BackboneElement):
 	connectivity: Optional[str] = None

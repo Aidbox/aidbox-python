@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class CarePlan_Activity_Detail(BackboneElement):
 	description: Optional[str] = None

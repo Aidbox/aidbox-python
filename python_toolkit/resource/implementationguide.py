@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ImplementationGuide_Definition_Grouping(BackboneElement):
 	description: Optional[str] = None

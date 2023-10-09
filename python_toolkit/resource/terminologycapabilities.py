@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class TerminologyCapabilities_Expansion_Parameter(BackboneElement):
 	documentation: Optional[str] = None

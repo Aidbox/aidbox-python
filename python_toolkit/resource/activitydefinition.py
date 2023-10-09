@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ActivityDefinition_Participant(BackboneElement):
 	role: Optional[CodeableConcept] = None

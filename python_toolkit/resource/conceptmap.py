@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ConceptMap_Group_Element_Target_DependsOn(BackboneElement):
 	display: Optional[str] = None

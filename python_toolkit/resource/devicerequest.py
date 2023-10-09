@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class DeviceRequest_Parameter(BackboneElement):
 	code: Optional[CodeableConcept] = None

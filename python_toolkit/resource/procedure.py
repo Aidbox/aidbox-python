@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class Procedure_FocalDevice(BackboneElement):
 	action: Optional[CodeableConcept] = None

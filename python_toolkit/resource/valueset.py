@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class ValueSet_Compose_Include_Concept_Designation(BackboneElement):
 	language: Optional[str] = None

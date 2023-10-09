@@ -1,5 +1,5 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class Coverage_CostToBeneficiary_Exception(BackboneElement):
 	period: Optional[Period] = None

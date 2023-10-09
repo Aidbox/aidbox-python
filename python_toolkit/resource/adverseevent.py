@@ -1,8 +1,8 @@
 from typing import Optional
-from base import *
+from ..base import *
 
 class AdverseEvent_SuspectEntity_Causality(BackboneElement):
-	assessment: Optional[CodeableConcept] = None 
+	assessment: Optional[CodeableConcept] = None
 	author: Optional[Reference] = None
 	method: Optional[CodeableConcept] = None
 	productRelatedness: Optional[str] = None
