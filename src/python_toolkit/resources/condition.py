@@ -1,25 +1,14 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Range
-from base import BackboneElement
-from base import Reference
-from base import BackboneElement
-from base import Period
-from base import Period
-from base import Reference
-from base import Annotation
-from base import Range
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Identifier
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import DomainResource
+class Condition_Stage(BackboneElement):
+	assessment: list[Reference] = []
+	summary: Optional[CodeableConcept] = None
+	type: Optional[CodeableConcept] = None
 
+class Condition_Evidence(BackboneElement):
+	code: list[CodeableConcept] = []
+	detail: list[Reference] = []
 
 class Condition(DomainResource):
 	category: list[CodeableConcept] = []
@@ -27,9 +16,9 @@ class Condition(DomainResource):
 	abatementAge: Optional[str] = None
 	onsetRange: Optional[Range] = None
 	onsetAge: Optional[str] = None
-	stage: list[BackboneElement] = []
+	stage: list[Condition_Stage] = []
 	encounter: Optional[Reference] = None
-	evidence: list[BackboneElement] = []
+	evidence: list[Condition_Evidence] = []
 	onsetPeriod: Optional[Period] = None
 	abatementPeriod: Optional[Period] = None
 	asserter: Optional[Reference] = None

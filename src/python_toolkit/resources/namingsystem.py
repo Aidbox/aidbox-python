@@ -1,12 +1,12 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import UsageContext
-from base import CodeableConcept
-from base import BackboneElement
-from base import ContactDetail
-from base import DomainResource
-
+class NamingSystem_UniqueId(BackboneElement):
+	comment: Optional[str] = None
+	period: Optional[Period] = None
+	preferred: Optional[bool] = None
+	type: str
+	value: str
 
 class NamingSystem(DomainResource):
 	description: Optional[str] = None
@@ -20,6 +20,6 @@ class NamingSystem(DomainResource):
 	usage: Optional[str] = None
 	status: str
 	kind: str
-	uniqueId: list[BackboneElement]
+	uniqueId: list[NamingSystem_UniqueId]
 	contact: list[ContactDetail] = []
 

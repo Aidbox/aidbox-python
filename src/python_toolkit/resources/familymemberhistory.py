@@ -1,19 +1,15 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import CodeableConcept
-from base import Range
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import BackboneElement
-from base import Identifier
-from base import Range
-from base import Period
-from base import CodeableConcept
-from base import Reference
-from base import DomainResource
-
+class FamilyMemberHistory_Condition(BackboneElement):
+	onsetRange: Optional[Range] = None
+	onsetAge: Optional[str] = None
+	contributedToDeath: Optional[bool] = None
+	onsetPeriod: Optional[Period] = None
+	outcome: Optional[CodeableConcept] = None
+	note: list[Annotation] = []
+	onsetString: Optional[str] = None
+	code: CodeableConcept
 
 class FamilyMemberHistory(DomainResource):
 	deceasedAge: Optional[str] = None
@@ -30,7 +26,7 @@ class FamilyMemberHistory(DomainResource):
 	reasonCode: list[CodeableConcept] = []
 	note: list[Annotation] = []
 	status: str
-	condition: list[BackboneElement] = []
+	condition: list[FamilyMemberHistory_Condition] = []
 	identifier: list[Identifier] = []
 	ageString: Optional[str] = None
 	deceasedRange: Optional[Range] = None

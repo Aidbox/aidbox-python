@@ -1,11 +1,5 @@
 from typing import Optional
-
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class Basic(DomainResource):
 	author: Optional[Reference] = None

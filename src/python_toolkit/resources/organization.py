@@ -1,14 +1,11 @@
 from typing import Optional
+from base import *
 
-from base import Address
-from base import CodeableConcept
-from base import Identifier
-from base import ContactPoint
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import DomainResource
-
+class Organization_Contact(BackboneElement):
+	address: Optional[Address] = None
+	name: Optional[HumanName] = None
+	purpose: Optional[CodeableConcept] = None
+	telecom: list[ContactPoint] = []
 
 class Organization(DomainResource):
 	address: list[Address] = []
@@ -20,5 +17,5 @@ class Organization(DomainResource):
 	telecom: list[ContactPoint] = []
 	partOf: Optional[Reference] = None
 	endpoint: list[Reference] = []
-	contact: list[BackboneElement] = []
+	contact: list[Organization_Contact] = []
 

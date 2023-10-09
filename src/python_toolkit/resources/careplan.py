@@ -1,23 +1,34 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Annotation
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Identifier
-from base import Reference
-from base import Period
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
+class CarePlan_Activity_Detail(BackboneElement):
+	description: Optional[str] = None
+	instantiatesCanonical: list[str] = []
+	instantiatesUri: list[str] = []
+	productCodeableConcept: Optional[CodeableConcept] = None
+	productReference: Optional[Reference] = None
+	scheduledPeriod: Optional[Period] = None
+	goal: list[Reference] = []
+	reasonCode: list[CodeableConcept] = []
+	statusReason: Optional[CodeableConcept] = None
+	scheduledTiming: Optional[str] = None
+	dailyAmount: Optional[Quantity] = None
+	scheduledString: Optional[str] = None
+	status: str
+	kind: Optional[str] = None
+	code: Optional[CodeableConcept] = None
+	doNotPerform: Optional[bool] = None
+	quantity: Optional[Quantity] = None
+	location: Optional[Reference] = None
+	performer: list[Reference] = []
+	reasonReference: list[Reference] = []
 
+class CarePlan_Activity(BackboneElement):
+	detail: Optional[CarePlan_Activity_Detail] = None
+	outcomeCodeableConcept: list[CodeableConcept] = []
+	outcomeReference: list[Reference] = []
+	progress: list[Annotation] = []
+	reference: Optional[Reference] = None
 
 class CarePlan(DomainResource):
 	description: Optional[str] = None
@@ -32,7 +43,7 @@ class CarePlan(DomainResource):
 	title: Optional[str] = None
 	note: list[Annotation] = []
 	author: Optional[Reference] = None
-	activity: list[BackboneElement] = []
+	activity: list[CarePlan_Activity] = []
 	contributor: list[Reference] = []
 	status: str
 	identifier: list[Identifier] = []

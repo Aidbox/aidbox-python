@@ -1,29 +1,15 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import CodeableConcept
-from base import Reference
-from base import Quantity
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Quantity
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import DomainResource
+class MedicationDispense_Substitution(BackboneElement):
+	reason: list[CodeableConcept] = []
+	responsibleParty: list[Reference] = []
+	type: Optional[CodeableConcept] = None
+	wasSubstituted: bool
 
+class MedicationDispense_Performer(BackboneElement):
+	actor: Reference
+	function: Optional[CodeableConcept] = None
 
 class MedicationDispense(DomainResource):
 	statusReasonReference: Optional[Reference] = None
@@ -31,7 +17,7 @@ class MedicationDispense(DomainResource):
 	whenHandedOver: Optional[str] = None
 	whenPrepared: Optional[str] = None
 	eventHistory: list[Reference] = []
-	substitution: Optional[BackboneElement] = None
+	substitution: Optional[MedicationDispense_Substitution] = None
 	detectedIssue: list[Reference] = []
 	medicationCodeableConcept: Optional[CodeableConcept] = None
 	type: Optional[CodeableConcept] = None
@@ -51,5 +37,5 @@ class MedicationDispense(DomainResource):
 	receiver: list[Reference] = []
 	subject: Optional[Reference] = None
 	destination: Optional[Reference] = None
-	performer: list[BackboneElement] = []
+	performer: list[MedicationDispense_Performer] = []
 

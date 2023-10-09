@@ -1,16 +1,11 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Annotation
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Identifier
-from base import BackboneElement
-from base import Reference
-from base import DomainResource
-
+class List_Entry(BackboneElement):
+	date: Optional[str] = None
+	deleted: Optional[bool] = None
+	flag: Optional[CodeableConcept] = None
+	item: Reference
 
 class List(DomainResource):
 	date: Optional[str] = None
@@ -24,6 +19,6 @@ class List(DomainResource):
 	status: str
 	code: Optional[CodeableConcept] = None
 	identifier: list[Identifier] = []
-	entry: list[BackboneElement] = []
+	entry: list[List_Entry] = []
 	subject: Optional[Reference] = None
 

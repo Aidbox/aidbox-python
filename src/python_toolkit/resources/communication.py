@@ -1,30 +1,16 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import Reference
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+class Communication_Payload(BackboneElement):
+	contentAttachment: Optional[Attachment] = None
+	contentReference: Optional[Reference] = None
+	contentString: Optional[str] = None
 
 class Communication(DomainResource):
 	category: list[CodeableConcept] = []
 	received: Optional[str] = None
 	instantiatesCanonical: list[str] = []
-	payload: list[BackboneElement] = []
+	payload: list[Communication_Payload] = []
 	instantiatesUri: list[str] = []
 	encounter: Optional[Reference] = None
 	medium: list[CodeableConcept] = []

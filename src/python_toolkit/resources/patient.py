@@ -1,18 +1,22 @@
 from typing import Optional
+from base import *
 
-from base import Address
-from base import Reference
-from base import HumanName
-from base import Attachment
-from base import BackboneElement
-from base import BackboneElement
-from base import Identifier
-from base import ContactPoint
-from base import Reference
-from base import CodeableConcept
-from base import BackboneElement
-from base import DomainResource
+class Patient_Link(BackboneElement):
+	other: Reference
+	type: str
 
+class Patient_Communication(BackboneElement):
+	language: CodeableConcept
+	preferred: Optional[bool] = None
+
+class Patient_Contact(BackboneElement):
+	address: Optional[Address] = None
+	gender: Optional[str] = None
+	name: Optional[HumanName] = None
+	organization: Optional[Reference] = None
+	period: Optional[Period] = None
+	relationship: list[CodeableConcept] = []
+	telecom: list[ContactPoint] = []
 
 class Patient(DomainResource):
 	multipleBirthBoolean: Optional[bool] = None
@@ -24,13 +28,13 @@ class Patient(DomainResource):
 	birthDate: Optional[str] = None
 	multipleBirthInteger: Optional[int] = None
 	photo: list[Attachment] = []
-	link: list[BackboneElement] = []
+	link: list[Patient_Link] = []
 	active: Optional[bool] = None
-	communication: list[BackboneElement] = []
+	communication: list[Patient_Communication] = []
 	identifier: list[Identifier] = []
 	telecom: list[ContactPoint] = []
 	generalPractitioner: list[Reference] = []
 	gender: Optional[str] = None
 	maritalStatus: Optional[CodeableConcept] = None
-	contact: list[BackboneElement] = []
+	contact: list[Patient_Contact] = []
 

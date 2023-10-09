@@ -1,24 +1,28 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import DomainResource
+class ObservationDefinition_QuantitativeDetails(BackboneElement):
+	conversionFactor: Optional[str] = None
+	customaryUnit: Optional[CodeableConcept] = None
+	decimalPrecision: Optional[int] = None
+	unit: Optional[CodeableConcept] = None
 
+class ObservationDefinition_QualifiedInterval(BackboneElement):
+	age: Optional[Range] = None
+	appliesTo: list[CodeableConcept] = []
+	category: Optional[str] = None
+	condition: Optional[str] = None
+	context: Optional[CodeableConcept] = None
+	gender: Optional[str] = None
+	gestationalAge: Optional[Range] = None
+	range: Optional[Range] = None
 
 class ObservationDefinition(DomainResource):
-	quantitativeDetails: Optional[BackboneElement] = None
+	quantitativeDetails: Optional[ObservationDefinition_QuantitativeDetails] = None
 	category: list[CodeableConcept] = []
 	method: Optional[CodeableConcept] = None
 	validCodedValueSet: Optional[Reference] = None
-	qualifiedInterval: list[BackboneElement] = []
+	qualifiedInterval: list[ObservationDefinition_QualifiedInterval] = []
 	abnormalCodedValueSet: Optional[Reference] = None
 	code: CodeableConcept
 	identifier: list[Identifier] = []

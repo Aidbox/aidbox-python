@@ -1,27 +1,40 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import Period
-from base import DomainResource
+class CoverageEligibilityRequest_Insurance(BackboneElement):
+	businessArrangement: Optional[str] = None
+	coverage: Reference
+	focal: Optional[bool] = None
 
+class CoverageEligibilityRequest_SupportingInfo(BackboneElement):
+	appliesToAll: Optional[bool] = None
+	information: Reference
+	sequence: str
+
+class CoverageEligibilityRequest_Item_Diagnosis(BackboneElement):
+	diagnosisCodeableConcept: Optional[CodeableConcept] = None
+	diagnosisReference: Optional[Reference] = None
+
+class CoverageEligibilityRequest_Item(BackboneElement):
+	category: Optional[CodeableConcept] = None
+	facility: Optional[Reference] = None
+	diagnosis: list[CoverageEligibilityRequest_Item_Diagnosis] = []
+	modifier: list[CodeableConcept] = []
+	productOrService: Optional[CodeableConcept] = None
+	quantity: Optional[Quantity] = None
+	provider: Optional[Reference] = None
+	supportingInfoSequence: list[str] = []
+	unitPrice: Optional[Money] = None
+	detail: list[Reference] = []
 
 class CoverageEligibilityRequest(DomainResource):
 	patient: Reference
-	insurance: list[BackboneElement] = []
+	insurance: list[CoverageEligibilityRequest_Insurance] = []
 	facility: Optional[Reference] = None
 	enterer: Optional[Reference] = None
-	supportingInfo: list[BackboneElement] = []
+	supportingInfo: list[CoverageEligibilityRequest_SupportingInfo] = []
 	purpose: list[str]
-	item: list[BackboneElement] = []
+	item: list[CoverageEligibilityRequest_Item] = []
 	created: str
 	insurer: Reference
 	priority: Optional[CodeableConcept] = None

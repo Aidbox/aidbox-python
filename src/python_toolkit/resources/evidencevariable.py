@@ -1,20 +1,22 @@
 from typing import Optional
+from base import *
 
-from base import ContactDetail
-from base import CodeableConcept
-from base import UsageContext
-from base import CodeableConcept
-from base import Annotation
-from base import ContactDetail
-from base import BackboneElement
-from base import Identifier
-from base import ContactDetail
-from base import ContactDetail
-from base import RelatedArtifact
-from base import ContactDetail
-from base import Period
-from base import DomainResource
-
+class EvidenceVariable_Characteristic(BackboneElement):
+	description: Optional[str] = None
+	exclude: Optional[bool] = None
+	groupMeasure: Optional[str] = None
+	definitionExpression: Optional[Expression] = None
+	timeFromStart: Optional[str] = None
+	participantEffectiveDuration: Optional[str] = None
+	definitionDataRequirement: Optional[DataRequirement] = None
+	definitionTriggerDefinition: Optional[TriggerDefinition] = None
+	definitionCanonical: Optional[str] = None
+	definitionReference: Optional[Reference] = None
+	participantEffectiveTiming: Optional[str] = None
+	participantEffectiveDateTime: Optional[str] = None
+	participantEffectivePeriod: Optional[Period] = None
+	definitionCodeableConcept: Optional[CodeableConcept] = None
+	usageContext: list[UsageContext] = []
 
 class EvidenceVariable(DomainResource):
 	description: Optional[str] = None
@@ -31,7 +33,7 @@ class EvidenceVariable(DomainResource):
 	title: Optional[str] = None
 	note: list[Annotation] = []
 	author: list[ContactDetail] = []
-	characteristic: list[BackboneElement]
+	characteristic: list[EvidenceVariable_Characteristic]
 	status: str
 	subtitle: Optional[str] = None
 	url: Optional[str] = None

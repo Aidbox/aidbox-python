@@ -1,15 +1,9 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import BackboneElement
-from base import Reference
-from base import Identifier
-from base import Identifier
-from base import Reference
-from base import DomainResource
-
+class DocumentManifest_Related(BackboneElement):
+	identifier: Optional[Identifier] = None
+	ref: Optional[Reference] = None
 
 class DocumentManifest(DomainResource):
 	description: Optional[str] = None
@@ -17,7 +11,7 @@ class DocumentManifest(DomainResource):
 	recipient: list[Reference] = []
 	type: Optional[CodeableConcept] = None
 	created: Optional[str] = None
-	related: list[BackboneElement] = []
+	related: list[DocumentManifest_Related] = []
 	source: Optional[str] = None
 	author: list[Reference] = []
 	masterIdentifier: Optional[Identifier] = None

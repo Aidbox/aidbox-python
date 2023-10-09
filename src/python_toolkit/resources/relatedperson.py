@@ -1,16 +1,9 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import Address
-from base import HumanName
-from base import CodeableConcept
-from base import Attachment
-from base import BackboneElement
-from base import Identifier
-from base import ContactPoint
-from base import Period
-from base import DomainResource
-
+class RelatedPerson_Communication(BackboneElement):
+	language: CodeableConcept
+	preferred: Optional[bool] = None
 
 class RelatedPerson(DomainResource):
 	patient: Reference
@@ -20,7 +13,7 @@ class RelatedPerson(DomainResource):
 	relationship: list[CodeableConcept] = []
 	photo: list[Attachment] = []
 	active: Optional[bool] = None
-	communication: list[BackboneElement] = []
+	communication: list[RelatedPerson_Communication] = []
 	identifier: list[Identifier] = []
 	telecom: list[ContactPoint] = []
 	gender: Optional[str] = None

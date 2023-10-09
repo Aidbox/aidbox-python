@@ -1,13 +1,5 @@
 from typing import Optional
-
-from base import Coding
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Period
-from base import ContactPoint
-from base import DomainResource
-
+from base import *
 
 class Endpoint(DomainResource):
 	connectionType: Coding

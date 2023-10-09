@@ -1,22 +1,18 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Identifier
-from base import Period
-from base import Reference
-from base import BackboneElement
-from base import DomainResource
+class EpisodeOfCare_Diagnosis(BackboneElement):
+	condition: Reference
+	rank: Optional[str] = None
+	role: Optional[CodeableConcept] = None
 
+class EpisodeOfCare_StatusHistory(BackboneElement):
+	period: Period
+	status: str
 
 class EpisodeOfCare(DomainResource):
 	patient: Reference
-	diagnosis: list[BackboneElement] = []
+	diagnosis: list[EpisodeOfCare_Diagnosis] = []
 	managingOrganization: Optional[Reference] = None
 	type: list[CodeableConcept] = []
 	account: list[Reference] = []
@@ -26,5 +22,5 @@ class EpisodeOfCare(DomainResource):
 	identifier: list[Identifier] = []
 	period: Optional[Period] = None
 	careManager: Optional[Reference] = None
-	statusHistory: list[BackboneElement] = []
+	statusHistory: list[EpisodeOfCare_StatusHistory] = []
 

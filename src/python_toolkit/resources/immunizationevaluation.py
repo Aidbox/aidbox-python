@@ -1,14 +1,5 @@
 from typing import Optional
-
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Identifier
-from base import CodeableConcept
-from base import CodeableConcept
-from base import DomainResource
-
+from base import *
 
 class ImmunizationEvaluation(DomainResource):
 	patient: Reference

@@ -1,24 +1,20 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import CodeableConcept
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import ContactPoint
-from base import Period
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
+class PractitionerRole_AvailableTime(BackboneElement):
+	allDay: Optional[bool] = None
+	availableEndTime: Optional[str] = None
+	availableStartTime: Optional[str] = None
+	daysOfWeek: list[str] = []
 
+class PractitionerRole_NotAvailable(BackboneElement):
+	description: str
+	during: Optional[Period] = None
 
 class PractitionerRole(DomainResource):
-	availableTime: list[BackboneElement] = []
+	availableTime: list[PractitionerRole_AvailableTime] = []
 	specialty: list[CodeableConcept] = []
-	notAvailable: list[BackboneElement] = []
+	notAvailable: list[PractitionerRole_NotAvailable] = []
 	organization: Optional[Reference] = None
 	active: Optional[bool] = None
 	code: list[CodeableConcept] = []

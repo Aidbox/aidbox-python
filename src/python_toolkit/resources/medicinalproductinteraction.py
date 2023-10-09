@@ -1,19 +1,15 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import CodeableConcept
-from base import BackboneElement
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import DomainResource
-
+class MedicinalProductInteraction_Interactant(BackboneElement):
+	itemCodeableConcept: Optional[CodeableConcept] = None
+	itemReference: Optional[Reference] = None
 
 class MedicinalProductInteraction(DomainResource):
 	description: Optional[str] = None
 	effect: Optional[CodeableConcept] = None
 	incidence: Optional[CodeableConcept] = None
-	interactant: list[BackboneElement] = []
+	interactant: list[MedicinalProductInteraction_Interactant] = []
 	management: Optional[CodeableConcept] = None
 	subject: list[Reference] = []
 	type: Optional[CodeableConcept] = None

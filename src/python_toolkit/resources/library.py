@@ -1,24 +1,5 @@
 from typing import Optional
-
-from base import DataRequirement
-from base import ContactDetail
-from base import CodeableConcept
-from base import Attachment
-from base import CodeableConcept
-from base import UsageContext
-from base import CodeableConcept
-from base import CodeableConcept
-from base import ContactDetail
-from base import Identifier
-from base import ContactDetail
-from base import ContactDetail
-from base import RelatedArtifact
-from base import ContactDetail
-from base import Reference
-from base import ParameterDefinition
-from base import Period
-from base import DomainResource
-
+from base import *
 
 class Library(DomainResource):
 	description: Optional[str] = None

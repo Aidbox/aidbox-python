@@ -1,9 +1,14 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import DomainResource
-
+class OperationOutcome_Issue(BackboneElement):
+	code: str
+	details: Optional[CodeableConcept] = None
+	diagnostics: Optional[str] = None
+	expression: list[str] = []
+	location: list[str] = []
+	severity: str
 
 class OperationOutcome(DomainResource):
-	issue: list[BackboneElement]
+	issue: list[OperationOutcome_Issue]
 

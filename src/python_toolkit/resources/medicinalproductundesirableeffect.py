@@ -1,12 +1,5 @@
 from typing import Optional
-
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Population
-from base import DomainResource
-
+from base import *
 
 class MedicinalProductUndesirableEffect(DomainResource):
 	classification: Optional[CodeableConcept] = None

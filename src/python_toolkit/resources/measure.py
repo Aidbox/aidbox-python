@@ -1,32 +1,39 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import ContactDetail
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import UsageContext
-from base import CodeableConcept
-from base import CodeableConcept
-from base import BackboneElement
-from base import ContactDetail
-from base import Identifier
-from base import ContactDetail
-from base import CodeableConcept
-from base import ContactDetail
-from base import RelatedArtifact
-from base import ContactDetail
-from base import Reference
-from base import CodeableConcept
-from base import Period
-from base import DomainResource
+class Measure_Group_Population(BackboneElement):
+	code: Optional[CodeableConcept] = None
+	criteria: Expression
+	description: Optional[str] = None
 
+class Measure_Group_Stratifier_Component(BackboneElement):
+	code: Optional[CodeableConcept] = None
+	criteria: Expression
+	description: Optional[str] = None
+
+class Measure_Group_Stratifier(BackboneElement):
+	code: Optional[CodeableConcept] = None
+	component: list[Measure_Group_Stratifier_Component] = []
+	criteria: Optional[Expression] = None
+	description: Optional[str] = None
+
+class Measure_Group(BackboneElement):
+	code: Optional[CodeableConcept] = None
+	description: Optional[str] = None
+	population: list[Measure_Group_Population] = []
+	stratifier: list[Measure_Group_Stratifier] = []
+
+class Measure_SupplementalData(BackboneElement):
+	code: Optional[CodeableConcept] = None
+	criteria: Expression
+	description: Optional[str] = None
+	usage: list[CodeableConcept] = []
 
 class Measure(DomainResource):
 	description: Optional[str] = None
 	definition: list[str] = []
 	date: Optional[str] = None
-	group: list[BackboneElement] = []
+	group: list[Measure_Group] = []
 	endorser: list[ContactDetail] = []
 	publisher: Optional[str] = None
 	approvalDate: Optional[str] = None
@@ -43,7 +50,7 @@ class Measure(DomainResource):
 	experimental: Optional[bool] = None
 	topic: list[CodeableConcept] = []
 	title: Optional[str] = None
-	supplementalData: list[BackboneElement] = []
+	supplementalData: list[Measure_SupplementalData] = []
 	library: list[str] = []
 	author: list[ContactDetail] = []
 	usage: Optional[str] = None

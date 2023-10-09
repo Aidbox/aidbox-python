@@ -1,22 +1,5 @@
 from typing import Optional
-
-from base import ContactDetail
-from base import CodeableConcept
-from base import UsageContext
-from base import Reference
-from base import CodeableConcept
-from base import Annotation
-from base import ContactDetail
-from base import Identifier
-from base import ContactDetail
-from base import ContactDetail
-from base import RelatedArtifact
-from base import ContactDetail
-from base import Reference
-from base import Period
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class Evidence(DomainResource):
 	description: Optional[str] = None

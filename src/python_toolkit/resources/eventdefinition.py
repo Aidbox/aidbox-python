@@ -1,21 +1,5 @@
 from typing import Optional
-
-from base import ContactDetail
-from base import CodeableConcept
-from base import CodeableConcept
-from base import UsageContext
-from base import CodeableConcept
-from base import ContactDetail
-from base import Identifier
-from base import ContactDetail
-from base import ContactDetail
-from base import TriggerDefinition
-from base import RelatedArtifact
-from base import ContactDetail
-from base import Reference
-from base import Period
-from base import DomainResource
-
+from base import *
 
 class EventDefinition(DomainResource):
 	description: Optional[str] = None

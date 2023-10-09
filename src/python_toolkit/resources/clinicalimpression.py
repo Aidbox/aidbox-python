@@ -1,27 +1,19 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Annotation
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import Period
-from base import DomainResource
+class ClinicalImpression_Investigation(BackboneElement):
+	code: CodeableConcept
+	item: list[Reference] = []
 
+class ClinicalImpression_Finding(BackboneElement):
+	basis: Optional[str] = None
+	itemCodeableConcept: Optional[CodeableConcept] = None
+	itemReference: Optional[Reference] = None
 
 class ClinicalImpression(DomainResource):
 	description: Optional[str] = None
 	date: Optional[str] = None
-	investigation: list[BackboneElement] = []
+	investigation: list[ClinicalImpression_Investigation] = []
 	protocol: list[str] = []
 	assessor: Optional[Reference] = None
 	supportingInfo: list[Reference] = []
@@ -36,7 +28,7 @@ class ClinicalImpression(DomainResource):
 	previous: Optional[Reference] = None
 	code: Optional[CodeableConcept] = None
 	identifier: list[Identifier] = []
-	finding: list[BackboneElement] = []
+	finding: list[ClinicalImpression_Finding] = []
 	prognosisReference: list[Reference] = []
 	subject: Reference
 	effectivePeriod: Optional[Period] = None

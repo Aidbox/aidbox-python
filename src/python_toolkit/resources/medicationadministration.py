@@ -1,31 +1,24 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import Reference
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import Period
-from base import Reference
-from base import DomainResource
+class MedicationAdministration_Dosage(BackboneElement):
+	dose: Optional[Quantity] = None
+	method: Optional[CodeableConcept] = None
+	rateQuantity: Optional[Quantity] = None
+	rateRatio: Optional[Ratio] = None
+	route: Optional[CodeableConcept] = None
+	site: Optional[CodeableConcept] = None
+	text: Optional[str] = None
 
+class MedicationAdministration_Performer(BackboneElement):
+	actor: Reference
+	function: Optional[CodeableConcept] = None
 
 class MedicationAdministration(DomainResource):
 	category: Optional[CodeableConcept] = None
 	request: Optional[Reference] = None
 	eventHistory: list[Reference] = []
-	dosage: Optional[BackboneElement] = None
+	dosage: Optional[MedicationAdministration_Dosage] = None
 	instantiates: list[str] = []
 	reasonCode: list[CodeableConcept] = []
 	medicationCodeableConcept: Optional[CodeableConcept] = None
@@ -40,7 +33,7 @@ class MedicationAdministration(DomainResource):
 	medicationReference: Optional[Reference] = None
 	partOf: list[Reference] = []
 	subject: Reference
-	performer: list[BackboneElement] = []
+	performer: list[MedicationAdministration_Performer] = []
 	effectivePeriod: Optional[Period] = None
 	reasonReference: list[Reference] = []
 

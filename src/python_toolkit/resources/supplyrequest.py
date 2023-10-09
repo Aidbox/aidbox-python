@@ -1,20 +1,12 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Period
-from base import Identifier
-from base import CodeableConcept
-from base import Quantity
-from base import BackboneElement
-from base import Reference
-from base import DomainResource
-
+class SupplyRequest_Parameter(BackboneElement):
+	code: Optional[CodeableConcept] = None
+	valueBoolean: Optional[bool] = None
+	valueCodeableConcept: Optional[CodeableConcept] = None
+	valueQuantity: Optional[Quantity] = None
+	valueRange: Optional[Range] = None
 
 class SupplyRequest(DomainResource):
 	category: Optional[CodeableConcept] = None
@@ -33,6 +25,6 @@ class SupplyRequest(DomainResource):
 	itemCodeableConcept: Optional[CodeableConcept] = None
 	quantity: Quantity
 	occurrenceDateTime: Optional[str] = None
-	parameter: list[BackboneElement] = []
+	parameter: list[SupplyRequest_Parameter] = []
 	reasonReference: list[Reference] = []
 

@@ -1,28 +1,9 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Annotation
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Period
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import Quantity
-from base import Reference
-from base import Money
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import DomainResource
-
+class ChargeItem_Performer(BackboneElement):
+	actor: Reference
+	function: Optional[CodeableConcept] = None
 
 class ChargeItem(DomainResource):
 	service: list[Reference] = []
@@ -53,5 +34,5 @@ class ChargeItem(DomainResource):
 	performingOrganization: Optional[Reference] = None
 	subject: Reference
 	factorOverride: Optional[str] = None
-	performer: list[BackboneElement] = []
+	performer: list[ChargeItem_Performer] = []
 

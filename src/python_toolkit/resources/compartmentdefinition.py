@@ -1,10 +1,10 @@
 from typing import Optional
+from base import *
 
-from base import UsageContext
-from base import BackboneElement
-from base import ContactDetail
-from base import DomainResource
-
+class CompartmentDefinition_Resource(BackboneElement):
+	code: str
+	documentation: Optional[str] = None
+	param: list[str] = []
 
 class CompartmentDefinition(DomainResource):
 	description: Optional[str] = None
@@ -16,7 +16,7 @@ class CompartmentDefinition(DomainResource):
 	experimental: Optional[bool] = None
 	search: bool
 	status: str
-	resource: list[BackboneElement] = []
+	resource: list[CompartmentDefinition_Resource] = []
 	url: str
 	code: str
 	version: Optional[str] = None

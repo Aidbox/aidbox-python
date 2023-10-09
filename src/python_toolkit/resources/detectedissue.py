@@ -1,20 +1,19 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import BackboneElement
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import Period
-from base import DomainResource
+class DetectedIssue_Evidence(BackboneElement):
+	code: list[CodeableConcept] = []
+	detail: list[Reference] = []
 
+class DetectedIssue_Mitigation(BackboneElement):
+	action: CodeableConcept
+	author: Optional[Reference] = None
+	date: Optional[str] = None
 
 class DetectedIssue(DomainResource):
 	patient: Optional[Reference] = None
-	evidence: list[BackboneElement] = []
-	mitigation: list[BackboneElement] = []
+	evidence: list[DetectedIssue_Evidence] = []
+	mitigation: list[DetectedIssue_Mitigation] = []
 	author: Optional[Reference] = None
 	identifiedDateTime: Optional[str] = None
 	reference: Optional[str] = None

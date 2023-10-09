@@ -1,11 +1,5 @@
 from typing import Optional
-
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class EnrollmentResponse(DomainResource):
 	created: Optional[str] = None

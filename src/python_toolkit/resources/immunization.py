@@ -1,34 +1,35 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import CodeableConcept
-from base import BackboneElement
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Quantity
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import Identifier
-from base import Reference
-from base import BackboneElement
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import BackboneElement
-from base import Reference
-from base import DomainResource
+class Immunization_ProtocolApplied(BackboneElement):
+	seriesDosesPositiveInt: Optional[str] = None
+	doseNumberPositiveInt: Optional[str] = None
+	series: Optional[str] = None
+	authority: Optional[Reference] = None
+	doseNumberString: Optional[str] = None
+	seriesDosesString: Optional[str] = None
+	targetDisease: list[CodeableConcept] = []
 
+class Immunization_Education(BackboneElement):
+	documentType: Optional[str] = None
+	presentationDate: Optional[str] = None
+	publicationDate: Optional[str] = None
+	reference: Optional[str] = None
+
+class Immunization_Reaction(BackboneElement):
+	date: Optional[str] = None
+	detail: Optional[Reference] = None
+	reported: Optional[bool] = None
+
+class Immunization_Performer(BackboneElement):
+	actor: Reference
+	function: Optional[CodeableConcept] = None
 
 class Immunization(DomainResource):
 	patient: Reference
 	isSubpotent: Optional[bool] = None
 	reportOrigin: Optional[CodeableConcept] = None
-	protocolApplied: list[BackboneElement] = []
+	protocolApplied: list[Immunization_ProtocolApplied] = []
 	site: Optional[CodeableConcept] = None
 	encounter: Optional[Reference] = None
 	vaccineCode: CodeableConcept
@@ -44,14 +45,14 @@ class Immunization(DomainResource):
 	lotNumber: Optional[str] = None
 	identifier: list[Identifier] = []
 	manufacturer: Optional[Reference] = None
-	education: list[BackboneElement] = []
+	education: list[Immunization_Education] = []
 	occurrenceString: Optional[str] = None
-	reaction: list[BackboneElement] = []
+	reaction: list[Immunization_Reaction] = []
 	location: Optional[Reference] = None
 	occurrenceDateTime: Optional[str] = None
 	fundingSource: Optional[CodeableConcept] = None
 	subpotentReason: list[CodeableConcept] = []
 	expirationDate: Optional[str] = None
-	performer: list[BackboneElement] = []
+	performer: list[Immunization_Performer] = []
 	reasonReference: list[Reference] = []
 

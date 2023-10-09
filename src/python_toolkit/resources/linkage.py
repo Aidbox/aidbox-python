@@ -1,12 +1,12 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import BackboneElement
-from base import DomainResource
-
+class Linkage_Item(BackboneElement):
+	resource: Reference
+	type: str
 
 class Linkage(DomainResource):
 	active: Optional[bool] = None
 	author: Optional[Reference] = None
-	item: list[BackboneElement]
+	item: list[Linkage_Item]
 

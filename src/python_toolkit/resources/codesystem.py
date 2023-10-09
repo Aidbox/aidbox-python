@@ -1,14 +1,40 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import BackboneElement
-from base import UsageContext
-from base import BackboneElement
-from base import Identifier
-from base import BackboneElement
-from base import ContactDetail
-from base import DomainResource
+class CodeSystem_Property(BackboneElement):
+	code: str
+	description: Optional[str] = None
+	type: str
+	uri: Optional[str] = None
 
+class CodeSystem_Filter(BackboneElement):
+	code: str
+	description: Optional[str] = None
+	operator: list[str]
+	value: str
+
+class CodeSystem_Concept_Designation(BackboneElement):
+	language: Optional[str] = None
+	use: Optional[Coding] = None
+	value: str
+
+class CodeSystem_Concept_Property(BackboneElement):
+	valueCode: Optional[str] = None
+	valueDecimal: Optional[str] = None
+	valueString: Optional[str] = None
+	valueBoolean: Optional[bool] = None
+	valueDateTime: Optional[str] = None
+	valueCoding: Optional[Coding] = None
+	code: str
+	valueInteger: Optional[int] = None
+
+class CodeSystem_Concept(BackboneElement):
+	code: str
+	concept: list[str] = []
+	definition: Optional[str] = None
+	designation: list[CodeSystem_Concept_Designation] = []
+	display: Optional[str] = None
+	property: list[CodeSystem_Concept_Property] = []
 
 class CodeSystem(DomainResource):
 	description: Optional[str] = None
@@ -18,13 +44,13 @@ class CodeSystem(DomainResource):
 	jurisdiction: list[CodeableConcept] = []
 	purpose: Optional[str] = None
 	content: str
-	property: list[BackboneElement] = []
+	property: list[CodeSystem_Property] = []
 	name: Optional[str] = None
 	useContext: list[UsageContext] = []
 	copyright: Optional[str] = None
 	experimental: Optional[bool] = None
 	title: Optional[str] = None
-	filter: list[BackboneElement] = []
+	filter: list[CodeSystem_Filter] = []
 	supplements: Optional[str] = None
 	compositional: Optional[bool] = None
 	status: str
@@ -33,7 +59,7 @@ class CodeSystem(DomainResource):
 	count: Optional[str] = None
 	url: Optional[str] = None
 	identifier: list[Identifier] = []
-	concept: list[BackboneElement] = []
+	concept: list[CodeSystem_Concept] = []
 	caseSensitive: Optional[bool] = None
 	version: Optional[str] = None
 	contact: list[ContactDetail] = []

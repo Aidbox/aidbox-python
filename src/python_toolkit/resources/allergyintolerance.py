@@ -1,19 +1,14 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import CodeableConcept
-from base import Range
-from base import Reference
-from base import Period
-from base import Reference
-from base import Annotation
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import CodeableConcept
-from base import BackboneElement
-from base import DomainResource
-
+class AllergyIntolerance_Reaction(BackboneElement):
+	description: Optional[str] = None
+	exposureRoute: Optional[CodeableConcept] = None
+	manifestation: list[CodeableConcept]
+	note: list[Annotation] = []
+	onset: Optional[str] = None
+	severity: Optional[str] = None
+	substance: Optional[CodeableConcept] = None
 
 class AllergyIntolerance(DomainResource):
 	patient: Reference
@@ -35,5 +30,5 @@ class AllergyIntolerance(DomainResource):
 	onsetDateTime: Optional[str] = None
 	lastOccurrence: Optional[str] = None
 	verificationStatus: Optional[CodeableConcept] = None
-	reaction: list[BackboneElement] = []
+	reaction: list[AllergyIntolerance_Reaction] = []
 

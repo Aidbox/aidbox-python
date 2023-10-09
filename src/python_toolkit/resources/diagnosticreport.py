@@ -1,22 +1,9 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Attachment
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import Period
-from base import DomainResource
-
+class DiagnosticReport_Media(BackboneElement):
+	comment: Optional[str] = None
+	link: Reference
 
 class DiagnosticReport(DomainResource):
 	category: list[CodeableConcept] = []
@@ -34,7 +21,7 @@ class DiagnosticReport(DomainResource):
 	presentedForm: list[Attachment] = []
 	basedOn: list[Reference] = []
 	imagingStudy: list[Reference] = []
-	media: list[BackboneElement] = []
+	media: list[DiagnosticReport_Media] = []
 	subject: Optional[Reference] = None
 	performer: list[Reference] = []
 	effectivePeriod: Optional[Period] = None

@@ -1,34 +1,20 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Identifier
-from base import CodeableConcept
-from base import CodeableConcept
-from base import BackboneElement
-from base import Period
-from base import Reference
-from base import RelatedArtifact
-from base import CodeableConcept
-from base import ContactDetail
-from base import Reference
-from base import DomainResource
+class ResearchStudy_Arm(BackboneElement):
+	description: Optional[str] = None
+	name: str
+	type: Optional[CodeableConcept] = None
 
+class ResearchStudy_Objective(BackboneElement):
+	name: Optional[str] = None
+	type: Optional[CodeableConcept] = None
 
 class ResearchStudy(DomainResource):
 	description: Optional[str] = None
 	category: list[CodeableConcept] = []
 	enrollment: list[Reference] = []
-	arm: list[BackboneElement] = []
+	arm: list[ResearchStudy_Arm] = []
 	site: list[Reference] = []
 	protocol: list[Reference] = []
 	principalInvestigator: Optional[Reference] = None
@@ -42,7 +28,7 @@ class ResearchStudy(DomainResource):
 	identifier: list[Identifier] = []
 	primaryPurposeType: Optional[CodeableConcept] = None
 	focus: list[CodeableConcept] = []
-	objective: list[BackboneElement] = []
+	objective: list[ResearchStudy_Objective] = []
 	period: Optional[Period] = None
 	partOf: list[Reference] = []
 	relatedArtifact: list[RelatedArtifact] = []

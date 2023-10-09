@@ -1,18 +1,21 @@
 from typing import Optional
+from base import *
 
-from base import Money
-from base import Reference
-from base import CodeableConcept
-from base import Money
-from base import BackboneElement
-from base import Annotation
-from base import Reference
-from base import BackboneElement
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import DomainResource
+class Invoice_Participant(BackboneElement):
+	actor: Reference
+	role: Optional[CodeableConcept] = None
 
+class Invoice_LineItem_PriceComponent(BackboneElement):
+	amount: Optional[Money] = None
+	code: Optional[CodeableConcept] = None
+	factor: Optional[str] = None
+	type: str
+
+class Invoice_LineItem(BackboneElement):
+	chargeItemCodeableConcept: Optional[CodeableConcept] = None
+	chargeItemReference: Optional[Reference] = None
+	priceComponent: list[Invoice_LineItem_PriceComponent] = []
+	sequence: Optional[str] = None
 
 class Invoice(DomainResource):
 	date: Optional[str] = None
@@ -21,11 +24,11 @@ class Invoice(DomainResource):
 	totalPriceComponent: list[str] = []
 	type: Optional[CodeableConcept] = None
 	totalGross: Optional[Money] = None
-	participant: list[BackboneElement] = []
+	participant: list[Invoice_Participant] = []
 	note: list[Annotation] = []
 	account: Optional[Reference] = None
 	status: str
-	lineItem: list[BackboneElement] = []
+	lineItem: list[Invoice_LineItem] = []
 	identifier: list[Identifier] = []
 	issuer: Optional[Reference] = None
 	cancelledReason: Optional[str] = None

@@ -1,33 +1,14 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Annotation
-from base import Range
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Period
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import DomainResource
+class Procedure_FocalDevice(BackboneElement):
+	action: Optional[CodeableConcept] = None
+	manipulated: Reference
 
+class Procedure_Performer(BackboneElement):
+	actor: Reference
+	function: Optional[CodeableConcept] = None
+	onBehalfOf: Optional[Reference] = None
 
 class Procedure(DomainResource):
 	category: Optional[CodeableConcept] = None
@@ -36,7 +17,7 @@ class Procedure(DomainResource):
 	usedReference: list[Reference] = []
 	instantiatesCanonical: list[str] = []
 	instantiatesUri: list[str] = []
-	focalDevice: list[BackboneElement] = []
+	focalDevice: list[Procedure_FocalDevice] = []
 	encounter: Optional[Reference] = None
 	performedAge: Optional[str] = None
 	complicationDetail: list[Reference] = []
@@ -60,6 +41,6 @@ class Procedure(DomainResource):
 	location: Optional[Reference] = None
 	followUp: list[CodeableConcept] = []
 	subject: Reference
-	performer: list[BackboneElement] = []
+	performer: list[Procedure_Performer] = []
 	reasonReference: list[Reference] = []
 

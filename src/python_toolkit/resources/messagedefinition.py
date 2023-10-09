@@ -1,14 +1,15 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import UsageContext
-from base import BackboneElement
-from base import Identifier
-from base import BackboneElement
-from base import ContactDetail
-from base import Coding
-from base import DomainResource
+class MessageDefinition_AllowedResponse(BackboneElement):
+	message: str
+	situation: Optional[str] = None
 
+class MessageDefinition_Focus(BackboneElement):
+	code: str
+	max: Optional[str] = None
+	min: str
+	profile: Optional[str] = None
 
 class MessageDefinition(DomainResource):
 	description: Optional[str] = None
@@ -24,11 +25,11 @@ class MessageDefinition(DomainResource):
 	experimental: Optional[bool] = None
 	title: Optional[str] = None
 	status: str
-	allowedResponse: list[BackboneElement] = []
+	allowedResponse: list[MessageDefinition_AllowedResponse] = []
 	graph: list[str] = []
 	url: Optional[str] = None
 	identifier: list[Identifier] = []
-	focus: list[BackboneElement] = []
+	focus: list[MessageDefinition_Focus] = []
 	replaces: list[str] = []
 	responseRequired: Optional[str] = None
 	base: Optional[str] = None

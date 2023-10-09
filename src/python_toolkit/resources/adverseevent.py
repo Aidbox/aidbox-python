@@ -1,23 +1,15 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
+class AdverseEvent_SuspectEntity_Causality(BackboneElement):
+	assessment: Optional[CodeableConcept] = None 
+	author: Optional[Reference] = None
+	method: Optional[CodeableConcept] = None
+	productRelatedness: Optional[str] = None
 
+class AdverseEvent_SuspectEntity(BackboneElement):
+	causality: list[AdverseEvent_SuspectEntity_Causality] = []
+	instance: Reference
 
 class AdverseEvent(DomainResource):
 	category: list[CodeableConcept] = []
@@ -25,7 +17,7 @@ class AdverseEvent(DomainResource):
 	date: Optional[str] = None
 	study: list[Reference] = []
 	encounter: Optional[Reference] = None
-	suspectEntity: list[BackboneElement] = []
+	suspectEntity: list[AdverseEvent_SuspectEntity] = []
 	referenceDocument: list[Reference] = []
 	outcome: Optional[CodeableConcept] = None
 	recordedDate: Optional[str] = None

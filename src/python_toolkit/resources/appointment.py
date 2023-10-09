@@ -1,20 +1,12 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Period
-from base import CodeableConcept
-from base import BackboneElement
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+class Appointment_Participant(BackboneElement):
+	actor: Optional[Reference] = None
+	period: Optional[Period] = None
+	required: Optional[str] = None
+	status: str
+	type: list[CodeableConcept] = []
 
 class Appointment(DomainResource):
 	description: Optional[str] = None
@@ -27,7 +19,7 @@ class Appointment(DomainResource):
 	start: Optional[str] = None
 	reasonCode: list[CodeableConcept] = []
 	created: Optional[str] = None
-	participant: list[BackboneElement]
+	participant: list[Appointment_Participant]
 	serviceType: list[CodeableConcept] = []
 	supportingInformation: list[Reference] = []
 	priority: Optional[str] = None

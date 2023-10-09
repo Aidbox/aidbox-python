@@ -1,23 +1,27 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import Reference
-from base import CodeableConcept
-from base import UsageContext
-from base import CodeableConcept
-from base import Identifier
-from base import ContactDetail
-from base import BackboneElement
-from base import Period
-from base import DomainResource
+class ChargeItemDefinition_PropertyGroup_PriceComponent(BackboneElement):
+	amount: Optional[Money] = None
+	code: Optional[CodeableConcept] = None
+	factor: Optional[str] = None
+	type: str
 
+class ChargeItemDefinition_PropertyGroup(BackboneElement):
+	applicability: list[str] = []
+	priceComponent: list[ChargeItemDefinition_PropertyGroup_PriceComponent] = []
+
+class ChargeItemDefinition_Applicability(BackboneElement):
+	description: Optional[str] = None
+	expression: Optional[str] = None
+	language: Optional[str] = None
 
 class ChargeItemDefinition(DomainResource):
 	description: Optional[str] = None
 	date: Optional[str] = None
 	publisher: Optional[str] = None
 	approvalDate: Optional[str] = None
-	propertyGroup: list[BackboneElement] = []
+	propertyGroup: list[ChargeItemDefinition_PropertyGroup] = []
 	instance: list[Reference] = []
 	jurisdiction: list[CodeableConcept] = []
 	useContext: list[UsageContext] = []
@@ -34,6 +38,6 @@ class ChargeItemDefinition(DomainResource):
 	partOf: list[str] = []
 	version: Optional[str] = None
 	contact: list[ContactDetail] = []
-	applicability: list[BackboneElement] = []
+	applicability: list[ChargeItemDefinition_Applicability] = []
 	effectivePeriod: Optional[Period] = None
 

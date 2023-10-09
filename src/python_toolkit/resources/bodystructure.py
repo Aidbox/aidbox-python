@@ -1,13 +1,5 @@
 from typing import Optional
-
-from base import Identifier
-from base import Attachment
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class BodyStructure(DomainResource):
 	active: Optional[bool] = None

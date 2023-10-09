@@ -1,33 +1,13 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import Range
-from base import ContactDetail
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Period
-from base import UsageContext
-from base import CodeableConcept
-from base import BackboneElement
-from base import ContactDetail
-from base import BackboneElement
-from base import CodeableConcept
-from base import Identifier
-from base import ContactDetail
-from base import CodeableConcept
-from base import Reference
-from base import ContactDetail
-from base import Quantity
-from base import RelatedArtifact
-from base import Reference
-from base import ContactDetail
-from base import Reference
-from base import Period
-from base import DomainResource
+class ActivityDefinition_Participant(BackboneElement):
+	role: Optional[CodeableConcept] = None
+	type: str
 
+class ActivityDefinition_DynamicValue(BackboneElement):
+	expression: Expression
+	path: str
 
 class ActivityDefinition(DomainResource):
 	observationResultRequirement: list[Reference] = []
@@ -51,7 +31,7 @@ class ActivityDefinition(DomainResource):
 	copyright: Optional[str] = None
 	experimental: Optional[bool] = None
 	topic: list[CodeableConcept] = []
-	participant: list[BackboneElement] = []
+	participant: list[ActivityDefinition_Participant] = []
 	title: Optional[str] = None
 	library: list[str] = []
 	author: list[ContactDetail] = []
@@ -63,7 +43,7 @@ class ActivityDefinition(DomainResource):
 	status: str
 	subtitle: Optional[str] = None
 	kind: Optional[str] = None
-	dynamicValue: list[BackboneElement] = []
+	dynamicValue: list[ActivityDefinition_DynamicValue] = []
 	url: Optional[str] = None
 	code: Optional[CodeableConcept] = None
 	identifier: list[Identifier] = []

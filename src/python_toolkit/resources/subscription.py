@@ -1,12 +1,14 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import ContactPoint
-from base import DomainResource
-
+class Subscription_Channel(BackboneElement):
+	endpoint: Optional[str] = None
+	header: list[str] = []
+	payload: Optional[str] = None
+	type: str
 
 class Subscription(DomainResource):
-	channel: BackboneElement
+	channel: Subscription_Channel
 	contact: list[ContactPoint] = []
 	criteria: str
 	end: Optional[str] = None

@@ -1,42 +1,49 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import BackboneElement
-from base import BackboneElement
-from base import CodeableConcept
-from base import Reference
-from base import BackboneElement
-from base import BackboneElement
-from base import Reference
-from base import Annotation
-from base import CodeableConcept
-from base import CodeableConcept
-from base import BackboneElement
-from base import Identifier
-from base import Quantity
-from base import ContactPoint
-from base import Reference
-from base import ProductShelfLife
-from base import ProdCharacteristic
-from base import DomainResource
+class DeviceDefinition_DeviceName(BackboneElement):
+	name: str
+	type: str
 
+class DeviceDefinition_Property(BackboneElement):
+	type: CodeableConcept
+	valueCode: list[CodeableConcept] = []
+	valueQuantity: list[Quantity] = []
+
+class DeviceDefinition_UdiDeviceIdentifier(BackboneElement):
+	deviceIdentifier: str
+	issuer: str
+	jurisdiction: str
+
+class DeviceDefinition_Capability(BackboneElement):
+	description: list[CodeableConcept] = []
+	type: CodeableConcept
+
+class DeviceDefinition_Specialization(BackboneElement):
+	systemType: str
+	version: Optional[str] = None
+
+class DeviceDefinition_Material(BackboneElement):
+	allergenicIndicator: Optional[bool] = None
+	alternate: Optional[bool] = None
+	substance: CodeableConcept
 
 class DeviceDefinition(DomainResource):
-	deviceName: list[BackboneElement] = []
+	deviceName: list[DeviceDefinition_DeviceName] = []
 	shelfLifeStorage: list[ProductShelfLife] = []
-	property: list[BackboneElement] = []
+	property: list[DeviceDefinition_Property] = []
 	manufacturerString: Optional[str] = None
 	modelNumber: Optional[str] = None
-	udiDeviceIdentifier: list[BackboneElement] = []
+	udiDeviceIdentifier: list[DeviceDefinition_UdiDeviceIdentifier] = []
 	type: Optional[CodeableConcept] = None
 	manufacturerReference: Optional[Reference] = None
-	capability: list[BackboneElement] = []
-	specialization: list[BackboneElement] = []
+	capability: list[DeviceDefinition_Capability] = []
+	specialization: list[DeviceDefinition_Specialization] = []
 	parentDevice: Optional[Reference] = None
 	note: list[Annotation] = []
 	languageCode: list[CodeableConcept] = []
 	safety: list[CodeableConcept] = []
-	material: list[BackboneElement] = []
+	material: list[DeviceDefinition_Material] = []
 	url: Optional[str] = None
 	identifier: list[Identifier] = []
 	quantity: Optional[Quantity] = None

@@ -1,12 +1,5 @@
 from typing import Optional
-
-from base import Reference
-from base import Identifier
-from base import Reference
-from base import Period
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class ResearchSubject(DomainResource):
 	actualArm: Optional[str] = None

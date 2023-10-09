@@ -1,34 +1,5 @@
 from typing import Optional
-
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Annotation
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Period
-from base import Ratio
-from base import CodeableConcept
-from base import Identifier
-from base import CodeableConcept
-from base import Range
-from base import Quantity
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class ServiceRequest(DomainResource):
 	performerType: Optional[CodeableConcept] = None

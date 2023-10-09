@@ -1,26 +1,12 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Annotation
-from base import Reference
-from base import Reference
-from base import Period
-from base import CodeableConcept
-from base import Identifier
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+class DeviceRequest_Parameter(BackboneElement):
+	code: Optional[CodeableConcept] = None
+	valueBoolean: Optional[bool] = None
+	valueCodeableConcept: Optional[CodeableConcept] = None
+	valueQuantity: Optional[Quantity] = None
+	valueRange: Optional[Range] = None
 
 class DeviceRequest(DomainResource):
 	performerType: Optional[CodeableConcept] = None
@@ -47,7 +33,7 @@ class DeviceRequest(DomainResource):
 	basedOn: list[Reference] = []
 	occurrenceDateTime: Optional[str] = None
 	subject: Reference
-	parameter: list[BackboneElement] = []
+	parameter: list[DeviceRequest_Parameter] = []
 	performer: Optional[Reference] = None
 	reasonReference: list[Reference] = []
 

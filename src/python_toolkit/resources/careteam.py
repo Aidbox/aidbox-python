@@ -1,18 +1,11 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import BackboneElement
-from base import Annotation
-from base import Identifier
-from base import ContactPoint
-from base import Period
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+class CareTeam_Participant(BackboneElement):
+	member: Optional[Reference] = None
+	onBehalfOf: Optional[Reference] = None
+	period: Optional[Period] = None
+	role: list[CodeableConcept] = []
 
 class CareTeam(DomainResource):
 	category: list[CodeableConcept] = []
@@ -20,7 +13,7 @@ class CareTeam(DomainResource):
 	encounter: Optional[Reference] = None
 	name: Optional[str] = None
 	reasonCode: list[CodeableConcept] = []
-	participant: list[BackboneElement] = []
+	participant: list[CareTeam_Participant] = []
 	note: list[Annotation] = []
 	status: Optional[str] = None
 	identifier: list[Identifier] = []

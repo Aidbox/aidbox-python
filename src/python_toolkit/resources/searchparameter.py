@@ -1,11 +1,9 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import UsageContext
-from base import BackboneElement
-from base import ContactDetail
-from base import DomainResource
-
+class SearchParameter_Component(BackboneElement):
+	definition: str
+	expression: str
 
 class SearchParameter(DomainResource):
 	description: str
@@ -24,7 +22,7 @@ class SearchParameter(DomainResource):
 	xpathUsage: Optional[str] = None
 	type: str
 	experimental: Optional[bool] = None
-	component: list[BackboneElement] = []
+	component: list[SearchParameter_Component] = []
 	status: str
 	chain: list[str] = []
 	url: str

@@ -1,21 +1,28 @@
 from typing import Optional
+from base import *
 
-from base import ContactDetail
-from base import CodeableConcept
-from base import CodeableConcept
-from base import UsageContext
-from base import CodeableConcept
-from base import ContactDetail
-from base import BackboneElement
-from base import Identifier
-from base import ContactDetail
-from base import ContactDetail
-from base import RelatedArtifact
-from base import ContactDetail
-from base import Reference
-from base import Period
-from base import DomainResource
-
+class ResearchElementDefinition_Characteristic(BackboneElement):
+	studyEffectiveTiming: Optional[str] = None
+	exclude: Optional[bool] = None
+	definitionExpression: Optional[Expression] = None
+	participantEffectiveDuration: Optional[str] = None
+	studyEffectiveDuration: Optional[str] = None
+	definitionDataRequirement: Optional[DataRequirement] = None
+	definitionCanonical: Optional[str] = None
+	studyEffectiveGroupMeasure: Optional[str] = None
+	participantEffectiveTiming: Optional[str] = None
+	participantEffectiveGroupMeasure: Optional[str] = None
+	studyEffectiveDescription: Optional[str] = None
+	participantEffectiveDateTime: Optional[str] = None
+	studyEffectiveTimeFromStart: Optional[str] = None
+	unitOfMeasure: Optional[CodeableConcept] = None
+	participantEffectivePeriod: Optional[Period] = None
+	participantEffectiveDescription: Optional[str] = None
+	definitionCodeableConcept: Optional[CodeableConcept] = None
+	usageContext: list[UsageContext] = []
+	studyEffectivePeriod: Optional[Period] = None
+	participantEffectiveTimeFromStart: Optional[str] = None
+	studyEffectiveDateTime: Optional[str] = None
 
 class ResearchElementDefinition(DomainResource):
 	description: Optional[str] = None
@@ -36,7 +43,7 @@ class ResearchElementDefinition(DomainResource):
 	title: Optional[str] = None
 	library: list[str] = []
 	author: list[ContactDetail] = []
-	characteristic: list[BackboneElement]
+	characteristic: list[ResearchElementDefinition_Characteristic]
 	usage: Optional[str] = None
 	status: str
 	subtitle: Optional[str] = None

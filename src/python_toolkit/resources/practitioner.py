@@ -1,14 +1,11 @@
 from typing import Optional
+from base import *
 
-from base import Address
-from base import HumanName
-from base import Attachment
-from base import CodeableConcept
-from base import Identifier
-from base import BackboneElement
-from base import ContactPoint
-from base import DomainResource
-
+class Practitioner_Qualification(BackboneElement):
+	code: CodeableConcept
+	identifier: list[Identifier] = []
+	issuer: Optional[Reference] = None
+	period: Optional[Period] = None
 
 class Practitioner(DomainResource):
 	address: list[Address] = []
@@ -18,7 +15,7 @@ class Practitioner(DomainResource):
 	active: Optional[bool] = None
 	communication: list[CodeableConcept] = []
 	identifier: list[Identifier] = []
-	qualification: list[BackboneElement] = []
+	qualification: list[Practitioner_Qualification] = []
 	telecom: list[ContactPoint] = []
 	gender: Optional[str] = None
 

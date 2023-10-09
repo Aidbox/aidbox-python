@@ -1,23 +1,27 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import Reference
-from base import Money
-from base import BackboneElement
-from base import Identifier
-from base import Identifier
-from base import Period
-from base import Reference
-from base import CodeableConcept
-from base import BackboneElement
-from base import DomainResource
+class PaymentReconciliation_ProcessNote(BackboneElement):
+	text: Optional[str] = None
+	type: Optional[str] = None
 
+class PaymentReconciliation_Detail(BackboneElement):
+	response: Optional[Reference] = None
+	amount: Optional[Money] = None
+	date: Optional[str] = None
+	request: Optional[Reference] = None
+	type: CodeableConcept
+	responsible: Optional[Reference] = None
+	payee: Optional[Reference] = None
+	predecessor: Optional[Identifier] = None
+	identifier: Optional[Identifier] = None
+	submitter: Optional[Reference] = None
 
 class PaymentReconciliation(DomainResource):
 	requestor: Optional[Reference] = None
 	request: Optional[Reference] = None
 	paymentAmount: Money
-	processNote: list[BackboneElement] = []
+	processNote: list[PaymentReconciliation_ProcessNote] = []
 	created: str
 	outcome: Optional[str] = None
 	disposition: Optional[str] = None
@@ -28,5 +32,5 @@ class PaymentReconciliation(DomainResource):
 	period: Optional[Period] = None
 	paymentIssuer: Optional[Reference] = None
 	formCode: Optional[CodeableConcept] = None
-	detail: list[BackboneElement] = []
+	detail: list[PaymentReconciliation_Detail] = []
 

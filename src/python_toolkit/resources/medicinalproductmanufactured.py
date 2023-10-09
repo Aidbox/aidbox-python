@@ -1,14 +1,5 @@
 from typing import Optional
-
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Quantity
-from base import CodeableConcept
-from base import ProdCharacteristic
-from base import DomainResource
-
+from base import *
 
 class MedicinalProductManufactured(DomainResource):
 	ingredient: list[Reference] = []

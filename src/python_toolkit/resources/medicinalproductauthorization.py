@@ -1,26 +1,26 @@
 from typing import Optional
+from base import *
 
-from base import Period
-from base import CodeableConcept
-from base import BackboneElement
-from base import BackboneElement
-from base import CodeableConcept
-from base import Period
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import DomainResource
+class MedicinalProductAuthorization_JurisdictionalAuthorization(BackboneElement):
+	country: Optional[CodeableConcept] = None
+	identifier: list[Identifier] = []
+	jurisdiction: list[CodeableConcept] = []
+	legalStatusOfSupply: Optional[CodeableConcept] = None
+	validityPeriod: Optional[Period] = None
 
+class MedicinalProductAuthorization_Procedure(BackboneElement):
+	application: list[str] = []
+	dateDateTime: Optional[str] = None
+	datePeriod: Optional[Period] = None
+	identifier: Optional[Identifier] = None
+	type: CodeableConcept
 
 class MedicinalProductAuthorization(DomainResource):
 	dataExclusivityPeriod: Optional[Period] = None
 	restoreDate: Optional[str] = None
 	jurisdiction: list[CodeableConcept] = []
-	jurisdictionalAuthorization: list[BackboneElement] = []
-	procedure: Optional[BackboneElement] = None
+	jurisdictionalAuthorization: list[MedicinalProductAuthorization_JurisdictionalAuthorization] = []
+	procedure: Optional[MedicinalProductAuthorization_Procedure] = None
 	legalBasis: Optional[CodeableConcept] = None
 	validityPeriod: Optional[Period] = None
 	regulator: Optional[Reference] = None

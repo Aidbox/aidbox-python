@@ -1,22 +1,5 @@
 from typing import Optional
-
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Period
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class MedicationStatement(DomainResource):
 	category: Optional[CodeableConcept] = None

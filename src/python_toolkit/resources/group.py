@@ -1,18 +1,26 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import BackboneElement
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import DomainResource
+class Group_Member(BackboneElement):
+	entity: Reference
+	inactive: Optional[bool] = None
+	period: Optional[Period] = None
 
+class Group_Characteristic(BackboneElement):
+	exclude: bool
+	valueReference: Optional[Reference] = None
+	valueQuantity: Optional[Quantity] = None
+	valueBoolean: Optional[bool] = None
+	code: CodeableConcept
+	valueCodeableConcept: Optional[CodeableConcept] = None
+	period: Optional[Period] = None
+	valueRange: Optional[Range] = None
 
 class Group(DomainResource):
 	name: Optional[str] = None
 	type: str
-	member: list[BackboneElement] = []
-	characteristic: list[BackboneElement] = []
+	member: list[Group_Member] = []
+	characteristic: list[Group_Characteristic] = []
 	active: Optional[bool] = None
 	code: Optional[CodeableConcept] = None
 	identifier: list[Identifier] = []

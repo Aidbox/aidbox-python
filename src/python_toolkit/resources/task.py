@@ -1,33 +1,119 @@
 from typing import Optional
+from base import *
 
-from base import BackboneElement
-from base import CodeableConcept
-from base import Period
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import BackboneElement
-from base import CodeableConcept
-from base import Annotation
-from base import Reference
-from base import Reference
-from base import Identifier
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
+class Task_Restriction(BackboneElement):
+	period: Optional[Period] = None
+	recipient: list[Reference] = []
+	repetitions: Optional[str] = None
 
+class Task_Output(BackboneElement):
+	valueBase64Binary: Optional[str] = None
+	valueAge: Optional[str] = None
+	valueParameterDefinition: Optional[ParameterDefinition] = None
+	valueTiming: Optional[str] = None
+	valueCode: Optional[str] = None
+	valueReference: Optional[Reference] = None
+	valueContributor: Optional[Contributor] = None
+	valueContactDetail: Optional[ContactDetail] = None
+	valueUri: Optional[str] = None
+	valueUsageContext: Optional[UsageContext] = None
+	valueTime: Optional[str] = None
+	valueDecimal: Optional[str] = None
+	valueCanonical: Optional[str] = None
+	valueMarkdown: Optional[str] = None
+	valueIdentifier: Optional[Identifier] = None
+	valueTriggerDefinition: Optional[TriggerDefinition] = None
+	valueQuantity: Optional[Quantity] = None
+	valueCount: Optional[str] = None
+	valueString: Optional[str] = None
+	valueRatio: Optional[Ratio] = None
+	valueBoolean: Optional[bool] = None
+	valueInstant: Optional[str] = None
+	valueDateTime: Optional[str] = None
+	valueDate: Optional[str] = None
+	type: CodeableConcept
+	valueDuration: Optional[str] = None
+	valueDataRequirement: Optional[DataRequirement] = None
+	valueMeta: Optional[Meta] = None
+	valueMoney: Optional[Money] = None
+	valueCoding: Optional[Coding] = None
+	valueExpression: Optional[Expression] = None
+	valueSampledData: Optional[SampledData] = None
+	valueDosage: Optional[str] = None
+	valueContactPoint: Optional[ContactPoint] = None
+	valueCodeableConcept: Optional[CodeableConcept] = None
+	valueAnnotation: Optional[Annotation] = None
+	valuePeriod: Optional[Period] = None
+	valueDistance: Optional[str] = None
+	valueRange: Optional[Range] = None
+	valueSignature: Optional[Signature] = None
+	valueUuid: Optional[str] = None
+	valueInteger: Optional[int] = None
+	valueHumanName: Optional[HumanName] = None
+	valueUnsignedInt: Optional[str] = None
+	valueAttachment: Optional[Attachment] = None
+	valueOid: Optional[str] = None
+	valueAddress: Optional[Address] = None
+	valueRelatedArtifact: Optional[RelatedArtifact] = None
+	valuePositiveInt: Optional[str] = None
+	valueId: Optional[str] = None
+	valueUrl: Optional[str] = None
+
+class Task_Input(BackboneElement):
+	valueBase64Binary: Optional[str] = None
+	valueAge: Optional[str] = None
+	valueParameterDefinition: Optional[ParameterDefinition] = None
+	valueTiming: Optional[str] = None
+	valueCode: Optional[str] = None
+	valueReference: Optional[Reference] = None
+	valueContributor: Optional[Contributor] = None
+	valueContactDetail: Optional[ContactDetail] = None
+	valueUri: Optional[str] = None
+	valueUsageContext: Optional[UsageContext] = None
+	valueTime: Optional[str] = None
+	valueDecimal: Optional[str] = None
+	valueCanonical: Optional[str] = None
+	valueMarkdown: Optional[str] = None
+	valueIdentifier: Optional[Identifier] = None
+	valueTriggerDefinition: Optional[TriggerDefinition] = None
+	valueQuantity: Optional[Quantity] = None
+	valueCount: Optional[str] = None
+	valueString: Optional[str] = None
+	valueRatio: Optional[Ratio] = None
+	valueBoolean: Optional[bool] = None
+	valueInstant: Optional[str] = None
+	valueDateTime: Optional[str] = None
+	valueDate: Optional[str] = None
+	type: CodeableConcept
+	valueDuration: Optional[str] = None
+	valueDataRequirement: Optional[DataRequirement] = None
+	valueMeta: Optional[Meta] = None
+	valueMoney: Optional[Money] = None
+	valueCoding: Optional[Coding] = None
+	valueExpression: Optional[Expression] = None
+	valueSampledData: Optional[SampledData] = None
+	valueDosage: Optional[str] = None
+	valueContactPoint: Optional[ContactPoint] = None
+	valueCodeableConcept: Optional[CodeableConcept] = None
+	valueAnnotation: Optional[Annotation] = None
+	valuePeriod: Optional[Period] = None
+	valueDistance: Optional[str] = None
+	valueRange: Optional[Range] = None
+	valueSignature: Optional[Signature] = None
+	valueUuid: Optional[str] = None
+	valueInteger: Optional[int] = None
+	valueHumanName: Optional[HumanName] = None
+	valueUnsignedInt: Optional[str] = None
+	valueAttachment: Optional[Attachment] = None
+	valueOid: Optional[str] = None
+	valueAddress: Optional[Address] = None
+	valueRelatedArtifact: Optional[RelatedArtifact] = None
+	valuePositiveInt: Optional[str] = None
+	valueId: Optional[str] = None
+	valueUrl: Optional[str] = None
 
 class Task(DomainResource):
-	restriction: Optional[BackboneElement] = None
+	restriction: Optional[Task_Restriction] = None
 	description: Optional[str] = None
 	performerType: list[CodeableConcept] = []
 	executionPeriod: Optional[Period] = None
@@ -39,7 +125,7 @@ class Task(DomainResource):
 	reasonCode: Optional[CodeableConcept] = None
 	statusReason: Optional[CodeableConcept] = None
 	authoredOn: Optional[str] = None
-	output: list[BackboneElement] = []
+	output: list[Task_Output] = []
 	businessStatus: Optional[CodeableConcept] = None
 	note: list[Annotation] = []
 	for_: Optional[Reference] = None
@@ -52,7 +138,7 @@ class Task(DomainResource):
 	identifier: list[Identifier] = []
 	intent: str
 	focus: Optional[Reference] = None
-	input: list[BackboneElement] = []
+	input: list[Task_Input] = []
 	basedOn: list[Reference] = []
 	partOf: list[Reference] = []
 	location: Optional[Reference] = None

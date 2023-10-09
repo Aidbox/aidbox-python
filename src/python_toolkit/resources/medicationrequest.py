@@ -1,32 +1,23 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Annotation
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Identifier
-from base import Reference
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
+class MedicationRequest_Substitution(BackboneElement):
+	allowedBoolean: Optional[bool] = None
+	allowedCodeableConcept: Optional[CodeableConcept] = None
+	reason: Optional[CodeableConcept] = None
 
+class MedicationRequest_DispenseRequest_InitialFill(BackboneElement):
+	duration: Optional[str] = None
+	quantity: Optional[Quantity] = None
+
+class MedicationRequest_DispenseRequest(BackboneElement):
+	dispenseInterval: Optional[str] = None
+	expectedSupplyDuration: Optional[str] = None
+	initialFill: Optional[MedicationRequest_DispenseRequest_InitialFill] = None
+	numberOfRepeatsAllowed: Optional[str] = None
+	performer: Optional[Reference] = None
+	quantity: Optional[Quantity] = None
+	validityPeriod: Optional[Period] = None
 
 class MedicationRequest(DomainResource):
 	performerType: Optional[CodeableConcept] = None
@@ -35,10 +26,10 @@ class MedicationRequest(DomainResource):
 	instantiatesCanonical: list[str] = []
 	eventHistory: list[Reference] = []
 	instantiatesUri: list[str] = []
-	substitution: Optional[BackboneElement] = None
+	substitution: Optional[MedicationRequest_Substitution] = None
 	detectedIssue: list[Reference] = []
 	encounter: Optional[Reference] = None
-	dispenseRequest: Optional[BackboneElement] = None
+	dispenseRequest: Optional[MedicationRequest_DispenseRequest] = None
 	reasonCode: list[CodeableConcept] = []
 	medicationCodeableConcept: Optional[CodeableConcept] = None
 	statusReason: Optional[CodeableConcept] = None

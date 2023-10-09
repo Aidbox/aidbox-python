@@ -1,16 +1,5 @@
 from typing import Optional
-
-from base import Reference
-from base import Money
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Identifier
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class PaymentNotice(DomainResource):
 	response: Optional[Reference] = None

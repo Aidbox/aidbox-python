@@ -1,10 +1,5 @@
 from typing import Optional
-
-from base import CodeableConcept
-from base import UsageContext
-from base import ContactDetail
-from base import DomainResource
-
+from base import *
 
 class MetadataResource(DomainResource):
 	description: Optional[str] = None

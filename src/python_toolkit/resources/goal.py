@@ -1,20 +1,17 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Annotation
-from base import CodeableConcept
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Identifier
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+class Goal_Target(BackboneElement):
+	detailRange: Optional[Range] = None
+	detailQuantity: Optional[Quantity] = None
+	detailInteger: Optional[int] = None
+	detailString: Optional[str] = None
+	measure: Optional[CodeableConcept] = None
+	detailRatio: Optional[Ratio] = None
+	detailCodeableConcept: Optional[CodeableConcept] = None
+	dueDate: Optional[str] = None
+	detailBoolean: Optional[bool] = None
+	dueDuration: Optional[str] = None
 
 class Goal(DomainResource):
 	description: CodeableConcept
@@ -30,7 +27,7 @@ class Goal(DomainResource):
 	outcomeCode: list[CodeableConcept] = []
 	identifier: list[Identifier] = []
 	statusDate: Optional[str] = None
-	target: list[BackboneElement] = []
+	target: list[Goal_Target] = []
 	outcomeReference: list[Reference] = []
 	subject: Reference
 	lifecycleStatus: str

@@ -1,18 +1,16 @@
 from typing import Optional
+from base import *
 
-from base import Address
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import BackboneElement
-from base import BackboneElement
-from base import ContactPoint
-from base import Coding
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import DomainResource
+class Location_HoursOfOperation(BackboneElement):
+	allDay: Optional[bool] = None
+	closingTime: Optional[str] = None
+	daysOfWeek: list[str] = []
+	openingTime: Optional[str] = None
 
+class Location_Position(BackboneElement):
+	altitude: Optional[str] = None
+	latitude: str
+	longitude: str
 
 class Location(DomainResource):
 	description: Optional[str] = None
@@ -24,9 +22,9 @@ class Location(DomainResource):
 	alias: list[str] = []
 	status: Optional[str] = None
 	identifier: list[Identifier] = []
-	hoursOfOperation: list[BackboneElement] = []
+	hoursOfOperation: list[Location_HoursOfOperation] = []
 	availabilityExceptions: Optional[str] = None
-	position: Optional[BackboneElement] = None
+	position: Optional[Location_Position] = None
 	telecom: list[ContactPoint] = []
 	operationalStatus: Optional[Coding] = None
 	partOf: Optional[Reference] = None

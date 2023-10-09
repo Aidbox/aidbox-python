@@ -1,27 +1,20 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import Reference
-from base import BackboneElement
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Annotation
-from base import Period
-from base import Reference
-from base import CodeableConcept
-from base import Identifier
-from base import Reference
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+class RiskAssessment_Prediction(BackboneElement):
+	relativeRisk: Optional[str] = None
+	whenRange: Optional[Range] = None
+	outcome: Optional[CodeableConcept] = None
+	whenPeriod: Optional[Period] = None
+	rationale: Optional[str] = None
+	probabilityRange: Optional[Range] = None
+	qualitativeRisk: Optional[CodeableConcept] = None
+	probabilityDecimal: Optional[str] = None
 
 class RiskAssessment(DomainResource):
 	parent: Optional[Reference] = None
 	encounter: Optional[Reference] = None
-	prediction: list[BackboneElement] = []
+	prediction: list[RiskAssessment_Prediction] = []
 	method: Optional[CodeableConcept] = None
 	basis: list[Reference] = []
 	reasonCode: list[CodeableConcept] = []

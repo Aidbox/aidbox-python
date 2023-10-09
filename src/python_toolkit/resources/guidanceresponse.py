@@ -1,20 +1,5 @@
 from typing import Optional
-
-from base import DataRequirement
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Identifier
-from base import Annotation
-from base import Reference
-from base import Identifier
-from base import CodeableConcept
-from base import Reference
-from base import Reference
-from base import Reference
-from base import DomainResource
-
+from base import *
 
 class GuidanceResponse(DomainResource):
 	dataRequirement: list[DataRequirement] = []

@@ -1,13 +1,10 @@
 from typing import Optional
+from base import *
 
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Identifier
-from base import BackboneElement
-from base import DomainResource
-
+class DeviceMetric_Calibration(BackboneElement):
+	state: Optional[str] = None
+	time: Optional[str] = None
+	type: Optional[str] = None
 
 class DeviceMetric(DomainResource):
 	category: str
@@ -18,6 +15,6 @@ class DeviceMetric(DomainResource):
 	type: CodeableConcept
 	source: Optional[Reference] = None
 	identifier: list[Identifier] = []
-	calibration: list[BackboneElement] = []
+	calibration: list[DeviceMetric_Calibration] = []
 	operationalStatus: Optional[str] = None
 

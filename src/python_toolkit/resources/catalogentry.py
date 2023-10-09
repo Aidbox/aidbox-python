@@ -1,16 +1,9 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Period
-from base import Identifier
-from base import Identifier
-from base import BackboneElement
-from base import DomainResource
-
+class CatalogEntry_RelatedEntry(BackboneElement):
+	item: Reference
+	relationtype: str
 
 class CatalogEntry(DomainResource):
 	additionalCharacteristic: list[CodeableConcept] = []
@@ -25,5 +18,5 @@ class CatalogEntry(DomainResource):
 	identifier: list[Identifier] = []
 	additionalIdentifier: list[Identifier] = []
 	lastUpdated: Optional[str] = None
-	relatedEntry: list[BackboneElement] = []
+	relatedEntry: list[CatalogEntry_RelatedEntry] = []
 

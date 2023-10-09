@@ -1,38 +1,34 @@
 from typing import Optional
+from base import *
 
-from base import CodeableConcept
-from base import BackboneElement
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import CodeableConcept
-from base import Reference
-from base import Quantity
-from base import Ratio
-from base import BackboneElement
-from base import Annotation
-from base import SampledData
-from base import CodeableConcept
-from base import Identifier
-from base import CodeableConcept
-from base import CodeableConcept
-from base import Reference
-from base import Period
-from base import Reference
-from base import Reference
-from base import Range
-from base import Reference
-from base import Reference
-from base import Reference
-from base import CodeableConcept
-from base import Period
-from base import DomainResource
+class Observation_ReferenceRange(BackboneElement):
+	age: Optional[Range] = None
+	appliesTo: list[CodeableConcept] = []
+	high: Optional[Quantity] = None
+	low: Optional[Quantity] = None
+	text: Optional[str] = None
+	type: Optional[CodeableConcept] = None
 
+class Observation_Component(BackboneElement):
+	referenceRange: list[str] = []
+	interpretation: list[CodeableConcept] = []
+	valueTime: Optional[str] = None
+	valueQuantity: Optional[Quantity] = None
+	valueString: Optional[str] = None
+	valueRatio: Optional[Ratio] = None
+	valueBoolean: Optional[bool] = None
+	valueDateTime: Optional[str] = None
+	valueSampledData: Optional[SampledData] = None
+	code: CodeableConcept
+	valueCodeableConcept: Optional[CodeableConcept] = None
+	valuePeriod: Optional[Period] = None
+	valueRange: Optional[Range] = None
+	valueInteger: Optional[int] = None
+	dataAbsentReason: Optional[CodeableConcept] = None
 
 class Observation(DomainResource):
 	category: list[CodeableConcept] = []
-	referenceRange: list[BackboneElement] = []
+	referenceRange: list[Observation_ReferenceRange] = []
 	hasMember: list[Reference] = []
 	derivedFrom: list[Reference] = []
 	interpretation: list[CodeableConcept] = []
@@ -45,7 +41,7 @@ class Observation(DomainResource):
 	valueRatio: Optional[Ratio] = None
 	valueBoolean: Optional[bool] = None
 	valueDateTime: Optional[str] = None
-	component: list[BackboneElement] = []
+	component: list[Observation_Component] = []
 	note: list[Annotation] = []
 	valueSampledData: Optional[SampledData] = None
 	effectiveDateTime: Optional[str] = None
