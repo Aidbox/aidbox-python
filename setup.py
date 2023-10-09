@@ -14,10 +14,7 @@ setup(
         'pydantic>=2.3.0',
         'pydantic_core==2.6.3',
         'setuptools==68.2.2',
-        'types-setuptools==68.2.0.0',
-        'python-dotenv==1.0.0',
-        'wheel',
-        'mypy'
+        'types-setuptools==68.2.0.0'
     ],
     classifiers=[
         'License :: OSI Approved :: MIT License',
