@@ -7,6 +7,7 @@ setup(
     python_requires='>=3.7',
     package_data={"python-toolkit": ["py.typed"]},
     include_package_data=True,
+    zip_safe=False,
     install_requires=[
         'requests>=2.31.0',
         'types-requests==2.31.0.8',
