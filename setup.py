@@ -1,29 +1,26 @@
 from setuptools import setup
 
 setup(
-    name='python-toolkit',
-    version='0.0.1',
-    description='',
-    python_requires='>=3.7',
-    package_data={"python-toolkit": ["py.typed"], "base": ["py.typed"], "resource": ["py.typed"]},
+    name="python-toolkit",
+    version="0.0.1",
+    description="",
+    python_requires=">=3.7",
+    package_data={"": ["py.typed"]},
     include_package_data=True,
-    zip_safe=False,
     install_requires=[
-        'requests>=2.31.0',
-        'types-requests==2.31.0.8',
-        'pydantic>=2.3.0',
-        'pydantic_core==2.6.3',
-        'setuptools==68.2.2',
-        'types-setuptools==68.2.0.0'
+        "requests>=2.31.0",
+        "types-requests==2.31.0.8",
+        "pydantic>=2.3.0",
+        "pydantic_core==2.6.3",
     ],
     classifiers=[
-        'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
-        'Development Status :: 2 - Pre-Alpha',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Typing :: Typed'
-    ]
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Development Status :: 2 - Pre-Alpha",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Typing :: Typed",
+    ],
 )
