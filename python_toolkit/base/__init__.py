@@ -74,7 +74,7 @@ basic = HTTPBasicAuth(username, password)
 class API(BaseModel):
     @classmethod
     def from_id(cls, id: str):
-        response = requests.get(url=f"{base}/{cls.__name__}/{id}", auth=basic)
+        response = requests.get(url=f"{base}/fhir/{cls.__name__}/{id}", auth=basic)
         response.raise_for_status()  # TODO: handle and type HTTP codes except 200+
         return cls(**response.json())
 
@@ -83,7 +83,7 @@ class API(BaseModel):
         search_params: dict[str, Any] = {}
         [search_params.update(d) for d in args]
         response = requests.get(
-            url=f"{base}/{cls.__name__}", params=search_params, auth=basic
+            url=f"{base}/fhir/{cls.__name__}", params=search_params, auth=basic
         )
         response.raise_for_status()  # TODO: handle and type HTTP codes except 200+
         data = response.json()  # TODO: handle HTTP response bodies
@@ -96,13 +96,15 @@ class API(BaseModel):
     def delete(self):
         assert self.id is not None
         resource_type = self.__class__.__name__
-        response = requests.delete(url=f"{base}/{resource_type}/{self.id}", auth=basic)
+        response = requests.delete(
+            url=f"{base}/fhir/{resource_type}/{self.id}", auth=basic
+        )
         response.raise_for_status()  # TODO: handle and type HTTP codes except 200+
 
     def save(self):  # create | persist | save
         resource_type = self.__class__.__name__
         response = requests.put(
-            url=f"{base}/{resource_type}/{self.id or ''}",
+            url=f"{base}/fhir/{resource_type}/{self.id or ''}",
             json=self.model_dump(exclude_unset=True),
             auth=basic,
         )
