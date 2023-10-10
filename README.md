@@ -12,7 +12,7 @@ Environment has to contain three variables `AIDBOX_URL`, `AIDBOX_CLIENT_USERNAME
 (username and password from aidbox basic client). It can be solved with code below that loads
 variables from the `.env` file.
 
-```
+```python
 from dotenv import load_dotenv
 from os.path import join, dirname
 
