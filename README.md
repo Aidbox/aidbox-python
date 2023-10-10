@@ -3,7 +3,7 @@
 ## Install
 
 ```shell
-pip install git+https://github.com/Aidbox/Aidbox-py
+pip install git+https://github.com/Aidbox/aidbox-python
 ```
 
 ## Auth
