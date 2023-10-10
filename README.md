@@ -1,9 +1,9 @@
-# Python Toolkit
+# Aidbox-Py
 
 ## Install
 
 ```shell
-pip install git+https://github.com/Aidbox/python-toolkit
+pip install git+https://github.com/Aidbox/Aidbox-py
 ```
 
 ## Auth
@@ -23,9 +23,9 @@ load_dotenv(dotenv_path)
 ## Example
 
 ```python
-from python_toolkit.resource.appointment import Appointment, Appointment_Participant
-from python_toolkit.resource import Patient, Practitioner
-from python_toolkit.base import Reference, HumanName
+from aidbox.resource.appointment import Appointment, Appointment_Participant
+from aidbox.resource import Patient, Practitioner
+from aidbox.base import Reference, HumanName
 
 import requests
 
