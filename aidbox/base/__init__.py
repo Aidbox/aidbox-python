@@ -155,7 +155,7 @@ class API(BaseModel):
     @classmethod
     def request(cls, endpoint, method='GET', **kwargs):
         url = f"{base}{endpoint}"
-        return requests.request(url, method, **kwargs)
+        return requests.request(method, url, auth=basic, **kwargs)
 
 
 class Resource(API):
