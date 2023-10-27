@@ -1,5 +1,6 @@
 from __future__ import annotations
-
+from typing_extensions import TypeAlias
+IncEx: TypeAlias = 'set[int] | set[str] | dict[int, Any] | dict[str, Any] | None'
 from typing import Literal, Union, Literal, Mapping, Optional, Any, overload
 from pydantic import BaseModel
 
@@ -77,6 +78,14 @@ class API(BaseModel):
         response = requests.get(url=f"{base}/fhir/{cls.__name__}/{id}", auth=basic)
         response.raise_for_status()  # TODO: handle and type HTTP codes except 200+
         return cls(**response.json())
+    
+    @classmethod
+    def bundle(cls, entry: list[Any], type: Literal["transaction"]):
+        data = { "resourceType": "Bundle", "type": type, "entry": entry }
+        response = requests.post(
+            url=f"{base}/fhir", json=data, auth=basic
+        )
+        response.raise_for_status()  # TODO: handle and type HTTP codes except 200+
 
     @classmethod
     def get(cls, *args: dict[str, Any]):
@@ -112,6 +121,41 @@ class API(BaseModel):
         data = response.json()
         self.id = data["id"]
         self.meta = Meta(**data["meta"])
+    
+    def dump(self, *,
+        mode: Literal['json', 'python'] | str = 'python',
+        include: IncEx = None,
+        exclude: IncEx = None,
+        by_alias: bool = False,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        round_trip: bool = False,
+        warnings: bool = True
+        ):
+        data = self.model_dump(
+            mode=mode,
+            by_alias=by_alias,
+            include=include,
+            exclude=exclude,
+            exclude_unset=exclude_unset,
+            exclude_defaults=exclude_defaults,
+            exclude_none=exclude_none,
+            round_trip=round_trip,
+            warnings=warnings
+        )
+
+        for item in ["class", "global", "for", "import"]:
+            if (item + "_") in data:
+                data[item] = data[item + "_"]
+                del data[item + "_"]
+        
+        return data
+    
+    @classmethod
+    def request(cls, endpoint, method='GET', **kwargs):
+        url = f"{base}{endpoint}"
+        return requests.request(url, method, **kwargs)
 
 
 class Resource(API):
