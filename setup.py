@@ -10,8 +10,8 @@ setup(
     install_requires=[
         "requests>=2.31.0",
         "types-requests==2.31.0.8",
-        "pydantic>=2.3.0",
-        "pydantic_core==2.6.3",
+        "pydantic[email]==2.0.0",
+        "pydantic_core==2.0.1",
     ],
     classifiers=[
         "License :: OSI Approved :: MIT License",
