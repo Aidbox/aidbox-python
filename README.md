@@ -94,6 +94,16 @@ from aidbox.base import Page, Count, Sort, Where
 patients = Patient.get(Where('active', True), Count(10), Page(3), Sort('created_at', 'desc'))
 ```
 
+#### Serialize to JSON `dumps()`
+
+```python
+from aidbox.resource.patient import Patient
+from aidbox.base import Page, Count, Sort, Where
+
+patient = Patient.from_id('patient-1')
+patient_json = patient.dumps(exclude_unset=True)
+```
+
 #### Bundle `.bundle()`
 
 ```python
