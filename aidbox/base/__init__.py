@@ -3,7 +3,7 @@ from typing_extensions import TypeAlias
 
 IncEx: TypeAlias = "set[int] | set[str] | dict[int, Any] | dict[str, Any] | None"
 from typing import Literal, Union, Literal, Mapping, Optional, Any, overload
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 import os
 
@@ -113,7 +113,7 @@ class API(BaseModel):
         resource_type = self.__class__.__name__
         response = requests.put(
             url=f"{base}/fhir/{resource_type}/{self.id or ''}",
-            json=self.model_dump(exclude_unset=True),
+            json=self.dumps(exclude_unset=True),
             auth=basic,
         )
         response.raise_for_status()  # TODO: handle and type HTTP codes except 200+
@@ -372,6 +372,10 @@ class ContactPoint(Element):
 class ContactPointEmail(ContactPoint):
     system: Literal["email"] = "email"
     value: EmailStr
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.system = "email"
 
 
 class Narrative(Element):
