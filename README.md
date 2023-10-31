@@ -85,15 +85,16 @@ from aidbox.resource.patient import Patient
 patient = Patient.from_id("patient-1")
 ```
 
-#### Get resource list
+#### Get resource list `.get()`
 
 ```python
 from aidbox.resource.patient import Patient
+from aidbox.base import Page, Count, Sort, Where
 
 patients = Patient.get(Where('active', True), Count(10), Page(3), Sort('created_at', 'desc'))
 ```
 
-#### Bundle
+#### Bundle `.bundle()`
 
 ```python
 from aidbox.base import API
