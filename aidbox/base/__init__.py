@@ -38,7 +38,7 @@ def Where(attribute: Literal["gender"], value: Literal["male", "female", "other"
     ...
 
 
-def Where(attribute: str, value: Any) -> Mapping[str, Any]:
+def Where(attribute: str, value: Any):
     return {attribute: str(value).lower() if type(value) is bool else value}
 
 

@@ -16,7 +16,7 @@ variables from the `.env` file.
 from dotenv import load_dotenv
 from os.path import join, dirname
 
-dotenv_path = join(dirname(__file__), "./.env")
+dotenv_path = join(dirname(__file__), ".env")
 load_dotenv(dotenv_path)
 ```
 
@@ -49,6 +49,70 @@ try:
             ),
         ],
     ).save()
+except requests.exceptions.RequestException as e:
+    if e.response is not None:
+        print(e.response.json())
+```
+
+## API
+
+#### Save resource to aidbox `.save()`
+
+```python
+from aidbox.resource.patient import Patient
+from aidbox.base import HumanName
+
+patient = Patient()
+patient.name = [HumanName(family="Bourne", given=["Jason"])]
+
+patient.save()
+```
+
+#### Delete resource by id `.delete()`
+
+```python
+from aidbox.resource.patient import Patient
+
+patient = Patient(id="patient-1")
+patient.delete()
+```
+
+#### Get resource by id `.from_id()`
+
+```python
+from aidbox.resource.patient import Patient
+
+patient = Patient.from_id("patient-1")
+```
+
+#### Get resource list
+
+```python
+from aidbox.resource.patient import Patient
+
+patients = Patient.get(Where('active', True), Count(10), Page(3), Sort('created_at', 'desc'))
+```
+
+#### Bundle
+
+```python
+from aidbox.base import API
+
+entry = []
+
+entry.append(
+    {
+        "resource": patient.dumps(exclude_unset=True),
+        "request": {"method": "POST", "url": "Patient"},
+    },
+    {
+        "resource": patient.dumps(exclude_unset=True),
+        "request": {"method": "POST", "url": "Patient"},
+    },
+)
+
+try:
+    API.bundle(entry=entry, type="transaction")
 except requests.exceptions.RequestException as e:
     if e.response is not None:
         print(e.response.json())
