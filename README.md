@@ -94,6 +94,23 @@ from aidbox.base import Page, Count, Sort, Where
 patients = Patient.get(Where('active', True), Count(10), Page(3), Sort('created_at', 'desc'))
 ```
 
+#### Authorized request to any of Aidbox endpoints `.request()`
+
+```python
+from aidbox.base import API
+
+API.request(endpoint="/AidboxTask", method="GET")
+
+API.request(
+    endpoint="/rpc",
+    method="POST",
+    json={
+        "method": "awf.task/list",
+        "params": { "filter": { "excludeDefinitions": ["awf.workflow/decision-task"] }},
+    },
+)
+```
+
 #### Serialize to JSON `dumps()`
 
 ```python
