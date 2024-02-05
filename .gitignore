@@ -2,5 +2,8 @@
 build
 *.egg-info
 .env
-
+fhir-schema*
 __pycache__
+.lsp
+.clj-kondo
+.vscode
