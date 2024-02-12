@@ -288,7 +288,7 @@ class Extension(Element):
     valueUri: Optional[str] = None
     valueUsageContext: Optional[UsageContext] = None
     valueTime: Optional[str] = None
-    valueDecimal: Optional[str] = None
+    valueDecimal: Optional[float] = None
     valueCanonical: Optional[str] = None
     valueMarkdown: Optional[str] = None
     valueIdentifier: Optional[Identifier] = None
