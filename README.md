@@ -24,7 +24,8 @@ load_dotenv(dotenv_path)
 
 ```python
 from aidbox.resource.appointment import Appointment, Appointment_Participant
-from aidbox.resource import Patient, Practitioner
+from aidbox.resource.patient import Patient
+from aidbox.resource.practitioner import Practitioner
 from aidbox.base import Reference, HumanName
 
 import requests
