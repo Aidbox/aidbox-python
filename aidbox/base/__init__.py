@@ -335,7 +335,7 @@ class Quantity(Element):
     comparator: Optional[str] = None
     system: Optional[str] = None
     unit: Optional[str] = None
-    value: Optional[str] = None
+    value: Optional[float] = None
 
 
 class RelatedArtifact(Element):

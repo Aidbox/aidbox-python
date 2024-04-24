@@ -2,8 +2,8 @@ from typing import Optional
 from ..base import *
 
 class Immunization_ProtocolApplied(BackboneElement):
-	seriesDosesPositiveInt: Optional[str] = None
-	doseNumberPositiveInt: Optional[str] = None
+	seriesDosesPositiveInt: Optional[int] = None
+	doseNumberPositiveInt: Optional[int] = None
 	series: Optional[str] = None
 	authority: Optional[Reference] = None
 	doseNumberString: Optional[str] = None
