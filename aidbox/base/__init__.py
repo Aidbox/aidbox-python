@@ -363,7 +363,7 @@ class UsageContext(Element):
 
 class ContactPoint(Element):
     period: Optional[Period] = None
-    rank: Optional[str] = None
+    rank: Optional[int] = None
     system: Optional[str] = None
     use: Optional[str] = None
     value: Optional[str] = None
