@@ -3,7 +3,7 @@ from typing_extensions import TypeAlias
 
 IncEx: TypeAlias = "set[int] | set[str] | dict[int, Any] | dict[str, Any] | None"
 from typing import Literal, Union, Literal, Mapping, Optional, Any, overload
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, PositiveInt, NonNegativeInt
 
 import os
 
@@ -673,10 +673,30 @@ class Dosage(BackboneElement):
     text: Optional[str] = None
 
 
+class TimingRepeat(Element):
+    boundsDuration: Optional[Duration] = None
+    boundsRange: Optional[Range] = None
+    boundsPeriod: Optional[Period] = None
+    count: Optional[PositiveInt] = None
+    countMax: Optional[PositiveInt] = None
+    duration: Optional[float] = None
+    durationMax: Optional[float] = None
+    frequency: Optional[PositiveInt] = None
+    frequencyMax: Optional[PositiveInt] = None
+    period: Optional[float] = None
+    periodMax: Optional[float] = None
+    durationUnit: Optional[str] = None
+    periodUnit: Optional[str] = None
+    dayOfWeek: Optional[str] = None
+    timeOfDay: Optional[str] = None
+    when: Optional[str] = None
+    offset: Optional[NonNegativeInt] = None
+
+
 class Timing(BackboneElement):
     code: Optional[CodeableConcept] = None
     event: list[str] = []
-    repeat: Optional[Element] = None
+    repeat: Optional[TimingRepeat] = None
 
 
 class MarketingStatus(BackboneElement):

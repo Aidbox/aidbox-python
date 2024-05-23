@@ -14,7 +14,7 @@ class ServiceRequest(DomainResource):
 	specimen: list[Reference] = []
 	reasonCode: list[CodeableConcept] = []
 	authoredOn: Optional[str] = None
-	occurrenceTiming: Optional[str] = None
+	occurrenceTiming: Optional[Timing] = None
 	note: list[Annotation] = []
 	asNeededBoolean: Optional[bool] = None
 	requisition: Optional[Identifier] = None
