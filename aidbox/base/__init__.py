@@ -673,6 +673,14 @@ class Dosage(BackboneElement):
     text: Optional[str] = None
 
 
+class Duration(Element):
+    code: Optional[str] = None
+    comparator: Optional[str] = None
+    system: Optional[str] = Literal["http://unitsofmeasure.org"]
+    unit: Optional[str] = None
+    value: Optional[float] = None
+
+
 class TimingRepeat(Element):
     boundsDuration: Optional[Duration] = None
     boundsRange: Optional[Range] = None
