@@ -154,7 +154,7 @@ class API(BaseModel):
         return data
 
     @classmethod
-    def request(cls, endpoint, method="GET", **kwargs):
+    def do_request(cls, endpoint, method="GET", **kwargs):
         url = f"{base}{endpoint}"
         return requests.request(method, url, auth=basic, **kwargs)
 
