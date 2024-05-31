@@ -1,9 +1,8 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
+from ..base import *
 
-
-class Synthesis(BaseModel):
+class Synthesis(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/synthesis"])
 	description: Optional[str] = None
 	date: Optional[str] = None
@@ -33,10 +32,3 @@ class Synthesis(BaseModel):
 	exposureBackground: Reference
 	effectivePeriod: Optional[Period] = None
 	exposureVariant: List[Reference]
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

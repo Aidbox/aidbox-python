@@ -1,31 +1,32 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Consent_Provision_Actor(BackboneElement):
-	reference: Reference
 	role: CodeableConcept
+	reference: Reference
 
 class Consent_Provision_Data(BackboneElement):
 	meaning: str
 	reference: Reference
 
 class Consent_Provision(BackboneElement):
-	provision: list[str] = []
-	purpose: list[Coding] = []
+	provision: Optional[List[str]] = None
+	purpose: Optional[List[Coding]] = None
 	dataPeriod: Optional[Period] = None
 	type: Optional[str] = None
-	class_: list[Coding] = []
-	code: list[CodeableConcept] = []
-	action: list[CodeableConcept] = []
+	class_: Optional[List[Coding]] = None
+	code: Optional[List[CodeableConcept]] = None
+	action: Optional[List[CodeableConcept]] = None
 	period: Optional[Period] = None
-	securityLabel: list[Coding] = []
-	actor: list[Consent_Provision_Actor] = []
-	data: list[Consent_Provision_Data] = []
+	securityLabel: Optional[List[Coding]] = None
+	actor: Optional[List[Consent_Provision_Actor]] = None
+	data: Optional[List[Consent_Provision_Data]] = None
 
 class Consent_Verification(BackboneElement):
-	verificationDate: Optional[str] = None
 	verified: bool
 	verifiedWith: Optional[Reference] = None
+	verificationDate: Optional[str] = None
 
 class Consent_Policy(BackboneElement):
 	authority: Optional[str] = None
@@ -33,17 +34,16 @@ class Consent_Policy(BackboneElement):
 
 class Consent(DomainResource):
 	patient: Optional[Reference] = None
-	category: list[CodeableConcept]
+	category: List[CodeableConcept]
 	provision: Optional[Consent_Provision] = None
 	sourceAttachment: Optional[Attachment] = None
-	organization: list[Reference] = []
-	verification: list[Consent_Verification] = []
+	organization: Optional[List[Reference]] = None
+	verification: Optional[List[Consent_Verification]] = None
 	scope: CodeableConcept
-	policy: list[Consent_Policy] = []
+	policy: Optional[List[Consent_Policy]] = None
 	sourceReference: Optional[Reference] = None
 	dateTime: Optional[str] = None
 	status: str
 	policyRule: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
-	performer: list[Reference] = []
-
+	identifier: Optional[List[Identifier]] = None
+	performer: Optional[List[Reference]] = None

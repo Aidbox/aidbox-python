@@ -1,29 +1,30 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class AdverseEvent_SuspectEntity_Causality(BackboneElement):
 	assessment: Optional[CodeableConcept] = None
+	productRelatedness: Optional[str] = None
 	author: Optional[Reference] = None
 	method: Optional[CodeableConcept] = None
-	productRelatedness: Optional[str] = None
 
 class AdverseEvent_SuspectEntity(BackboneElement):
-	causality: list[AdverseEvent_SuspectEntity_Causality] = []
 	instance: Reference
+	causality: Optional[List[AdverseEvent_SuspectEntity_Causality]] = None
 
 class AdverseEvent(DomainResource):
-	category: list[CodeableConcept] = []
+	category: Optional[List[CodeableConcept]] = None
 	actuality: str
 	date: Optional[str] = None
-	study: list[Reference] = []
+	study: Optional[List[Reference]] = None
 	encounter: Optional[Reference] = None
-	suspectEntity: list[AdverseEvent_SuspectEntity] = []
-	referenceDocument: list[Reference] = []
+	suspectEntity: Optional[List[AdverseEvent_SuspectEntity]] = None
+	referenceDocument: Optional[List[Reference]] = None
 	outcome: Optional[CodeableConcept] = None
 	recordedDate: Optional[str] = None
 	event: Optional[CodeableConcept] = None
-	contributor: list[Reference] = []
-	subjectMedicalHistory: list[Reference] = []
+	contributor: Optional[List[Reference]] = None
+	subjectMedicalHistory: Optional[List[Reference]] = None
 	recorder: Optional[Reference] = None
 	seriousness: Optional[CodeableConcept] = None
 	severity: Optional[CodeableConcept] = None
@@ -31,5 +32,4 @@ class AdverseEvent(DomainResource):
 	detected: Optional[str] = None
 	location: Optional[Reference] = None
 	subject: Reference
-	resultingCondition: list[Reference] = []
-
+	resultingCondition: Optional[List[Reference]] = None

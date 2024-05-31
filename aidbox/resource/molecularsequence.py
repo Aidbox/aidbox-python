@@ -1,62 +1,63 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
-class MolecularSequence_StructureVariant_Inner(BackboneElement):
-	end: Optional[int] = None
-	start: Optional[int] = None
-
 class MolecularSequence_StructureVariant_Outer(BackboneElement):
-	end: Optional[int] = None
 	start: Optional[int] = None
+	end: Optional[int] = None
+
+class MolecularSequence_StructureVariant_Inner(BackboneElement):
+	start: Optional[int] = None
+	end: Optional[int] = None
 
 class MolecularSequence_StructureVariant(BackboneElement):
+	variantType: Optional[CodeableConcept] = None
 	exact: Optional[bool] = None
-	inner: Optional[MolecularSequence_StructureVariant_Inner] = None
 	length: Optional[int] = None
 	outer: Optional[MolecularSequence_StructureVariant_Outer] = None
-	variantType: Optional[CodeableConcept] = None
+	inner: Optional[MolecularSequence_StructureVariant_Inner] = None
 
 class MolecularSequence_Repository(BackboneElement):
-	datasetId: Optional[str] = None
-	name: Optional[str] = None
-	readsetId: Optional[str] = None
 	type: str
 	url: Optional[str] = None
+	name: Optional[str] = None
+	datasetId: Optional[str] = None
 	variantsetId: Optional[str] = None
+	readsetId: Optional[str] = None
 
 class MolecularSequence_Variant(BackboneElement):
-	cigar: Optional[str] = None
+	start: Optional[int] = None
 	end: Optional[int] = None
 	observedAllele: Optional[str] = None
 	referenceAllele: Optional[str] = None
-	start: Optional[int] = None
+	cigar: Optional[str] = None
 	variantPointer: Optional[Reference] = None
 
 class MolecularSequence_Quality_Roc(BackboneElement):
-	fMeasure: list[str] = []
-	numFN: list[int] = []
-	numFP: list[int] = []
-	numTP: list[int] = []
-	precision: list[str] = []
-	score: list[int] = []
-	sensitivity: list[str] = []
+	score: Optional[List[int]] = None
+	numTP: Optional[List[int]] = None
+	numFP: Optional[List[int]] = None
+	numFN: Optional[List[int]] = None
+	precision: Optional[List[float]] = None
+	sensitivity: Optional[List[float]] = None
+	fMeasure: Optional[List[float]] = None
 
 class MolecularSequence_Quality(BackboneElement):
-	truthTP: Optional[str] = None
-	fScore: Optional[str] = None
-	truthFN: Optional[str] = None
-	queryFP: Optional[str] = None
+	truthTP: Optional[float] = None
+	fScore: Optional[float] = None
+	truthFN: Optional[float] = None
+	queryFP: Optional[float] = None
 	method: Optional[CodeableConcept] = None
-	precision: Optional[str] = None
+	precision: Optional[float] = None
 	start: Optional[int] = None
-	queryTP: Optional[str] = None
+	queryTP: Optional[float] = None
 	type: str
-	recall: Optional[str] = None
+	recall: Optional[float] = None
 	roc: Optional[MolecularSequence_Quality_Roc] = None
 	score: Optional[Quantity] = None
 	end: Optional[int] = None
 	standardSequence: Optional[CodeableConcept] = None
-	gtFP: Optional[str] = None
+	gtFP: Optional[float] = None
 
 class MolecularSequence_ReferenceSeq(BackboneElement):
 	chromosome: Optional[CodeableConcept] = None
@@ -71,19 +72,18 @@ class MolecularSequence_ReferenceSeq(BackboneElement):
 
 class MolecularSequence(DomainResource):
 	patient: Optional[Reference] = None
-	structureVariant: list[MolecularSequence_StructureVariant] = []
-	repository: list[MolecularSequence_Repository] = []
-	variant: list[MolecularSequence_Variant] = []
+	structureVariant: Optional[List[MolecularSequence_StructureVariant]] = None
+	repository: Optional[List[MolecularSequence_Repository]] = None
+	variant: Optional[List[MolecularSequence_Variant]] = None
 	specimen: Optional[Reference] = None
 	type: Optional[str] = None
-	pointer: list[Reference] = []
+	pointer: Optional[List[Reference]] = None
 	observedSeq: Optional[str] = None
-	identifier: list[Identifier] = []
-	quality: list[MolecularSequence_Quality] = []
+	identifier: Optional[List[Identifier]] = None
+	quality: Optional[List[MolecularSequence_Quality]] = None
 	device: Optional[Reference] = None
 	quantity: Optional[Quantity] = None
 	coordinateSystem: int
 	referenceSeq: Optional[MolecularSequence_ReferenceSeq] = None
 	performer: Optional[Reference] = None
 	readCoverage: Optional[int] = None
-

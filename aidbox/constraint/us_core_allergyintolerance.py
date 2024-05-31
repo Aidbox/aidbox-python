@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class AllergyIntolerance_Reaction(BackboneElement):
 	substance: Optional[CodeableConcept] = None
@@ -12,14 +11,14 @@ class AllergyIntolerance_Reaction(BackboneElement):
 	exposureRoute: Optional[CodeableConcept] = None
 	note: Optional[List[Annotation]] = None
 
-class UsCoreAllergyintolerance(BaseModel):
+class UsCoreAllergyintolerance(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-allergyintolerance"])
 	patient: Reference
 	category: Optional[List[str]] = None
 	criticality: Optional[str] = None
 	clinicalStatus: Optional[CodeableConcept] = None
 	onsetRange: Optional[Range] = None
-	onsetAge: Optional[str] = None
+	onsetAge: Optional[Age] = None
 	encounter: Optional[Reference] = None
 	onsetPeriod: Optional[Period] = None
 	type: Optional[str] = None
@@ -34,10 +33,3 @@ class UsCoreAllergyintolerance(BaseModel):
 	lastOccurrence: Optional[str] = None
 	verificationStatus: Optional[CodeableConcept] = None
 	reaction: Optional[List[AllergyIntolerance_Reaction]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

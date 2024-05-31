@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Device_DeviceName(BackboneElement):
 	name: str
@@ -29,7 +28,7 @@ class Device_UdiCarrier(BackboneElement):
 	carrierHRF: Optional[str] = None
 	entryType: Optional[str] = None
 
-class UsCoreImplantableDevice(BaseModel):
+class UsCoreImplantableDevice(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-implantable-device"])
 	patient: Reference
 	definition: Optional[Reference] = None
@@ -57,10 +56,3 @@ class UsCoreImplantableDevice(BaseModel):
 	owner: Optional[Reference] = None
 	expirationDate: Optional[str] = None
 	udiCarrier: Optional[List[Device_UdiCarrier]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

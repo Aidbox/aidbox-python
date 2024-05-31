@@ -1,45 +1,45 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Specimen_Processing(BackboneElement):
-	additive: list[Reference] = []
 	description: Optional[str] = None
 	procedure: Optional[CodeableConcept] = None
+	additive: Optional[List[Reference]] = None
 	timeDateTime: Optional[str] = None
 	timePeriod: Optional[Period] = None
 
 class Specimen_Container(BackboneElement):
+	identifier: Optional[List[Identifier]] = None
+	description: Optional[str] = None
+	type: Optional[CodeableConcept] = None
+	capacity: Optional[Quantity] = None
+	specimenQuantity: Optional[Quantity] = None
 	additiveCodeableConcept: Optional[CodeableConcept] = None
 	additiveReference: Optional[Reference] = None
-	capacity: Optional[Quantity] = None
-	description: Optional[str] = None
-	identifier: list[Identifier] = []
-	specimenQuantity: Optional[Quantity] = None
-	type: Optional[CodeableConcept] = None
 
 class Specimen_Collection(BackboneElement):
 	collectedDateTime: Optional[str] = None
 	fastingStatusCodeableConcept: Optional[CodeableConcept] = None
 	method: Optional[CodeableConcept] = None
-	fastingStatusDuration: Optional[str] = None
-	duration: Optional[str] = None
+	fastingStatusDuration: Optional[Duration] = None
+	duration: Optional[Duration] = None
 	collector: Optional[Reference] = None
 	bodySite: Optional[CodeableConcept] = None
 	quantity: Optional[Quantity] = None
 	collectedPeriod: Optional[Period] = None
 
 class Specimen(DomainResource):
-	request: list[Reference] = []
+	request: Optional[List[Reference]] = None
 	receivedTime: Optional[str] = None
-	processing: list[Specimen_Processing] = []
-	parent: list[Reference] = []
+	processing: Optional[List[Specimen_Processing]] = None
+	parent: Optional[List[Reference]] = None
 	type: Optional[CodeableConcept] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	status: Optional[str] = None
-	condition: list[CodeableConcept] = []
-	container: list[Specimen_Container] = []
-	identifier: list[Identifier] = []
+	condition: Optional[List[CodeableConcept]] = None
+	container: Optional[List[Specimen_Container]] = None
+	identifier: Optional[List[Identifier]] = None
 	accessionIdentifier: Optional[Identifier] = None
 	collection: Optional[Specimen_Collection] = None
 	subject: Optional[Reference] = None
-

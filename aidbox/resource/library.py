@@ -1,37 +1,37 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Library(DomainResource):
 	description: Optional[str] = None
 	date: Optional[str] = None
-	dataRequirement: list[DataRequirement] = []
-	endorser: list[ContactDetail] = []
+	dataRequirement: Optional[List[DataRequirement]] = None
+	endorser: Optional[List[ContactDetail]] = None
 	publisher: Optional[str] = None
 	approvalDate: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
-	content: list[Attachment] = []
+	content: Optional[List[Attachment]] = None
 	subjectCodeableConcept: Optional[CodeableConcept] = None
 	name: Optional[str] = None
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	copyright: Optional[str] = None
 	type: CodeableConcept
 	experimental: Optional[bool] = None
-	topic: list[CodeableConcept] = []
+	topic: Optional[List[CodeableConcept]] = None
 	title: Optional[str] = None
-	author: list[ContactDetail] = []
+	author: Optional[List[ContactDetail]] = None
 	usage: Optional[str] = None
 	status: str
 	subtitle: Optional[str] = None
 	url: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	lastReviewDate: Optional[str] = None
-	editor: list[ContactDetail] = []
-	reviewer: list[ContactDetail] = []
+	editor: Optional[List[ContactDetail]] = None
+	reviewer: Optional[List[ContactDetail]] = None
 	version: Optional[str] = None
-	relatedArtifact: list[RelatedArtifact] = []
-	contact: list[ContactDetail] = []
+	relatedArtifact: Optional[List[RelatedArtifact]] = None
+	contact: Optional[List[ContactDetail]] = None
 	subjectReference: Optional[Reference] = None
-	parameter: list[ParameterDefinition] = []
+	parameter: Optional[List[ParameterDefinition]] = None
 	effectivePeriod: Optional[Period] = None
-

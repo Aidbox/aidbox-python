@@ -1,21 +1,21 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Organization_Contact(BackboneElement):
-	address: Optional[Address] = None
-	name: Optional[HumanName] = None
 	purpose: Optional[CodeableConcept] = None
-	telecom: list[ContactPoint] = []
+	name: Optional[HumanName] = None
+	telecom: Optional[List[ContactPoint]] = None
+	address: Optional[Address] = None
 
 class Organization(DomainResource):
-	address: list[Address] = []
+	address: Optional[List[Address]] = None
 	name: Optional[str] = None
-	type: list[CodeableConcept] = []
-	alias: list[str] = []
+	type: Optional[List[CodeableConcept]] = None
+	alias: Optional[List[str]] = None
 	active: Optional[bool] = None
-	identifier: list[Identifier] = []
-	telecom: list[ContactPoint] = []
+	identifier: Optional[List[Identifier]] = None
+	telecom: Optional[List[ContactPoint]] = None
 	partOf: Optional[Reference] = None
-	endpoint: list[Reference] = []
-	contact: list[Organization_Contact] = []
-
+	endpoint: Optional[List[Reference]] = None
+	contact: Optional[List[Organization_Contact]] = None

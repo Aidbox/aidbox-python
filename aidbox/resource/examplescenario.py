@@ -1,26 +1,22 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
+
+class ExampleScenario_Instance_Version(BackboneElement):
+	versionId: str
+	description: str
 
 class ExampleScenario_Instance_ContainedInstance(BackboneElement):
 	resourceId: str
 	versionId: Optional[str] = None
 
-class ExampleScenario_Instance_Version(BackboneElement):
-	description: str
-	versionId: str
-
 class ExampleScenario_Instance(BackboneElement):
-	containedInstance: list[ExampleScenario_Instance_ContainedInstance] = []
-	description: Optional[str] = None
-	name: Optional[str] = None
 	resourceId: str
 	resourceType: str
-	version: list[ExampleScenario_Instance_Version] = []
-
-class ExampleScenario_Process_Step_Alternative(BackboneElement):
+	name: Optional[str] = None
 	description: Optional[str] = None
-	step: list[str] = []
-	title: str
+	version: Optional[List[ExampleScenario_Instance_Version]] = None
+	containedInstance: Optional[List[ExampleScenario_Instance_ContainedInstance]] = None
 
 class ExampleScenario_Process_Step_Operation(BackboneElement):
 	response: Optional[str] = None
@@ -34,41 +30,45 @@ class ExampleScenario_Process_Step_Operation(BackboneElement):
 	initiatorActive: Optional[bool] = None
 	receiver: Optional[str] = None
 
+class ExampleScenario_Process_Step_Alternative(BackboneElement):
+	title: str
+	description: Optional[str] = None
+	step: Optional[List[str]] = None
+
 class ExampleScenario_Process_Step(BackboneElement):
-	alternative: list[ExampleScenario_Process_Step_Alternative] = []
-	operation: Optional[ExampleScenario_Process_Step_Operation] = None
+	process: Optional[List[str]] = None
 	pause: Optional[bool] = None
-	process: list[str] = []
+	operation: Optional[ExampleScenario_Process_Step_Operation] = None
+	alternative: Optional[List[ExampleScenario_Process_Step_Alternative]] = None
 
 class ExampleScenario_Process(BackboneElement):
-	description: Optional[str] = None
-	postConditions: Optional[str] = None
-	preConditions: Optional[str] = None
-	step: list[ExampleScenario_Process_Step] = []
 	title: str
+	description: Optional[str] = None
+	preConditions: Optional[str] = None
+	postConditions: Optional[str] = None
+	step: Optional[List[ExampleScenario_Process_Step]] = None
 
 class ExampleScenario_Actor(BackboneElement):
 	actorId: str
-	description: Optional[str] = None
-	name: Optional[str] = None
 	type: str
+	name: Optional[str] = None
+	description: Optional[str] = None
 
 class ExampleScenario(DomainResource):
 	date: Optional[str] = None
 	publisher: Optional[str] = None
-	instance: list[ExampleScenario_Instance] = []
-	jurisdiction: list[CodeableConcept] = []
+	instance: Optional[List[ExampleScenario_Instance]] = None
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
 	name: Optional[str] = None
-	process: list[ExampleScenario_Process] = []
-	useContext: list[UsageContext] = []
+	process: Optional[List[ExampleScenario_Process]] = None
+	useContext: Optional[List[UsageContext]] = None
 	copyright: Optional[str] = None
 	experimental: Optional[bool] = None
-	workflow: list[str] = []
+	workflow: Optional[List[str]] = None
 	status: str
 	url: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	version: Optional[str] = None
-	contact: list[ContactDetail] = []
-	actor: list[ExampleScenario_Actor] = []
-
+	contact: Optional[List[ContactDetail]] = None
+	actor: Optional[List[ExampleScenario_Actor]] = None

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Measure_Group_Population(BackboneElement):
 	code: Optional[CodeableConcept] = None
@@ -31,7 +30,7 @@ class Measure_SupplementalData(BackboneElement):
 	description: Optional[str] = None
 	criteria: Expression
 
-class Shareablemeasure(BaseModel):
+class Shareablemeasure(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/shareablemeasure"])
 	description: str
 	definition: Optional[List[str]] = None
@@ -75,10 +74,3 @@ class Shareablemeasure(BaseModel):
 	rateAggregation: Optional[str] = None
 	effectivePeriod: Optional[Period] = None
 	clinicalRecommendationStatement: Optional[str] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

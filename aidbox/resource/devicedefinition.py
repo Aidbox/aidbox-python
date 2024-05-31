@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class DeviceDefinition_DeviceName(BackboneElement):
@@ -7,8 +8,8 @@ class DeviceDefinition_DeviceName(BackboneElement):
 
 class DeviceDefinition_Property(BackboneElement):
 	type: CodeableConcept
-	valueCode: list[CodeableConcept] = []
-	valueQuantity: list[Quantity] = []
+	valueQuantity: Optional[List[Quantity]] = None
+	valueCode: Optional[List[CodeableConcept]] = None
 
 class DeviceDefinition_UdiDeviceIdentifier(BackboneElement):
 	deviceIdentifier: str
@@ -16,40 +17,39 @@ class DeviceDefinition_UdiDeviceIdentifier(BackboneElement):
 	jurisdiction: str
 
 class DeviceDefinition_Capability(BackboneElement):
-	description: list[CodeableConcept] = []
 	type: CodeableConcept
+	description: Optional[List[CodeableConcept]] = None
 
 class DeviceDefinition_Specialization(BackboneElement):
 	systemType: str
 	version: Optional[str] = None
 
 class DeviceDefinition_Material(BackboneElement):
-	allergenicIndicator: Optional[bool] = None
-	alternate: Optional[bool] = None
 	substance: CodeableConcept
+	alternate: Optional[bool] = None
+	allergenicIndicator: Optional[bool] = None
 
 class DeviceDefinition(DomainResource):
-	deviceName: list[DeviceDefinition_DeviceName] = []
-	shelfLifeStorage: list[ProductShelfLife] = []
-	property: list[DeviceDefinition_Property] = []
+	deviceName: Optional[List[DeviceDefinition_DeviceName]] = None
+	shelfLifeStorage: Optional[List[ProductShelfLife]] = None
+	property: Optional[List[DeviceDefinition_Property]] = None
 	manufacturerString: Optional[str] = None
 	modelNumber: Optional[str] = None
-	udiDeviceIdentifier: list[DeviceDefinition_UdiDeviceIdentifier] = []
+	udiDeviceIdentifier: Optional[List[DeviceDefinition_UdiDeviceIdentifier]] = None
 	type: Optional[CodeableConcept] = None
 	manufacturerReference: Optional[Reference] = None
-	capability: list[DeviceDefinition_Capability] = []
-	specialization: list[DeviceDefinition_Specialization] = []
+	capability: Optional[List[DeviceDefinition_Capability]] = None
+	specialization: Optional[List[DeviceDefinition_Specialization]] = None
 	parentDevice: Optional[Reference] = None
-	note: list[Annotation] = []
-	languageCode: list[CodeableConcept] = []
-	safety: list[CodeableConcept] = []
-	material: list[DeviceDefinition_Material] = []
+	note: Optional[List[Annotation]] = None
+	languageCode: Optional[List[CodeableConcept]] = None
+	safety: Optional[List[CodeableConcept]] = None
+	material: Optional[List[DeviceDefinition_Material]] = None
 	url: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	quantity: Optional[Quantity] = None
-	version: list[str] = []
-	contact: list[ContactPoint] = []
+	version: Optional[List[str]] = None
+	contact: Optional[List[ContactPoint]] = None
 	owner: Optional[Reference] = None
 	onlineInformation: Optional[str] = None
 	physicalCharacteristics: Optional[ProdCharacteristic] = None
-

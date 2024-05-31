@@ -1,54 +1,54 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class TestReport_Participant(BackboneElement):
-	display: Optional[str] = None
 	type: str
 	uri: str
-
-class TestReport_Setup_Action_Assert(BackboneElement):
-	detail: Optional[str] = None
-	message: Optional[str] = None
-	result: str
+	display: Optional[str] = None
 
 class TestReport_Setup_Action_Operation(BackboneElement):
-	detail: Optional[str] = None
-	message: Optional[str] = None
 	result: str
+	message: Optional[str] = None
+	detail: Optional[str] = None
+
+class TestReport_Setup_Action_Assert(BackboneElement):
+	result: str
+	message: Optional[str] = None
+	detail: Optional[str] = None
 
 class TestReport_Setup_Action(BackboneElement):
-	assert_: Optional[TestReport_Setup_Action_Assert] = None
 	operation: Optional[TestReport_Setup_Action_Operation] = None
+	assert_: Optional[TestReport_Setup_Action_Assert] = None
 
 class TestReport_Setup(BackboneElement):
-	action: list[TestReport_Setup_Action]
+	action: List[TestReport_Setup_Action]
 
 class TestReport_Teardown_Action(BackboneElement):
 	operation: str
 
 class TestReport_Teardown(BackboneElement):
-	action: list[TestReport_Teardown_Action]
+	action: List[TestReport_Teardown_Action]
 
 class TestReport_Test_Action(BackboneElement):
-	assert_: Optional[str] = None
 	operation: Optional[str] = None
+	assert_: Optional[str] = None
 
 class TestReport_Test(BackboneElement):
-	action: list[TestReport_Test_Action]
-	description: Optional[str] = None
 	name: Optional[str] = None
+	description: Optional[str] = None
+	action: List[TestReport_Test_Action]
 
 class TestReport(DomainResource):
 	tester: Optional[str] = None
 	name: Optional[str] = None
 	testScript: Reference
-	participant: list[TestReport_Participant] = []
+	participant: Optional[List[TestReport_Participant]] = None
 	setup: Optional[TestReport_Setup] = None
 	status: str
 	result: str
-	score: Optional[str] = None
+	score: Optional[float] = None
 	identifier: Optional[Identifier] = None
 	issued: Optional[str] = None
 	teardown: Optional[TestReport_Teardown] = None
-	test: list[TestReport_Test] = []
-
+	test: Optional[List[TestReport_Test]] = None

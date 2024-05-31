@@ -95,14 +95,14 @@ from aidbox.base import Page, Count, Sort, Where
 patients = Patient.get(Where('active', True), Count(10), Page(3), Sort('created_at', 'desc'))
 ```
 
-#### Authorized request to any of Aidbox endpoints `.request()`
+#### Authorized request to any of Aidbox endpoints `.make_request()`
 
 ```python
 from aidbox.base import API
 
-API.request(endpoint="/AidboxTask", method="GET")
+API.make_request(endpoint="/AidboxTask", method="GET")
 
-API.request(
+API.make_request(
     endpoint="/rpc",
     method="POST",
     json={

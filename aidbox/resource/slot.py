@@ -1,16 +1,16 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Slot(DomainResource):
 	schedule: Reference
-	serviceCategory: list[CodeableConcept] = []
-	specialty: list[CodeableConcept] = []
+	serviceCategory: Optional[List[CodeableConcept]] = None
+	specialty: Optional[List[CodeableConcept]] = None
 	start: str
-	serviceType: list[CodeableConcept] = []
+	serviceType: Optional[List[CodeableConcept]] = None
 	appointmentType: Optional[CodeableConcept] = None
 	status: str
 	comment: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	end: str
 	overbooked: Optional[bool] = None
-

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class MedicationRequest_Substitution(BackboneElement):
 	allowedBoolean: Optional[bool] = None
@@ -10,18 +9,18 @@ class MedicationRequest_Substitution(BackboneElement):
 
 class MedicationRequest_DispenseRequest_InitialFill(BackboneElement):
 	quantity: Optional[Quantity] = None
-	duration: Optional[str] = None
+	duration: Optional[Duration] = None
 
 class MedicationRequest_DispenseRequest(BackboneElement):
 	initialFill: Optional[MedicationRequest_DispenseRequest_InitialFill] = None
-	dispenseInterval: Optional[str] = None
+	dispenseInterval: Optional[Duration] = None
 	validityPeriod: Optional[Period] = None
-	numberOfRepeatsAllowed: Optional[str] = None
+	numberOfRepeatsAllowed: Optional[NonNegativeInt] = None
 	quantity: Optional[Quantity] = None
-	expectedSupplyDuration: Optional[str] = None
+	expectedSupplyDuration: Optional[Duration] = None
 	performer: Optional[Reference] = None
 
-class UsCoreMedicationrequest(BaseModel):
+class UsCoreMedicationrequest(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-medicationrequest"])
 	performerType: Optional[CodeableConcept] = None
 	category: Optional[List[CodeableConcept]] = None
@@ -43,7 +42,7 @@ class UsCoreMedicationrequest(BaseModel):
 	reportedReference: Optional[Reference] = None
 	priority: Optional[str] = None
 	status: str
-	dosageInstruction: Optional[List[str]] = None
+	dosageInstruction: Optional[List[Dosage]] = None
 	groupIdentifier: Optional[Identifier] = None
 	recorder: Optional[Reference] = None
 	reportedBoolean: Optional[bool] = None
@@ -57,10 +56,3 @@ class UsCoreMedicationrequest(BaseModel):
 	subject: Reference
 	performer: Optional[Reference] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

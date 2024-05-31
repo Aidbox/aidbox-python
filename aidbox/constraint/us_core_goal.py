@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Goal_Target(BackboneElement):
 	detailRange: Optional[Range] = None
@@ -13,9 +12,9 @@ class Goal_Target(BackboneElement):
 	detailCodeableConcept: Optional[CodeableConcept] = None
 	dueDate: Optional[str] = None
 	detailBoolean: Optional[bool] = None
-	dueDuration: Optional[str] = None
+	dueDuration: Optional[Duration] = None
 
-class UsCoreGoal(BaseModel):
+class UsCoreGoal(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal"])
 	description: CodeableConcept
 	category: Optional[List[CodeableConcept]] = None
@@ -34,10 +33,3 @@ class UsCoreGoal(BaseModel):
 	outcomeReference: Optional[List[Reference]] = None
 	subject: Reference
 	lifecycleStatus: str
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

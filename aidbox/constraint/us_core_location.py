@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Location_HoursOfOperation(BackboneElement):
 	daysOfWeek: Optional[List[str]] = None
@@ -10,11 +9,11 @@ class Location_HoursOfOperation(BackboneElement):
 	closingTime: Optional[str] = None
 
 class Location_Position(BackboneElement):
-	longitude: str
-	latitude: str
-	altitude: Optional[str] = None
+	longitude: float
+	latitude: float
+	altitude: Optional[float] = None
 
-class UsCoreLocation(BaseModel):
+class UsCoreLocation(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-location"])
 	description: Optional[str] = None
 	address: Optional[Address] = None
@@ -33,10 +32,3 @@ class UsCoreLocation(BaseModel):
 	partOf: Optional[Reference] = None
 	physicalType: Optional[CodeableConcept] = None
 	endpoint: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

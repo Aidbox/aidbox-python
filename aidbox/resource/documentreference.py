@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class DocumentReference_Content(BackboneElement):
@@ -10,29 +11,28 @@ class DocumentReference_RelatesTo(BackboneElement):
 	target: Reference
 
 class DocumentReference_Context(BackboneElement):
-	encounter: list[Reference] = []
-	event: list[CodeableConcept] = []
-	facilityType: Optional[CodeableConcept] = None
+	encounter: Optional[List[Reference]] = None
+	event: Optional[List[CodeableConcept]] = None
 	period: Optional[Period] = None
+	facilityType: Optional[CodeableConcept] = None
 	practiceSetting: Optional[CodeableConcept] = None
-	related: list[Reference] = []
 	sourcePatientInfo: Optional[Reference] = None
+	related: Optional[List[Reference]] = None
 
 class DocumentReference(DomainResource):
 	description: Optional[str] = None
-	category: list[CodeableConcept] = []
+	category: Optional[List[CodeableConcept]] = None
 	date: Optional[str] = None
 	docStatus: Optional[str] = None
-	content: list[DocumentReference_Content]
+	content: List[DocumentReference_Content]
 	type: Optional[CodeableConcept] = None
-	author: list[Reference] = []
+	author: Optional[List[Reference]] = None
 	masterIdentifier: Optional[Identifier] = None
 	custodian: Optional[Reference] = None
 	status: str
-	identifier: list[Identifier] = []
-	relatesTo: list[DocumentReference_RelatesTo] = []
+	identifier: Optional[List[Identifier]] = None
+	relatesTo: Optional[List[DocumentReference_RelatesTo]] = None
 	context: Optional[DocumentReference_Context] = None
-	securityLabel: list[CodeableConcept] = []
+	securityLabel: Optional[List[CodeableConcept]] = None
 	subject: Optional[Reference] = None
 	authenticator: Optional[Reference] = None
-

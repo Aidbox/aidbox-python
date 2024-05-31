@@ -1,35 +1,35 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ClinicalImpression_Investigation(BackboneElement):
 	code: CodeableConcept
-	item: list[Reference] = []
+	item: Optional[List[Reference]] = None
 
 class ClinicalImpression_Finding(BackboneElement):
-	basis: Optional[str] = None
 	itemCodeableConcept: Optional[CodeableConcept] = None
 	itemReference: Optional[Reference] = None
+	basis: Optional[str] = None
 
 class ClinicalImpression(DomainResource):
 	description: Optional[str] = None
 	date: Optional[str] = None
-	investigation: list[ClinicalImpression_Investigation] = []
-	protocol: list[str] = []
+	investigation: Optional[List[ClinicalImpression_Investigation]] = None
+	protocol: Optional[List[str]] = None
 	assessor: Optional[Reference] = None
-	supportingInfo: list[Reference] = []
+	supportingInfo: Optional[List[Reference]] = None
 	encounter: Optional[Reference] = None
-	problem: list[Reference] = []
+	problem: Optional[List[Reference]] = None
 	statusReason: Optional[CodeableConcept] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	summary: Optional[str] = None
 	effectiveDateTime: Optional[str] = None
-	prognosisCodeableConcept: list[CodeableConcept] = []
+	prognosisCodeableConcept: Optional[List[CodeableConcept]] = None
 	status: str
 	previous: Optional[Reference] = None
 	code: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
-	finding: list[ClinicalImpression_Finding] = []
-	prognosisReference: list[Reference] = []
+	identifier: Optional[List[Identifier]] = None
+	finding: Optional[List[ClinicalImpression_Finding]] = None
+	prognosisReference: Optional[List[Reference]] = None
 	subject: Reference
 	effectivePeriod: Optional[Period] = None
-

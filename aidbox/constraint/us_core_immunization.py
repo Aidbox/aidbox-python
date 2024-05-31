@@ -1,11 +1,10 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Immunization_ProtocolApplied(BackboneElement):
-	seriesDosesPositiveInt: Optional[str] = None
-	doseNumberPositiveInt: Optional[str] = None
+	seriesDosesPositiveInt: Optional[PositiveInt] = None
+	doseNumberPositiveInt: Optional[PositiveInt] = None
 	series: Optional[str] = None
 	authority: Optional[Reference] = None
 	doseNumberString: Optional[str] = None
@@ -27,7 +26,7 @@ class Immunization_Performer(BackboneElement):
 	function: Optional[CodeableConcept] = None
 	actor: Reference
 
-class UsCoreImmunization(BaseModel):
+class UsCoreImmunization(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-immunization"])
 	patient: Reference
 	isSubpotent: Optional[bool] = None
@@ -58,10 +57,3 @@ class UsCoreImmunization(BaseModel):
 	expirationDate: Optional[str] = None
 	performer: Optional[List[Immunization_Performer]] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

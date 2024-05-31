@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Bundle_Link(BackboneElement):
 	relation: str
@@ -9,7 +8,7 @@ class Bundle_Link(BackboneElement):
 
 class Bundle_Entry_Search(BackboneElement):
 	mode: Optional[str] = None
-	score: Optional[str] = None
+	score: Optional[float] = None
 
 class Bundle_Entry_Request(BackboneElement):
 	method: str
@@ -34,15 +33,12 @@ class Bundle_Entry(BackboneElement):
 	request: Optional[Bundle_Entry_Request] = None
 	response: Optional[Bundle_Entry_Response] = None
 
-class McodePatientBundle(BaseModel):
+class McodePatientBundle(Resource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-patient-bundle"])
 	identifier: Optional[Identifier] = None
 	type: Literal["collection"] = "collection"
 	timestamp: Optional[str] = None
-	total: Optional[str] = None
+	total: Optional[NonNegativeInt] = None
 	link: Optional[List[Bundle_Link]] = None
 	entry: List[Bundle_Entry]
 	signature: Optional[Signature] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

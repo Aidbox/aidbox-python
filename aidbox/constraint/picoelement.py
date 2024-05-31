@@ -1,26 +1,25 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class EvidenceVariable_Characteristic(BackboneElement):
 	description: Optional[str] = None
 	exclude: Optional[bool] = None
 	groupMeasure: Optional[str] = None
 	definitionExpression: Optional[Expression] = None
-	timeFromStart: Optional[str] = None
-	participantEffectiveDuration: Optional[str] = None
+	timeFromStart: Optional[Duration] = None
+	participantEffectiveDuration: Optional[Duration] = None
 	definitionDataRequirement: Optional[DataRequirement] = None
 	definitionTriggerDefinition: Optional[TriggerDefinition] = None
 	definitionCanonical: Optional[str] = None
 	definitionReference: Optional[Reference] = None
-	participantEffectiveTiming: Optional[str] = None
+	participantEffectiveTiming: Optional[Timing] = None
 	participantEffectiveDateTime: Optional[str] = None
 	participantEffectivePeriod: Optional[Period] = None
 	definitionCodeableConcept: Optional[CodeableConcept] = None
 	usageContext: Optional[List[UsageContext]] = None
 
-class Picoelement(BaseModel):
+class Picoelement(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/picoelement"])
 	description: Optional[str] = None
 	date: Optional[str] = None
@@ -49,10 +48,3 @@ class Picoelement(BaseModel):
 	relatedArtifact: Optional[List[RelatedArtifact]] = None
 	contact: Optional[List[ContactDetail]] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

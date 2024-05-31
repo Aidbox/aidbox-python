@@ -1,21 +1,22 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
-class SubstanceReferenceInformation_Classification(BackboneElement):
-	classification: Optional[CodeableConcept] = None
-	domain: Optional[CodeableConcept] = None
-	source: list[Reference] = []
-	subtype: list[CodeableConcept] = []
-
 class SubstanceReferenceInformation_Gene(BackboneElement):
-	gene: Optional[CodeableConcept] = None
 	geneSequenceOrigin: Optional[CodeableConcept] = None
-	source: list[Reference] = []
+	gene: Optional[CodeableConcept] = None
+	source: Optional[List[Reference]] = None
 
 class SubstanceReferenceInformation_GeneElement(BackboneElement):
-	element: Optional[Identifier] = None
-	source: list[Reference] = []
 	type: Optional[CodeableConcept] = None
+	element: Optional[Identifier] = None
+	source: Optional[List[Reference]] = None
+
+class SubstanceReferenceInformation_Classification(BackboneElement):
+	domain: Optional[CodeableConcept] = None
+	classification: Optional[CodeableConcept] = None
+	subtype: Optional[List[CodeableConcept]] = None
+	source: Optional[List[Reference]] = None
 
 class SubstanceReferenceInformation_Target(BackboneElement):
 	organism: Optional[CodeableConcept] = None
@@ -23,16 +24,15 @@ class SubstanceReferenceInformation_Target(BackboneElement):
 	amountType: Optional[CodeableConcept] = None
 	type: Optional[CodeableConcept] = None
 	interaction: Optional[CodeableConcept] = None
-	source: list[Reference] = []
+	source: Optional[List[Reference]] = None
 	amountQuantity: Optional[Quantity] = None
 	amountString: Optional[str] = None
 	target: Optional[Identifier] = None
 	amountRange: Optional[Range] = None
 
 class SubstanceReferenceInformation(DomainResource):
-	classification: list[SubstanceReferenceInformation_Classification] = []
 	comment: Optional[str] = None
-	gene: list[SubstanceReferenceInformation_Gene] = []
-	geneElement: list[SubstanceReferenceInformation_GeneElement] = []
-	target: list[SubstanceReferenceInformation_Target] = []
-
+	gene: Optional[List[SubstanceReferenceInformation_Gene]] = None
+	geneElement: Optional[List[SubstanceReferenceInformation_GeneElement]] = None
+	classification: Optional[List[SubstanceReferenceInformation_Classification]] = None
+	target: Optional[List[SubstanceReferenceInformation_Target]] = None

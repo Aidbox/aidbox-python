@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class AdverseEvent_SuspectEntity_Causality(BackboneElement):
 	assessment: Optional[CodeableConcept] = None
@@ -13,7 +12,7 @@ class AdverseEvent_SuspectEntity(BackboneElement):
 	instance: Reference
 	causality: Optional[List[AdverseEvent_SuspectEntity_Causality]] = None
 
-class CodexrtRadiotherapyAdverseEvent(BaseModel):
+class CodexrtRadiotherapyAdverseEvent(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/codex-radiation-therapy/StructureDefinition/codexrt-radiotherapy-adverse-event"])
 	category: Optional[List[CodeableConcept]] = None
 	actuality: Literal["actual"] = "actual"
@@ -35,10 +34,3 @@ class CodexrtRadiotherapyAdverseEvent(BaseModel):
 	location: Optional[Reference] = None
 	subject: Reference
 	resultingCondition: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

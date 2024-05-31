@@ -1,11 +1,12 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class HealthcareService_AvailableTime(BackboneElement):
+	daysOfWeek: Optional[List[str]] = None
 	allDay: Optional[bool] = None
-	availableEndTime: Optional[str] = None
 	availableStartTime: Optional[str] = None
-	daysOfWeek: list[str] = []
+	availableEndTime: Optional[str] = None
 
 class HealthcareService_NotAvailable(BackboneElement):
 	description: str
@@ -16,28 +17,27 @@ class HealthcareService_Eligibility(BackboneElement):
 	comment: Optional[str] = None
 
 class HealthcareService(DomainResource):
-	coverageArea: list[Reference] = []
-	category: list[CodeableConcept] = []
-	availableTime: list[HealthcareService_AvailableTime] = []
-	specialty: list[CodeableConcept] = []
+	coverageArea: Optional[List[Reference]] = None
+	category: Optional[List[CodeableConcept]] = None
+	availableTime: Optional[List[HealthcareService_AvailableTime]] = None
+	specialty: Optional[List[CodeableConcept]] = None
 	name: Optional[str] = None
-	notAvailable: list[HealthcareService_NotAvailable] = []
+	notAvailable: Optional[List[HealthcareService_NotAvailable]] = None
 	providedBy: Optional[Reference] = None
-	type: list[CodeableConcept] = []
-	eligibility: list[HealthcareService_Eligibility] = []
+	type: Optional[List[CodeableConcept]] = None
+	eligibility: Optional[List[HealthcareService_Eligibility]] = None
 	extraDetails: Optional[str] = None
-	characteristic: list[CodeableConcept] = []
+	characteristic: Optional[List[CodeableConcept]] = None
 	photo: Optional[Attachment] = None
 	active: Optional[bool] = None
-	communication: list[CodeableConcept] = []
+	communication: Optional[List[CodeableConcept]] = None
 	comment: Optional[str] = None
-	identifier: list[Identifier] = []
-	serviceProvisionCode: list[CodeableConcept] = []
+	identifier: Optional[List[Identifier]] = None
+	serviceProvisionCode: Optional[List[CodeableConcept]] = None
 	availabilityExceptions: Optional[str] = None
 	appointmentRequired: Optional[bool] = None
-	referralMethod: list[CodeableConcept] = []
-	telecom: list[ContactPoint] = []
-	location: list[Reference] = []
-	program: list[CodeableConcept] = []
-	endpoint: list[Reference] = []
-
+	referralMethod: Optional[List[CodeableConcept]] = None
+	telecom: Optional[List[ContactPoint]] = None
+	location: Optional[List[Reference]] = None
+	program: Optional[List[CodeableConcept]] = None
+	endpoint: Optional[List[Reference]] = None

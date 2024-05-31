@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Composition_Section(BackboneElement):
 	orderedBy: Optional[CodeableConcept] = None
@@ -30,7 +29,7 @@ class Composition_RelatesTo(BackboneElement):
 	targetIdentifier: Optional[Identifier] = None
 	targetReference: Optional[Reference] = None
 
-class ExampleComposition(BaseModel):
+class ExampleComposition(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/example-composition"])
 	category: Optional[List[CodeableConcept]] = None
 	date: str
@@ -47,10 +46,3 @@ class ExampleComposition(BaseModel):
 	relatesTo: Optional[List[Composition_RelatesTo]] = None
 	subject: Optional[Reference] = None
 	confidentiality: Optional[str] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

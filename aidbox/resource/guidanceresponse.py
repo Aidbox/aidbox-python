@@ -1,22 +1,22 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class GuidanceResponse(DomainResource):
-	dataRequirement: list[DataRequirement] = []
+	dataRequirement: Optional[List[DataRequirement]] = None
 	moduleCanonical: Optional[str] = None
 	encounter: Optional[Reference] = None
-	reasonCode: list[CodeableConcept] = []
+	reasonCode: Optional[List[CodeableConcept]] = None
 	outputParameters: Optional[Reference] = None
-	evaluationMessage: list[Reference] = []
+	evaluationMessage: Optional[List[Reference]] = None
 	requestIdentifier: Optional[Identifier] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	status: str
 	result: Optional[Reference] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	moduleCodeableConcept: Optional[CodeableConcept] = None
 	moduleUri: Optional[str] = None
 	occurrenceDateTime: Optional[str] = None
 	subject: Optional[Reference] = None
 	performer: Optional[Reference] = None
-	reasonReference: list[Reference] = []
-
+	reasonReference: Optional[List[Reference]] = None

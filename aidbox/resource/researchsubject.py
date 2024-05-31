@@ -1,13 +1,13 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ResearchSubject(DomainResource):
-	actualArm: Optional[str] = None
-	assignedArm: Optional[str] = None
-	consent: Optional[Reference] = None
-	identifier: list[Identifier] = []
-	individual: Reference
-	period: Optional[Period] = None
+	identifier: Optional[List[Identifier]] = None
 	status: str
+	period: Optional[Period] = None
 	study: Reference
-
+	individual: Reference
+	assignedArm: Optional[str] = None
+	actualArm: Optional[str] = None
+	consent: Optional[Reference] = None

@@ -1,39 +1,40 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class PlanDefinition_Goal_Target(BackboneElement):
-	detailCodeableConcept: Optional[CodeableConcept] = None
+	measure: Optional[CodeableConcept] = None
 	detailQuantity: Optional[Quantity] = None
 	detailRange: Optional[Range] = None
-	due: Optional[str] = None
-	measure: Optional[CodeableConcept] = None
+	detailCodeableConcept: Optional[CodeableConcept] = None
+	due: Optional[Duration] = None
 
 class PlanDefinition_Goal(BackboneElement):
-	addresses: list[CodeableConcept] = []
 	category: Optional[CodeableConcept] = None
 	description: CodeableConcept
-	documentation: list[RelatedArtifact] = []
 	priority: Optional[CodeableConcept] = None
 	start: Optional[CodeableConcept] = None
-	target: list[PlanDefinition_Goal_Target] = []
+	addresses: Optional[List[CodeableConcept]] = None
+	documentation: Optional[List[RelatedArtifact]] = None
+	target: Optional[List[PlanDefinition_Goal_Target]] = None
 
 class PlanDefinition_Action_RelatedAction(BackboneElement):
 	actionId: str
-	offsetDuration: Optional[str] = None
-	offsetRange: Optional[Range] = None
 	relationship: str
+	offsetDuration: Optional[Duration] = None
+	offsetRange: Optional[Range] = None
 
 class PlanDefinition_Action_Participant(BackboneElement):
-	role: Optional[CodeableConcept] = None
 	type: str
+	role: Optional[CodeableConcept] = None
 
 class PlanDefinition_Action_Condition(BackboneElement):
-	expression: Optional[Expression] = None
 	kind: str
+	expression: Optional[Expression] = None
 
 class PlanDefinition_Action_DynamicValue(BackboneElement):
-	expression: Optional[Expression] = None
 	path: Optional[str] = None
+	expression: Optional[Expression] = None
 
 class PlanDefinition_Action(BackboneElement):
 	timingRange: Optional[Range] = None
@@ -41,67 +42,66 @@ class PlanDefinition_Action(BackboneElement):
 	transform: Optional[str] = None
 	textEquivalent: Optional[str] = None
 	definitionUri: Optional[str] = None
-	goalId: list[str] = []
+	goalId: Optional[List[str]] = None
 	subjectCodeableConcept: Optional[CodeableConcept] = None
 	timingPeriod: Optional[Period] = None
 	definitionCanonical: Optional[str] = None
-	relatedAction: list[PlanDefinition_Action_RelatedAction] = []
+	relatedAction: Optional[List[PlanDefinition_Action_RelatedAction]] = None
 	type: Optional[CodeableConcept] = None
-	participant: list[PlanDefinition_Action_Participant] = []
-	output: list[DataRequirement] = []
+	participant: Optional[List[PlanDefinition_Action_Participant]] = None
+	output: Optional[List[DataRequirement]] = None
 	title: Optional[str] = None
-	documentation: list[RelatedArtifact] = []
+	documentation: Optional[List[RelatedArtifact]] = None
 	prefix: Optional[str] = None
 	selectionBehavior: Optional[str] = None
-	reason: list[CodeableConcept] = []
+	reason: Optional[List[CodeableConcept]] = None
 	timingDateTime: Optional[str] = None
-	timingTiming: Optional[str] = None
-	timingDuration: Optional[str] = None
+	timingTiming: Optional[Timing] = None
+	timingDuration: Optional[Duration] = None
 	priority: Optional[str] = None
 	requiredBehavior: Optional[str] = None
-	condition: list[PlanDefinition_Action_Condition] = []
+	condition: Optional[List[PlanDefinition_Action_Condition]] = None
 	groupingBehavior: Optional[str] = None
-	dynamicValue: list[PlanDefinition_Action_DynamicValue] = []
-	code: list[CodeableConcept] = []
-	timingAge: Optional[str] = None
-	action: list[str] = []
+	dynamicValue: Optional[List[PlanDefinition_Action_DynamicValue]] = None
+	code: Optional[List[CodeableConcept]] = None
+	timingAge: Optional[Age] = None
+	action: Optional[List[str]] = None
 	precheckBehavior: Optional[str] = None
-	input: list[DataRequirement] = []
-	trigger: list[TriggerDefinition] = []
+	input: Optional[List[DataRequirement]] = None
+	trigger: Optional[List[TriggerDefinition]] = None
 	subjectReference: Optional[Reference] = None
 	cardinalityBehavior: Optional[str] = None
 
 class PlanDefinition(DomainResource):
 	description: Optional[str] = None
 	date: Optional[str] = None
-	endorser: list[ContactDetail] = []
+	endorser: Optional[List[ContactDetail]] = None
 	publisher: Optional[str] = None
 	approvalDate: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
 	subjectCodeableConcept: Optional[CodeableConcept] = None
 	name: Optional[str] = None
-	useContext: list[UsageContext] = []
-	goal: list[PlanDefinition_Goal] = []
+	useContext: Optional[List[UsageContext]] = None
+	goal: Optional[List[PlanDefinition_Goal]] = None
 	copyright: Optional[str] = None
 	type: Optional[CodeableConcept] = None
 	experimental: Optional[bool] = None
-	topic: list[CodeableConcept] = []
+	topic: Optional[List[CodeableConcept]] = None
 	title: Optional[str] = None
-	library: list[str] = []
-	author: list[ContactDetail] = []
+	library: Optional[List[str]] = None
+	author: Optional[List[ContactDetail]] = None
 	usage: Optional[str] = None
 	status: str
 	subtitle: Optional[str] = None
 	url: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	lastReviewDate: Optional[str] = None
-	editor: list[ContactDetail] = []
-	action: list[PlanDefinition_Action] = []
-	reviewer: list[ContactDetail] = []
+	editor: Optional[List[ContactDetail]] = None
+	action: Optional[List[PlanDefinition_Action]] = None
+	reviewer: Optional[List[ContactDetail]] = None
 	version: Optional[str] = None
-	relatedArtifact: list[RelatedArtifact] = []
-	contact: list[ContactDetail] = []
+	relatedArtifact: Optional[List[RelatedArtifact]] = None
+	contact: Optional[List[ContactDetail]] = None
 	subjectReference: Optional[Reference] = None
 	effectivePeriod: Optional[Period] = None
-

@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class PaymentNotice(DomainResource):
@@ -12,6 +13,5 @@ class PaymentNotice(DomainResource):
 	status: str
 	payee: Optional[Reference] = None
 	paymentDate: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	provider: Optional[Reference] = None
-

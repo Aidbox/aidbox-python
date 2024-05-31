@@ -1,12 +1,12 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class EnrollmentRequest(DomainResource):
-	candidate: Optional[Reference] = None
-	coverage: Optional[Reference] = None
+	identifier: Optional[List[Identifier]] = None
+	status: Optional[str] = None
 	created: Optional[str] = None
-	identifier: list[Identifier] = []
 	insurer: Optional[Reference] = None
 	provider: Optional[Reference] = None
-	status: Optional[str] = None
-
+	candidate: Optional[Reference] = None
+	coverage: Optional[Reference] = None

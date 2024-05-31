@@ -1,27 +1,28 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MedicinalProduct_ManufacturingBusinessOperation(BackboneElement):
-	authorisationReferenceNumber: Optional[Identifier] = None
-	confidentialityIndicator: Optional[CodeableConcept] = None
-	effectiveDate: Optional[str] = None
-	manufacturer: list[Reference] = []
 	operationType: Optional[CodeableConcept] = None
+	authorisationReferenceNumber: Optional[Identifier] = None
+	effectiveDate: Optional[str] = None
+	confidentialityIndicator: Optional[CodeableConcept] = None
+	manufacturer: Optional[List[Reference]] = None
 	regulator: Optional[Reference] = None
+
+class MedicinalProduct_Name_NamePart(BackboneElement):
+	part: str
+	type: Coding
 
 class MedicinalProduct_Name_CountryLanguage(BackboneElement):
 	country: CodeableConcept
 	jurisdiction: Optional[CodeableConcept] = None
 	language: CodeableConcept
 
-class MedicinalProduct_Name_NamePart(BackboneElement):
-	part: str
-	type: Coding
-
 class MedicinalProduct_Name(BackboneElement):
-	countryLanguage: list[MedicinalProduct_Name_CountryLanguage] = []
-	namePart: list[MedicinalProduct_Name_NamePart] = []
 	productName: str
+	namePart: Optional[List[MedicinalProduct_Name_NamePart]] = None
+	countryLanguage: Optional[List[MedicinalProduct_Name_CountryLanguage]] = None
 
 class MedicinalProduct_SpecialDesignation(BackboneElement):
 	date: Optional[str] = None
@@ -29,29 +30,28 @@ class MedicinalProduct_SpecialDesignation(BackboneElement):
 	type: Optional[CodeableConcept] = None
 	intendedUse: Optional[CodeableConcept] = None
 	status: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	indicationCodeableConcept: Optional[CodeableConcept] = None
 	indicationReference: Optional[Reference] = None
 
 class MedicinalProduct(DomainResource):
 	additionalMonitoringIndicator: Optional[CodeableConcept] = None
-	manufacturingBusinessOperation: list[MedicinalProduct_ManufacturingBusinessOperation] = []
+	manufacturingBusinessOperation: Optional[List[MedicinalProduct_ManufacturingBusinessOperation]] = None
 	combinedPharmaceuticalDoseForm: Optional[CodeableConcept] = None
-	clinicalTrial: list[Reference] = []
-	productClassification: list[CodeableConcept] = []
-	name: list[MedicinalProduct_Name]
-	masterFile: list[Reference] = []
-	pharmaceuticalProduct: list[Reference] = []
+	clinicalTrial: Optional[List[Reference]] = None
+	productClassification: Optional[List[CodeableConcept]] = None
+	name: List[MedicinalProduct_Name]
+	masterFile: Optional[List[Reference]] = None
+	pharmaceuticalProduct: Optional[List[Reference]] = None
 	type: Optional[CodeableConcept] = None
-	marketingStatus: list[MarketingStatus] = []
-	specialMeasures: list[str] = []
-	specialDesignation: list[MedicinalProduct_SpecialDesignation] = []
-	packagedMedicinalProduct: list[Reference] = []
-	identifier: list[Identifier] = []
-	crossReference: list[Identifier] = []
-	attachedDocument: list[Reference] = []
+	marketingStatus: Optional[List[MarketingStatus]] = None
+	specialMeasures: Optional[List[str]] = None
+	specialDesignation: Optional[List[MedicinalProduct_SpecialDesignation]] = None
+	packagedMedicinalProduct: Optional[List[Reference]] = None
+	identifier: Optional[List[Identifier]] = None
+	crossReference: Optional[List[Identifier]] = None
+	attachedDocument: Optional[List[Reference]] = None
 	domain: Optional[Coding] = None
 	legalStatusOfSupply: Optional[CodeableConcept] = None
 	paediatricUseIndicator: Optional[CodeableConcept] = None
-	contact: list[Reference] = []
-
+	contact: Optional[List[Reference]] = None

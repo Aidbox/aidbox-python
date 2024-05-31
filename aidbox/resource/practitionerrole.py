@@ -1,29 +1,29 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class PractitionerRole_AvailableTime(BackboneElement):
+	daysOfWeek: Optional[List[str]] = None
 	allDay: Optional[bool] = None
-	availableEndTime: Optional[str] = None
 	availableStartTime: Optional[str] = None
-	daysOfWeek: list[str] = []
+	availableEndTime: Optional[str] = None
 
 class PractitionerRole_NotAvailable(BackboneElement):
 	description: str
 	during: Optional[Period] = None
 
 class PractitionerRole(DomainResource):
-	availableTime: list[PractitionerRole_AvailableTime] = []
-	specialty: list[CodeableConcept] = []
-	notAvailable: list[PractitionerRole_NotAvailable] = []
+	availableTime: Optional[List[PractitionerRole_AvailableTime]] = None
+	specialty: Optional[List[CodeableConcept]] = None
+	notAvailable: Optional[List[PractitionerRole_NotAvailable]] = None
 	organization: Optional[Reference] = None
 	active: Optional[bool] = None
-	code: list[CodeableConcept] = []
-	identifier: list[Identifier] = []
+	code: Optional[List[CodeableConcept]] = None
+	identifier: Optional[List[Identifier]] = None
 	availabilityExceptions: Optional[str] = None
 	practitioner: Optional[Reference] = None
-	telecom: list[ContactPoint] = []
+	telecom: Optional[List[ContactPoint]] = None
 	period: Optional[Period] = None
-	location: list[Reference] = []
-	endpoint: list[Reference] = []
-	healthcareService: list[Reference] = []
-
+	location: Optional[List[Reference]] = None
+	endpoint: Optional[List[Reference]] = None
+	healthcareService: Optional[List[Reference]] = None

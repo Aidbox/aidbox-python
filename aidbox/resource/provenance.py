@@ -1,27 +1,27 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Provenance_Agent(BackboneElement):
-	onBehalfOf: Optional[Reference] = None
-	role: list[CodeableConcept] = []
 	type: Optional[CodeableConcept] = None
+	role: Optional[List[CodeableConcept]] = None
 	who: Reference
+	onBehalfOf: Optional[Reference] = None
 
 class Provenance_Entity(BackboneElement):
-	agent: list[str] = []
 	role: str
 	what: Reference
+	agent: Optional[List[str]] = None
 
 class Provenance(DomainResource):
-	signature: list[Signature] = []
+	signature: Optional[List[Signature]] = None
 	occurredDateTime: Optional[str] = None
 	recorded: str
-	agent: list[Provenance_Agent]
-	policy: list[str] = []
-	reason: list[CodeableConcept] = []
+	agent: List[Provenance_Agent]
+	policy: Optional[List[str]] = None
+	reason: Optional[List[CodeableConcept]] = None
 	activity: Optional[CodeableConcept] = None
-	target: list[Reference]
+	target: List[Reference]
 	location: Optional[Reference] = None
-	entity: list[Provenance_Entity] = []
+	entity: Optional[List[Provenance_Entity]] = None
 	occurredPeriod: Optional[Period] = None
-

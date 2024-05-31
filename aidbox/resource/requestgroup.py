@@ -1,59 +1,59 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class RequestGroup_Action_RelatedAction(BackboneElement):
 	actionId: str
-	offsetDuration: Optional[str] = None
-	offsetRange: Optional[Range] = None
 	relationship: str
+	offsetDuration: Optional[Duration] = None
+	offsetRange: Optional[Range] = None
 
 class RequestGroup_Action_Condition(BackboneElement):
-	expression: Optional[Expression] = None
 	kind: str
+	expression: Optional[Expression] = None
 
 class RequestGroup_Action(BackboneElement):
 	timingRange: Optional[Range] = None
 	description: Optional[str] = None
 	textEquivalent: Optional[str] = None
 	timingPeriod: Optional[Period] = None
-	relatedAction: list[RequestGroup_Action_RelatedAction] = []
+	relatedAction: Optional[List[RequestGroup_Action_RelatedAction]] = None
 	type: Optional[CodeableConcept] = None
-	participant: list[Reference] = []
+	participant: Optional[List[Reference]] = None
 	title: Optional[str] = None
-	documentation: list[RelatedArtifact] = []
+	documentation: Optional[List[RelatedArtifact]] = None
 	prefix: Optional[str] = None
 	selectionBehavior: Optional[str] = None
 	timingDateTime: Optional[str] = None
-	timingTiming: Optional[str] = None
-	timingDuration: Optional[str] = None
+	timingTiming: Optional[Timing] = None
+	timingDuration: Optional[Duration] = None
 	priority: Optional[str] = None
 	requiredBehavior: Optional[str] = None
-	condition: list[RequestGroup_Action_Condition] = []
+	condition: Optional[List[RequestGroup_Action_Condition]] = None
 	resource: Optional[Reference] = None
 	groupingBehavior: Optional[str] = None
-	code: list[CodeableConcept] = []
-	timingAge: Optional[str] = None
-	action: list[str] = []
+	code: Optional[List[CodeableConcept]] = None
+	timingAge: Optional[Age] = None
+	action: Optional[List[str]] = None
 	precheckBehavior: Optional[str] = None
 	cardinalityBehavior: Optional[str] = None
 
 class RequestGroup(DomainResource):
-	instantiatesCanonical: list[str] = []
-	instantiatesUri: list[str] = []
+	instantiatesCanonical: Optional[List[str]] = None
+	instantiatesUri: Optional[List[str]] = None
 	encounter: Optional[Reference] = None
-	reasonCode: list[CodeableConcept] = []
+	reasonCode: Optional[List[CodeableConcept]] = None
 	authoredOn: Optional[str] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	author: Optional[Reference] = None
 	priority: Optional[str] = None
 	status: str
 	groupIdentifier: Optional[Identifier] = None
 	code: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	intent: str
-	action: list[RequestGroup_Action] = []
-	replaces: list[Reference] = []
-	basedOn: list[Reference] = []
+	action: Optional[List[RequestGroup_Action]] = None
+	replaces: Optional[List[Reference]] = None
+	basedOn: Optional[List[Reference]] = None
 	subject: Optional[Reference] = None
-	reasonReference: list[Reference] = []
-
+	reasonReference: Optional[List[Reference]] = None

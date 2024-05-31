@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing_extensions import TypeAlias
 
 IncEx: TypeAlias = "set[int] | set[str] | dict[int, Any] | dict[str, Any] | None"
-from typing import Literal, Union, Literal, Mapping, Optional, Any, overload
+from typing import Literal, Union, Literal, Mapping, Optional, List, Any, overload
 from pydantic import BaseModel, EmailStr, Field, PositiveInt, NonNegativeInt
 
 import os
@@ -14,17 +14,17 @@ from requests.auth import HTTPBasicAuth
 @overload
 def Where(
     attribute: Literal[
-        "address-city",
-        "address",
-        "address-country",
-        "address-postalcode",
-        "address-state",
-        "family",
-        "name",
-        "given",
-    ],
+    "address-city",
+    "address",
+    "address-country",
+    "address-postalcode",
+    "address-state",
+    "family",
+    "name",
+    "given",
+],
     value: str,
-):
+    ):
     ...
 
 
@@ -53,7 +53,7 @@ def Page(value: int):
 def Sort(
     value: Union[Literal["last_updated", "created_at"], str],
     order: Literal["asc", "desc"],
-):
+    ):
     if value == "last_updated":
         return {"_sort": "-lastUpdated" if order == "desc" else "lastUpdated"}
     if value == "created_at":
@@ -133,7 +133,7 @@ class API(BaseModel):
         exclude_none: bool = False,
         round_trip: bool = False,
         warnings: bool = True,
-    ):
+        ):
         data = self.model_dump(
             mode=mode,
             by_alias=by_alias,
@@ -154,7 +154,7 @@ class API(BaseModel):
         return data
 
     @classmethod
-    def do_request(cls, endpoint, method="GET", **kwargs):
+    def make_request(cls, endpoint, method="GET", **kwargs):
         url = f"{base}{endpoint}"
         return requests.request(method, url, auth=basic, **kwargs)
 
@@ -172,23 +172,23 @@ class Element(BaseModel):
 
 
 class HumanName(Element):
-    family: Optional[str] = None
-    given: list[str] = []
-    period: Optional[Period] = None
-    prefix: list[str] = []
-    suffix: list[str] = []
-    text: Optional[str] = None
     use: Optional[str] = None
+    text: Optional[str] = None
+    family: Optional[str] = None
+    given: Optional[List[str]] = None
+    prefix: Optional[List[str]] = None
+    suffix: Optional[List[str]] = None
+    period: Optional[Period] = None
 
 
 class Signature(Element):
-    data: Optional[str] = None
-    onBehalfOf: Optional[Reference] = None
-    sigFormat: Optional[str] = None
-    targetFormat: Optional[str] = None
-    type: list[Coding]
+    type: List[Coding]
     when: str
     who: Reference
+    onBehalfOf: Optional[Reference] = None
+    targetFormat: Optional[str] = None
+    sigFormat: Optional[str] = None
+    data: Optional[str] = None
 
 
 class Range(Element):
@@ -206,17 +206,17 @@ class Coding(Element):
 
 class Attachment(Element):
     contentType: Optional[str] = None
-    creation: Optional[str] = None
-    data: Optional[str] = None
-    hash: Optional[str] = None
     language: Optional[str] = None
-    size: Optional[str] = None
-    title: Optional[str] = None
+    data: Optional[str] = None
     url: Optional[str] = None
+    size: Optional[NonNegativeInt] = None
+    hash: Optional[str] = None
+    title: Optional[str] = None
+    creation: Optional[str] = None
 
 
 class BackboneElement(Element):
-    modifierExtension: list[Extension] = []
+    modifierExtension: Optional[List[Extension]] = None
 
 
 class Address(Element):
@@ -224,7 +224,7 @@ class Address(Element):
     city: Optional[str] = None
     type: Optional[str] = None
     state: Optional[str] = None
-    line: list[str] = []
+    line: Optional[List[str]] = None
     postalCode: Optional[str] = None
     period: Optional[Period] = None
     country: Optional[str] = None
@@ -233,8 +233,8 @@ class Address(Element):
 
 
 class Money(Element):
+    value: Optional[float] = None
     currency: Optional[str] = None
-    value: Optional[str] = None
 
 
 class Period(Element):
@@ -255,32 +255,32 @@ class TriggerDefinition(Element):
     name: Optional[str] = None
     type: str
     timingDateTime: Optional[str] = None
-    timingTiming: Optional[str] = None
+    timingTiming: Optional[Timing] = None
     condition: Optional[Expression] = None
     timingDate: Optional[str] = None
-    data: list[DataRequirement] = []
+    data: Optional[List[DataRequirement]] = None
 
 
 class Contributor(Element):
-    contact: list[ContactDetail] = []
+    contact: Optional[List[ContactDetail]] = None
     name: str
     type: str
 
 
 class Identifier(Element):
-    assigner: Optional[Reference] = None
-    period: Optional[Period] = None
-    system: Optional[str] = None
-    type: Optional[CodeableConcept] = None
     use: Optional[str] = None
+    type: Optional[CodeableConcept] = None
+    system: Optional[str] = None
     value: Optional[str] = None
+    period: Optional[Period] = None
+    assigner: Optional[Reference] = None
 
 
 class Extension(Element):
     valueBase64Binary: Optional[str] = None
-    valueAge: Optional[str] = None
+    valueAge: Optional[Age] = None
     valueParameterDefinition: Optional[ParameterDefinition] = None
-    valueTiming: Optional[str] = None
+    valueTiming: Optional[Timing] = None
     valueCode: Optional[str] = None
     valueReference: Optional[Reference] = None
     valueContributor: Optional[Contributor] = None
@@ -294,58 +294,70 @@ class Extension(Element):
     valueIdentifier: Optional[Identifier] = None
     valueTriggerDefinition: Optional[TriggerDefinition] = None
     valueQuantity: Optional[Quantity] = None
-    valueCount: Optional[str] = None
+    valueCount: Optional[Count] = None
     valueString: Optional[str] = None
     valueRatio: Optional[Ratio] = None
     valueBoolean: Optional[bool] = None
     valueInstant: Optional[str] = None
     valueDateTime: Optional[str] = None
     valueDate: Optional[str] = None
-    valueDuration: Optional[str] = None
+    valueDuration: Optional[Duration] = None
     valueDataRequirement: Optional[DataRequirement] = None
     valueMeta: Optional[Meta] = None
     valueMoney: Optional[Money] = None
     valueCoding: Optional[Coding] = None
     valueExpression: Optional[Expression] = None
     valueSampledData: Optional[SampledData] = None
-    valueDosage: Optional[str] = None
+    valueDosage: Optional[Dosage] = None
     valueContactPoint: Optional[ContactPoint] = None
     url: str
     valueCodeableConcept: Optional[CodeableConcept] = None
     valueAnnotation: Optional[Annotation] = None
     valuePeriod: Optional[Period] = None
-    valueDistance: Optional[str] = None
+    valueDistance: Optional[Distance] = None
     valueRange: Optional[Range] = None
     valueSignature: Optional[Signature] = None
     valueUuid: Optional[str] = None
     valueInteger: Optional[int] = None
     valueHumanName: Optional[HumanName] = None
-    valueUnsignedInt: Optional[str] = None
+    valueUnsignedInt: Optional[NonNegativeInt] = None
     valueAttachment: Optional[Attachment] = None
     valueOid: Optional[str] = None
     valueAddress: Optional[Address] = None
     valueRelatedArtifact: Optional[RelatedArtifact] = None
-    valuePositiveInt: Optional[str] = None
+    valuePositiveInt: Optional[PositiveInt] = None
     valueId: Optional[str] = None
     valueUrl: Optional[str] = None
 
 
 class Quantity(Element):
-    code: Optional[str] = None
-    comparator: Optional[str] = None
-    system: Optional[str] = None
-    unit: Optional[str] = None
     value: Optional[float] = None
+    comparator: Optional[str] = None
+    unit: Optional[str] = None
+    system: Optional[str] = None
+    code: Optional[str] = None
+
+
+class Count(Quantity):
+    pass
+
+
+class Age(Quantity):
+    pass
+
+
+class Distance(Quantity):
+    pass
 
 
 class RelatedArtifact(Element):
-    citation: Optional[str] = None
-    display: Optional[str] = None
-    document: Optional[Attachment] = None
-    label: Optional[str] = None
-    resource: Optional[str] = None
     type: str
+    label: Optional[str] = None
+    display: Optional[str] = None
+    citation: Optional[str] = None
     url: Optional[str] = None
+    document: Optional[Attachment] = None
+    resource: Optional[str] = None
 
 
 class Ratio(Element):
@@ -362,11 +374,11 @@ class UsageContext(Element):
 
 
 class ContactPoint(Element):
-    period: Optional[Period] = None
-    rank: Optional[int] = None
     system: Optional[str] = None
-    use: Optional[str] = None
     value: Optional[str] = None
+    use: Optional[str] = None
+    rank: Optional[PositiveInt] = None
+    period: Optional[Period] = None
 
 
 class ContactPointEmail(ContactPoint):
@@ -384,22 +396,22 @@ class Narrative(Element):
 
 
 class Meta(Element):
-    lastUpdated: Optional[str] = None
-    profile: list[str] = []
-    security: list[Coding] = []
-    source: Optional[str] = None
-    tag: list[Coding] = []
     versionId: Optional[str] = None
+    lastUpdated: Optional[str] = None
+    source: Optional[str] = None
+    profile: Optional[List[str]] = None
+    security: Optional[List[Coding]] = None
+    tag: Optional[List[Coding]] = None
 
 
 class SampledData(Element):
-    data: Optional[str] = None
-    dimensions: str
-    factor: Optional[str] = None
-    lowerLimit: Optional[str] = None
     origin: Quantity
-    period: str
-    upperLimit: Optional[str] = None
+    period: float
+    factor: Optional[float] = None
+    lowerLimit: Optional[float] = None
+    upperLimit: Optional[float] = None
+    dimensions: PositiveInt
+    data: Optional[str] = None
 
 
 class Annotation(Element):
@@ -410,60 +422,183 @@ class Annotation(Element):
 
 
 class Reference(Element):
-    display: Optional[str] = None
-    identifier: Optional[Identifier] = None
     reference: Optional[str] = None
     type: Optional[str] = None
+    identifier: Optional[Identifier] = None
+    display: Optional[str] = None
 
 
 class CodeableConcept(Element):
-    coding: list[Coding] = []
+    coding: Optional[List[Coding]] = None
     text: Optional[str] = None
 
 
 class ContactDetail(Element):
     name: Optional[str] = None
-    telecom: list[ContactPoint] = []
+    telecom: Optional[List[ContactPoint]] = None
 
 
 class ParameterDefinition(Element):
-    documentation: Optional[str] = None
-    max: Optional[str] = None
-    min: Optional[int] = None
     name: Optional[str] = None
-    profile: Optional[str] = None
-    type: str
     use: str
+    min: Optional[int] = None
+    max: Optional[str] = None
+    documentation: Optional[str] = None
+    type: str
+    profile: Optional[str] = None
+
+
+class DataRequirement_CodeFilter(Element):
+    path: Optional[str] = None
+    searchParam: Optional[str] = None
+    valueSet: Optional[str] = None
+    code: Optional[List[Coding]] = None
+
+
+class DataRequirement_DateFilter(Element):
+    path: Optional[str] = None
+    searchParam: Optional[str] = None
+    valueDateTime: Optional[str] = None
+    valuePeriod: Optional[Period] = None
+    valueDuration: Optional[Duration] = None
+
+
+class DataRequirement_Sort(Element):
+    path: str
+    direction: str
 
 
 class DataRequirement(Element):
-    limit: Optional[str] = None
+    limit: Optional[PositiveInt] = None
     subjectCodeableConcept: Optional[CodeableConcept] = None
     type: str
-    mustSupport: list[str] = []
-    codeFilter: list[Element] = []
+    mustSupport: Optional[List[str]] = None
+    codeFilter: Optional[List[DataRequirement_CodeFilter]] = None
     subjectReference: Optional[Reference] = None
-    dateFilter: list[Element] = []
-    sort: list[Element] = []
-    profile: list[str] = []
+    dateFilter: Optional[List[DataRequirement_DateFilter]] = None
+    sort: Optional[List[DataRequirement_Sort]] = None
+    profile: Optional[List[str]] = None
+
+
+class ElementDefinition_Constraint(Element):
+    key: str
+    requirements: Optional[str] = None
+    severity: str
+    human: str
+    expression: Optional[str] = None
+    xpath: Optional[str] = None
+    source: Optional[str] = None
+
+
+class ElementDefinition_Mapping(Element):
+    identity: str
+    language: Optional[str] = None
+    map: str
+    comment: Optional[str] = None
+
+
+class ElementDefinition_Slicing_Discriminator(Element):
+    type: str
+    path: str
+
+
+class ElementDefinition_Slicing(Element):
+    discriminator: Optional[List[ElementDefinition_Slicing_Discriminator]] = None
+    description: Optional[str] = None
+    ordered: Optional[bool] = None
+    rules: str
+
+
+class ElementDefinition_Type(Element):
+    code: str
+    profile: Optional[List[str]] = None
+    targetProfile: Optional[List[str]] = None
+    aggregation: Optional[List[str]] = None
+    versioning: Optional[str] = None
+
+
+class ElementDefinition_Binding(Element):
+    strength: str
+    description: Optional[str] = None
+    valueSet: Optional[str] = None
+
+
+class ElementDefinition_Example(Element):
+    valueBase64Binary: Optional[str] = None
+    valueAge: Optional[Age] = None
+    valueParameterDefinition: Optional[ParameterDefinition] = None
+    valueTiming: Optional[Timing] = None
+    valueCode: Optional[str] = None
+    valueReference: Optional[Reference] = None
+    valueContributor: Optional[Contributor] = None
+    valueContactDetail: Optional[ContactDetail] = None
+    valueUri: Optional[str] = None
+    valueUsageContext: Optional[UsageContext] = None
+    valueTime: Optional[str] = None
+    valueDecimal: Optional[float] = None
+    valueCanonical: Optional[str] = None
+    valueMarkdown: Optional[str] = None
+    valueIdentifier: Optional[Identifier] = None
+    valueTriggerDefinition: Optional[TriggerDefinition] = None
+    valueQuantity: Optional[Quantity] = None
+    valueCount: Optional[Count] = None
+    valueString: Optional[str] = None
+    valueRatio: Optional[Ratio] = None
+    valueBoolean: Optional[bool] = None
+    valueInstant: Optional[str] = None
+    valueDateTime: Optional[str] = None
+    valueDate: Optional[str] = None
+    valueDuration: Optional[Duration] = None
+    valueDataRequirement: Optional[DataRequirement] = None
+    valueMeta: Optional[Meta] = None
+    valueMoney: Optional[Money] = None
+    valueCoding: Optional[Coding] = None
+    valueExpression: Optional[Expression] = None
+    valueSampledData: Optional[SampledData] = None
+    label: str
+    valueDosage: Optional[Dosage] = None
+    valueContactPoint: Optional[ContactPoint] = None
+    valueCodeableConcept: Optional[CodeableConcept] = None
+    valueAnnotation: Optional[Annotation] = None
+    valuePeriod: Optional[Period] = None
+    valueDistance: Optional[Distance] = None
+    valueRange: Optional[Range] = None
+    valueSignature: Optional[Signature] = None
+    valueUuid: Optional[str] = None
+    valueInteger: Optional[int] = None
+    valueHumanName: Optional[HumanName] = None
+    valueUnsignedInt: Optional[NonNegativeInt] = None
+    valueAttachment: Optional[Attachment] = None
+    valueOid: Optional[str] = None
+    valueAddress: Optional[Address] = None
+    valueRelatedArtifact: Optional[RelatedArtifact] = None
+    valuePositiveInt: Optional[PositiveInt] = None
+    valueId: Optional[str] = None
+    valueUrl: Optional[str] = None
+
+
+class ElementDefinition_Base(Element):
+    path: str
+    min: NonNegativeInt
+    max: str
 
 
 class ElementDefinition(BackboneElement):
-    constraint: list[Element] = []
+    constraint: Optional[List[ElementDefinition_Constraint]] = None
     fixedMarkdown: Optional[str] = None
     path: str
     patternRange: Optional[Range] = None
     patternMeta: Optional[Meta] = None
     defaultValueTime: Optional[str] = None
     fixedCode: Optional[str] = None
-    maxValueDecimal: Optional[str] = None
+    maxValueDecimal: Optional[float] = None
     requirements: Optional[str] = None
-    patternDosage: Optional[str] = None
+    patternDosage: Optional[Dosage] = None
     defaultValueDataRequirement: Optional[DataRequirement] = None
-    min: Optional[str] = None
+    min: Optional[NonNegativeInt] = None
     defaultValueMoney: Optional[Money] = None
-    fixedPositiveInt: Optional[str] = None
-    patternTiming: Optional[str] = None
+    fixedPositiveInt: Optional[PositiveInt] = None
+    patternTiming: Optional[Timing] = None
     definition: Optional[str] = None
     patternContributor: Optional[Contributor] = None
     patternContactPoint: Optional[ContactPoint] = None
@@ -476,46 +611,46 @@ class ElementDefinition(BackboneElement):
     short: Optional[str] = None
     fixedUsageContext: Optional[UsageContext] = None
     defaultValueCoding: Optional[Coding] = None
-    fixedAge: Optional[str] = None
+    fixedAge: Optional[Age] = None
     patternDataRequirement: Optional[DataRequirement] = None
     minValueDate: Optional[str] = None
-    maxValuePositiveInt: Optional[str] = None
+    maxValuePositiveInt: Optional[PositiveInt] = None
     fixedRelatedArtifact: Optional[RelatedArtifact] = None
     fixedAddress: Optional[Address] = None
     defaultValueCode: Optional[str] = None
     fixedUri: Optional[str] = None
     defaultValueSampledData: Optional[SampledData] = None
-    fixedDistance: Optional[str] = None
-    patternUnsignedInt: Optional[str] = None
+    fixedDistance: Optional[Distance] = None
+    patternUnsignedInt: Optional[NonNegativeInt] = None
     defaultValueMarkdown: Optional[str] = None
     defaultValueHumanName: Optional[HumanName] = None
     minValueInstant: Optional[str] = None
-    defaultValueDuration: Optional[str] = None
-    defaultValueDecimal: Optional[str] = None
+    defaultValueDuration: Optional[Duration] = None
+    defaultValueDecimal: Optional[float] = None
     defaultValueUri: Optional[str] = None
-    fixedDosage: Optional[str] = None
+    fixedDosage: Optional[Dosage] = None
     fixedRatio: Optional[Ratio] = None
     fixedContactDetail: Optional[ContactDetail] = None
     patternSampledData: Optional[SampledData] = None
     fixedParameterDefinition: Optional[ParameterDefinition] = None
     defaultValueQuantity: Optional[Quantity] = None
     patternAttachment: Optional[Attachment] = None
-    defaultValueCount: Optional[str] = None
+    defaultValueCount: Optional[Count] = None
     fixedExpression: Optional[Expression] = None
-    minValueDecimal: Optional[str] = None
-    fixedUnsignedInt: Optional[str] = None
-    fixedDuration: Optional[str] = None
+    minValueDecimal: Optional[float] = None
+    fixedUnsignedInt: Optional[NonNegativeInt] = None
+    fixedDuration: Optional[Duration] = None
     patternTriggerDefinition: Optional[TriggerDefinition] = None
-    mapping: list[Element] = []
+    mapping: Optional[List[ElementDefinition_Mapping]] = None
     contentReference: Optional[str] = None
     fixedOid: Optional[str] = None
     defaultValueId: Optional[str] = None
     fixedIdentifier: Optional[Identifier] = None
     defaultValueBase64Binary: Optional[str] = None
-    slicing: Optional[Element] = None
+    slicing: Optional[ElementDefinition_Slicing] = None
     fixedDateTime: Optional[str] = None
     defaultValueContactDetail: Optional[ContactDetail] = None
-    type: list[Element] = []
+    type: Optional[List[ElementDefinition_Type]] = None
     defaultValueBoolean: Optional[bool] = None
     defaultValuePeriod: Optional[Period] = None
     patternBoolean: Optional[bool] = None
@@ -530,8 +665,8 @@ class ElementDefinition(BackboneElement):
     fixedHumanName: Optional[HumanName] = None
     fixedTriggerDefinition: Optional[TriggerDefinition] = None
     defaultValueReference: Optional[Reference] = None
-    patternDecimal: Optional[str] = None
-    defaultValueDosage: Optional[str] = None
+    patternDecimal: Optional[float] = None
+    defaultValueDosage: Optional[Dosage] = None
     fixedDataRequirement: Optional[DataRequirement] = None
     defaultValueRange: Optional[Range] = None
     patternString: Optional[str] = None
@@ -539,32 +674,32 @@ class ElementDefinition(BackboneElement):
     patternTime: Optional[str] = None
     meaningWhenMissing: Optional[str] = None
     maxValueQuantity: Optional[Quantity] = None
-    fixedDecimal: Optional[str] = None
+    fixedDecimal: Optional[float] = None
     fixedCoding: Optional[Coding] = None
     patternAnnotation: Optional[Annotation] = None
     fixedSampledData: Optional[SampledData] = None
     patternUuid: Optional[str] = None
-    patternDuration: Optional[str] = None
+    patternDuration: Optional[Duration] = None
     patternCode: Optional[str] = None
-    fixedCount: Optional[str] = None
+    fixedCount: Optional[Count] = None
     patternSignature: Optional[Signature] = None
-    minValueUnsignedInt: Optional[str] = None
+    minValueUnsignedInt: Optional[NonNegativeInt] = None
     fixedCodeableConcept: Optional[CodeableConcept] = None
     patternReference: Optional[Reference] = None
     defaultValueInstant: Optional[str] = None
-    binding: Optional[Element] = None
-    patternCount: Optional[str] = None
+    binding: Optional[ElementDefinition_Binding] = None
+    patternCount: Optional[Count] = None
     maxValueDate: Optional[str] = None
-    alias: list[str] = []
+    alias: Optional[List[str]] = None
     defaultValueAttachment: Optional[Attachment] = None
-    defaultValueUnsignedInt: Optional[str] = None
-    patternAge: Optional[str] = None
+    defaultValueUnsignedInt: Optional[NonNegativeInt] = None
+    patternAge: Optional[Age] = None
     fixedSignature: Optional[Signature] = None
-    representation: list[str] = []
+    representation: Optional[List[str]] = None
     patternParameterDefinition: Optional[ParameterDefinition] = None
     fixedId: Optional[str] = None
     fixedUrl: Optional[str] = None
-    defaultValueDistance: Optional[str] = None
+    defaultValueDistance: Optional[Distance] = None
     patternIdentifier: Optional[Identifier] = None
     maxValueDateTime: Optional[str] = None
     fixedContactPoint: Optional[ContactPoint] = None
@@ -576,7 +711,7 @@ class ElementDefinition(BackboneElement):
     fixedString: Optional[str] = None
     label: Optional[str] = None
     defaultValueContributor: Optional[Contributor] = None
-    condition: list[str] = []
+    condition: Optional[List[str]] = None
     defaultValueRatio: Optional[Ratio] = None
     patternInstant: Optional[str] = None
     defaultValueCanonical: Optional[str] = None
@@ -584,7 +719,7 @@ class ElementDefinition(BackboneElement):
     comment: Optional[str] = None
     defaultValueSignature: Optional[Signature] = None
     patternDate: Optional[str] = None
-    code: list[Coding] = []
+    code: Optional[List[Coding]] = None
     fixedTime: Optional[str] = None
     defaultValueUrl: Optional[str] = None
     fixedContributor: Optional[Contributor] = None
@@ -593,9 +728,9 @@ class ElementDefinition(BackboneElement):
     patternHumanName: Optional[HumanName] = None
     patternMarkdown: Optional[str] = None
     fixedBase64Binary: Optional[str] = None
-    patternDistance: Optional[str] = None
+    patternDistance: Optional[Distance] = None
     patternRelatedArtifact: Optional[RelatedArtifact] = None
-    fixedTiming: Optional[str] = None
+    fixedTiming: Optional[Timing] = None
     maxLength: Optional[int] = None
     defaultValueAnnotation: Optional[Annotation] = None
     defaultValueUuid: Optional[str] = None
@@ -607,13 +742,13 @@ class ElementDefinition(BackboneElement):
     patternOid: Optional[str] = None
     sliceIsConstraining: Optional[bool] = None
     defaultValueString: Optional[str] = None
-    example: list[Element] = []
-    defaultValueAge: Optional[str] = None
-    patternPositiveInt: Optional[str] = None
+    example: Optional[List[ElementDefinition_Example]] = None
+    defaultValueAge: Optional[Age] = None
+    patternPositiveInt: Optional[PositiveInt] = None
     patternMoney: Optional[Money] = None
     patternId: Optional[str] = None
     patternQuantity: Optional[Quantity] = None
-    minValuePositiveInt: Optional[str] = None
+    minValuePositiveInt: Optional[PositiveInt] = None
     fixedPeriod: Optional[Period] = None
     defaultValueOid: Optional[str] = None
     orderMeaning: Optional[str] = None
@@ -621,19 +756,19 @@ class ElementDefinition(BackboneElement):
     fixedAttachment: Optional[Attachment] = None
     patternCodeableConcept: Optional[CodeableConcept] = None
     minValueQuantity: Optional[Quantity] = None
-    base: Optional[Element] = None
+    base: Optional[ElementDefinition_Base] = None
     patternInteger: Optional[int] = None
     defaultValueParameterDefinition: Optional[ParameterDefinition] = None
     defaultValueDateTime: Optional[str] = None
-    defaultValuePositiveInt: Optional[str] = None
-    maxValueUnsignedInt: Optional[str] = None
+    defaultValuePositiveInt: Optional[PositiveInt] = None
+    maxValueUnsignedInt: Optional[NonNegativeInt] = None
     defaultValueInteger: Optional[int] = None
     isModifierReason: Optional[str] = None
     patternAddress: Optional[Address] = None
     patternBase64Binary: Optional[str] = None
     patternUrl: Optional[str] = None
     patternDateTime: Optional[str] = None
-    defaultValueTiming: Optional[str] = None
+    defaultValueTiming: Optional[Timing] = None
     patternUri: Optional[str] = None
     fixedRange: Optional[Range] = None
     defaultValueRelatedArtifact: Optional[RelatedArtifact] = None
@@ -649,12 +784,20 @@ class ElementDefinition(BackboneElement):
 
 
 class Population(BackboneElement):
-    ageCodeableConcept: Optional[CodeableConcept] = None
     ageRange: Optional[Range] = None
+    ageCodeableConcept: Optional[CodeableConcept] = None
     gender: Optional[CodeableConcept] = None
-    physiologicalCondition: Optional[CodeableConcept] = None
     race: Optional[CodeableConcept] = None
+    physiologicalCondition: Optional[CodeableConcept] = None
 
+
+class Dosage_DoseAndRate(Element):
+    type: Optional[CodeableConcept] = None
+    doseRange: Optional[Range] = None
+    doseQuantity: Optional[Quantity] = None
+    rateRatio: Optional[Ratio] = None
+    rateRange: Optional[Range] = None
+    rateQuantity: Optional[Quantity] = None
 
 class Dosage(BackboneElement):
     site: Optional[CodeableConcept] = None
@@ -664,89 +807,145 @@ class Dosage(BackboneElement):
     maxDosePerAdministration: Optional[Quantity] = None
     route: Optional[CodeableConcept] = None
     asNeededBoolean: Optional[bool] = None
-    timing: Optional[str] = None
-    additionalInstruction: list[CodeableConcept] = []
+    timing: Optional[Timing] = None
+    additionalInstruction: Optional[List[CodeableConcept]] = None
     sequence: Optional[int] = None
     maxDosePerPeriod: Optional[Ratio] = None
-    doseAndRate: list[Element] = []
+    doseAndRate: Optional[List[Dosage_DoseAndRate]] = None
     asNeededCodeableConcept: Optional[CodeableConcept] = None
     text: Optional[str] = None
 
 
-class Duration(Element):
-    code: Optional[str] = None
-    comparator: Optional[str] = None
-    system: Optional[str] = Literal["http://unitsofmeasure.org"]
-    unit: Optional[str] = None
-    value: Optional[float] = None
+class Duration(Quantity):
+    pass
 
 
-class TimingRepeat(Element):
-    boundsDuration: Optional[Duration] = None
+class Timing_Repeat(Element):
     boundsRange: Optional[Range] = None
-    boundsPeriod: Optional[Period] = None
-    count: Optional[PositiveInt] = None
-    countMax: Optional[PositiveInt] = None
-    duration: Optional[float] = None
-    durationMax: Optional[float] = None
-    frequency: Optional[PositiveInt] = None
     frequencyMax: Optional[PositiveInt] = None
-    period: Optional[float] = None
-    periodMax: Optional[float] = None
-    durationUnit: Optional[str] = None
-    periodUnit: Optional[str] = None
-    dayOfWeek: Optional[str] = None
-    timeOfDay: Optional[str] = None
-    when: Optional[str] = None
+    boundsPeriod: Optional[Period] = None
+    when: Optional[List[str]] = None
     offset: Optional[NonNegativeInt] = None
+    periodUnit: Optional[str] = None
+    frequency: Optional[PositiveInt] = None
+    durationMax: Optional[float] = None
+    duration: Optional[float] = None
+    boundsDuration: Optional[Duration] = None
+    durationUnit: Optional[str] = None
+    dayOfWeek: Optional[List[str]] = None
+    count: Optional[PositiveInt] = None
+    periodMax: Optional[float] = None
+    period: Optional[float] = None
+    countMax: Optional[PositiveInt] = None
+    timeOfDay: Optional[List[str]] = None
 
 
 class Timing(BackboneElement):
+    event: Optional[List[str]] = None
+    repeat: Optional[Timing_Repeat] = None
     code: Optional[CodeableConcept] = None
-    event: list[str] = []
-    repeat: Optional[TimingRepeat] = None
 
 
 class MarketingStatus(BackboneElement):
     country: CodeableConcept
-    dateRange: Period
     jurisdiction: Optional[CodeableConcept] = None
-    restoreDate: Optional[str] = None
     status: CodeableConcept
+    dateRange: Period
+    restoreDate: Optional[str] = None
+
+
+class SubstanceAmount_ReferenceRange(Element):
+    lowLimit: Optional[Quantity] = None
+    highLimit: Optional[Quantity] = None
 
 
 class SubstanceAmount(BackboneElement):
     amountQuantity: Optional[Quantity] = None
     amountRange: Optional[Range] = None
     amountString: Optional[str] = None
-    amountText: Optional[str] = None
     amountType: Optional[CodeableConcept] = None
-    referenceRange: Optional[Element] = None
+    amountText: Optional[str] = None
+    referenceRange: Optional[SubstanceAmount_ReferenceRange] = None
 
 
 class ProductShelfLife(BackboneElement):
     identifier: Optional[Identifier] = None
-    period: Quantity
-    specialPrecautionsForStorage: list[CodeableConcept] = []
     type: CodeableConcept
+    period: Quantity
+    specialPrecautionsForStorage: Optional[List[CodeableConcept]] = None
 
 
 class ProdCharacteristic(BackboneElement):
-    imprint: list[str] = []
-    color: list[str] = []
+    imprint: Optional[List[str]] = None
+    color: Optional[List[str]] = None
     width: Optional[Quantity] = None
     nominalVolume: Optional[Quantity] = None
     weight: Optional[Quantity] = None
     shape: Optional[str] = None
     scoring: Optional[CodeableConcept] = None
-    image: list[Attachment] = []
+    image: Optional[List[Attachment]] = None
     depth: Optional[Quantity] = None
     externalDiameter: Optional[Quantity] = None
     height: Optional[Quantity] = None
 
 
+class Parameters_Parameter(BackboneElement):
+    valueBase64Binary: Optional[str] = None
+    valueAge: Optional[Age] = None
+    valueParameterDefinition: Optional[ParameterDefinition] = None
+    valueTiming: Optional[Timing] = None
+    valueCode: Optional[str] = None
+    valueReference: Optional[Reference] = None
+    valueContributor: Optional[Contributor] = None
+    valueContactDetail: Optional[ContactDetail] = None
+    valueUri: Optional[str] = None
+    valueUsageContext: Optional[UsageContext] = None
+    valueTime: Optional[str] = None
+    valueDecimal: Optional[float] = None
+    valueCanonical: Optional[str] = None
+    name: str
+    valueMarkdown: Optional[str] = None
+    valueIdentifier: Optional[Identifier] = None
+    valueTriggerDefinition: Optional[TriggerDefinition] = None
+    valueQuantity: Optional[Quantity] = None
+    part: Optional[List[str]] = None
+    valueCount: Optional[Count] = None
+    valueString: Optional[str] = None
+    valueRatio: Optional[Ratio] = None
+    valueBoolean: Optional[bool] = None
+    valueInstant: Optional[str] = None
+    valueDateTime: Optional[str] = None
+    valueDate: Optional[str] = None
+    valueDuration: Optional[Duration] = None
+    valueDataRequirement: Optional[DataRequirement] = None
+    valueMeta: Optional[Meta] = None
+    valueMoney: Optional[Money] = None
+    valueCoding: Optional[Coding] = None
+    valueExpression: Optional[Expression] = None
+    valueSampledData: Optional[SampledData] = None
+    resource: Optional[Resource] = None
+    valueDosage: Optional[Dosage] = None
+    valueContactPoint: Optional[ContactPoint] = None
+    valueCodeableConcept: Optional[CodeableConcept] = None
+    valueAnnotation: Optional[Annotation] = None
+    valuePeriod: Optional[Period] = None
+    valueDistance: Optional[Distance] = None
+    valueRange: Optional[Range] = None
+    valueSignature: Optional[Signature] = None
+    valueUuid: Optional[str] = None
+    valueInteger: Optional[int] = None
+    valueHumanName: Optional[HumanName] = None
+    valueUnsignedInt: Optional[NonNegativeInt] = None
+    valueAttachment: Optional[Attachment] = None
+    valueOid: Optional[str] = None
+    valueAddress: Optional[Address] = None
+    valueRelatedArtifact: Optional[RelatedArtifact] = None
+    valuePositiveInt: Optional[PositiveInt] = None
+    valueId: Optional[str] = None
+    valueUrl: Optional[str] = None
+
 class Parameters(Resource):
-    parameter: list[BackboneElement] = []
+    parameter: Optional[List[Parameters_Parameter]] = None
 
 
 class Binary(Resource):
@@ -755,18 +954,54 @@ class Binary(Resource):
     securityContext: Optional[Reference] = None
 
 
+class Bundle_Link(BackboneElement):
+    relation: str
+    url: str
+
+
+class Bundle_Entry_Search(BackboneElement):
+    mode: Optional[str] = None
+    score: Optional[float] = None
+
+
+class Bundle_Entry_Request(BackboneElement):
+    method: str
+    url: str
+    ifNoneMatch: Optional[str] = None
+    ifModifiedSince: Optional[str] = None
+    ifMatch: Optional[str] = None
+    ifNoneExist: Optional[str] = None
+
+
+class Bundle_Entry_Response(BackboneElement):
+    status: str
+    location: Optional[str] = None
+    etag: Optional[str] = None
+    lastModified: Optional[str] = None
+    outcome: Optional[Resource] = None
+
+
+class Bundle_Entry(BackboneElement):
+    link: Optional[List[str]] = None
+    fullUrl: Optional[str] = None
+    resource: Optional[Resource] = None
+    search: Optional[Bundle_Entry_Search] = None
+    request: Optional[Bundle_Entry_Request] = None
+    response: Optional[Bundle_Entry_Response] = None
+
+
 class Bundle(Resource):
-    entry: list[BackboneElement] = []
     identifier: Optional[Identifier] = None
-    link: list[BackboneElement] = []
-    signature: Optional[Signature] = None
-    timestamp: Optional[str] = None
-    total: Optional[str] = None
     type: str
+    timestamp: Optional[str] = None
+    total: Optional[NonNegativeInt] = None
+    link: Optional[List[Bundle_Link]] = None
+    entry: Optional[List[Bundle_Entry]] = None
+    signature: Optional[Signature] = None
 
 
 class DomainResource(Resource):
-    contained: list[Resource] = []
-    extension: list[Extension] = []
-    modifierExtension: list[Extension] = []
     text: Optional[Narrative] = None
+    contained: Optional[List[Resource]] = None
+    extension: Optional[List[Extension]] = None
+    modifierExtension: Optional[List[Extension]] = None

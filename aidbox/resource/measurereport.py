@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MeasureReport_Group_Population(BackboneElement):
@@ -16,31 +17,30 @@ class MeasureReport_Group_Stratifier_Stratum_Population(BackboneElement):
 	subjectResults: Optional[Reference] = None
 
 class MeasureReport_Group_Stratifier_Stratum(BackboneElement):
-	component: list[MeasureReport_Group_Stratifier_Stratum_Component] = []
-	measureScore: Optional[Quantity] = None
-	population: list[MeasureReport_Group_Stratifier_Stratum_Population] = []
 	value: Optional[CodeableConcept] = None
+	component: Optional[List[MeasureReport_Group_Stratifier_Stratum_Component]] = None
+	population: Optional[List[MeasureReport_Group_Stratifier_Stratum_Population]] = None
+	measureScore: Optional[Quantity] = None
 
 class MeasureReport_Group_Stratifier(BackboneElement):
-	code: list[CodeableConcept] = []
-	stratum: list[MeasureReport_Group_Stratifier_Stratum] = []
+	code: Optional[List[CodeableConcept]] = None
+	stratum: Optional[List[MeasureReport_Group_Stratifier_Stratum]] = None
 
 class MeasureReport_Group(BackboneElement):
 	code: Optional[CodeableConcept] = None
+	population: Optional[List[MeasureReport_Group_Population]] = None
 	measureScore: Optional[Quantity] = None
-	population: list[MeasureReport_Group_Population] = []
-	stratifier: list[MeasureReport_Group_Stratifier] = []
+	stratifier: Optional[List[MeasureReport_Group_Stratifier]] = None
 
 class MeasureReport(DomainResource):
-	evaluatedResource: list[Reference] = []
+	evaluatedResource: Optional[List[Reference]] = None
 	date: Optional[str] = None
-	group: list[MeasureReport_Group] = []
+	group: Optional[List[MeasureReport_Group]] = None
 	type: str
 	measure: str
 	reporter: Optional[Reference] = None
 	status: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	period: Period
 	improvementNotation: Optional[CodeableConcept] = None
 	subject: Optional[Reference] = None
-

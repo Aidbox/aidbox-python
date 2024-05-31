@@ -1,32 +1,33 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class SubstanceSourceMaterial_Organism_Author(BackboneElement):
-	authorDescription: Optional[str] = None
 	authorType: Optional[CodeableConcept] = None
+	authorDescription: Optional[str] = None
 
 class SubstanceSourceMaterial_Organism_Hybrid(BackboneElement):
-	hybridType: Optional[CodeableConcept] = None
 	maternalOrganismId: Optional[str] = None
 	maternalOrganismName: Optional[str] = None
 	paternalOrganismId: Optional[str] = None
 	paternalOrganismName: Optional[str] = None
+	hybridType: Optional[CodeableConcept] = None
 
 class SubstanceSourceMaterial_Organism_OrganismGeneral(BackboneElement):
-	class_: Optional[CodeableConcept] = None
 	kingdom: Optional[CodeableConcept] = None
-	order: Optional[CodeableConcept] = None
 	phylum: Optional[CodeableConcept] = None
+	class_: Optional[CodeableConcept] = None
+	order: Optional[CodeableConcept] = None
 
 class SubstanceSourceMaterial_Organism(BackboneElement):
-	author: list[SubstanceSourceMaterial_Organism_Author] = []
 	family: Optional[CodeableConcept] = None
 	genus: Optional[CodeableConcept] = None
-	hybrid: Optional[SubstanceSourceMaterial_Organism_Hybrid] = None
-	intraspecificDescription: Optional[str] = None
-	intraspecificType: Optional[CodeableConcept] = None
-	organismGeneral: Optional[SubstanceSourceMaterial_Organism_OrganismGeneral] = None
 	species: Optional[CodeableConcept] = None
+	intraspecificType: Optional[CodeableConcept] = None
+	intraspecificDescription: Optional[str] = None
+	author: Optional[List[SubstanceSourceMaterial_Organism_Author]] = None
+	hybrid: Optional[SubstanceSourceMaterial_Organism_Hybrid] = None
+	organismGeneral: Optional[SubstanceSourceMaterial_Organism_OrganismGeneral] = None
 
 class SubstanceSourceMaterial_PartDescription(BackboneElement):
 	part: Optional[CodeableConcept] = None
@@ -37,17 +38,16 @@ class SubstanceSourceMaterial_FractionDescription(BackboneElement):
 	materialType: Optional[CodeableConcept] = None
 
 class SubstanceSourceMaterial(DomainResource):
-	parentSubstanceName: list[str] = []
+	parentSubstanceName: Optional[List[str]] = None
 	organism: Optional[SubstanceSourceMaterial_Organism] = None
-	partDescription: list[SubstanceSourceMaterial_PartDescription] = []
+	partDescription: Optional[List[SubstanceSourceMaterial_PartDescription]] = None
 	developmentStage: Optional[CodeableConcept] = None
-	fractionDescription: list[SubstanceSourceMaterial_FractionDescription] = []
+	fractionDescription: Optional[List[SubstanceSourceMaterial_FractionDescription]] = None
 	sourceMaterialState: Optional[CodeableConcept] = None
-	countryOfOrigin: list[CodeableConcept] = []
+	countryOfOrigin: Optional[List[CodeableConcept]] = None
 	sourceMaterialType: Optional[CodeableConcept] = None
 	organismId: Optional[Identifier] = None
 	organismName: Optional[str] = None
-	parentSubstanceId: list[Identifier] = []
-	geographicalLocation: list[str] = []
+	parentSubstanceId: Optional[List[Identifier]] = None
+	geographicalLocation: Optional[List[str]] = None
 	sourceMaterialClass: Optional[CodeableConcept] = None
-

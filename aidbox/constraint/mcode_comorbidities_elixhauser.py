@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Codingcomorbiditieselixhauser(Coding):
 	display: Literal["Elixhauser Comorbidity Panel"] = "Elixhauser Comorbidity Panel"
 	system: Literal["http://hl7.org/fhir/us/mcode/CodeSystem/loinc-requested-cs"] = "http://hl7.org/fhir/us/mcode/CodeSystem/loinc-requested-cs"
@@ -36,7 +35,7 @@ class Observation_Component(BackboneElement):
 	valueInteger: Optional[int] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 
-class McodeComorbiditiesElixhauser(BaseModel):
+class McodeComorbiditiesElixhauser(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-comorbidities-elixhauser"])
 	category: Optional[List[CodeableConcept]] = None
 	referenceRange: Optional[List[Observation_ReferenceRange]] = None
@@ -52,7 +51,7 @@ class McodeComorbiditiesElixhauser(BaseModel):
 	status: str
 	code: McodeComorbiditiesElixhauserCode = McodeComorbiditiesElixhauserCode()
 	identifier: Optional[List[Identifier]] = None
-	effectiveTiming: Optional[str] = None
+	effectiveTiming: Optional[Timing] = None
 	bodySite: Optional[CodeableConcept] = None
 	focus: Optional[List[Reference]] = None
 	issued: Optional[str] = None
@@ -65,10 +64,3 @@ class McodeComorbiditiesElixhauser(BaseModel):
 	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

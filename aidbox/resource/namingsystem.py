@@ -1,25 +1,25 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class NamingSystem_UniqueId(BackboneElement):
-	comment: Optional[str] = None
-	period: Optional[Period] = None
-	preferred: Optional[bool] = None
 	type: str
 	value: str
+	preferred: Optional[bool] = None
+	comment: Optional[str] = None
+	period: Optional[Period] = None
 
 class NamingSystem(DomainResource):
 	description: Optional[str] = None
 	date: str
 	publisher: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	name: str
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	type: Optional[CodeableConcept] = None
 	responsible: Optional[str] = None
 	usage: Optional[str] = None
 	status: str
 	kind: str
-	uniqueId: list[NamingSystem_UniqueId]
-	contact: list[ContactDetail] = []
-
+	uniqueId: List[NamingSystem_UniqueId]
+	contact: Optional[List[ContactDetail]] = None

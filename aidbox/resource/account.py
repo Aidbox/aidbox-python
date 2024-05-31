@@ -1,25 +1,25 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Account_Coverage(BackboneElement):
 	coverage: Reference
-	priority: Optional[str] = None
+	priority: Optional[PositiveInt] = None
 
 class Account_Guarantor(BackboneElement):
-	onHold: Optional[bool] = None
 	party: Reference
+	onHold: Optional[bool] = None
 	period: Optional[Period] = None
 
 class Account(DomainResource):
 	description: Optional[str] = None
 	name: Optional[str] = None
 	servicePeriod: Optional[Period] = None
-	coverage: list[Account_Coverage] = []
+	coverage: Optional[List[Account_Coverage]] = None
 	type: Optional[CodeableConcept] = None
-	guarantor: list[Account_Guarantor] = []
+	guarantor: Optional[List[Account_Guarantor]] = None
 	status: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	partOf: Optional[Reference] = None
-	subject: list[Reference] = []
+	subject: Optional[List[Reference]] = None
 	owner: Optional[Reference] = None
-

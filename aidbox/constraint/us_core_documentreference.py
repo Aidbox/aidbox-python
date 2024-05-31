@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class DocumentReference_Content(BackboneElement):
 	attachment: Attachment
@@ -20,7 +19,7 @@ class DocumentReference_Context(BackboneElement):
 	sourcePatientInfo: Optional[Reference] = None
 	related: Optional[List[Reference]] = None
 
-class UsCoreDocumentreference(BaseModel):
+class UsCoreDocumentreference(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference"])
 	description: Optional[str] = None
 	category: List[CodeableConcept]
@@ -38,10 +37,3 @@ class UsCoreDocumentreference(BaseModel):
 	securityLabel: Optional[List[CodeableConcept]] = None
 	subject: Reference
 	authenticator: Optional[Reference] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

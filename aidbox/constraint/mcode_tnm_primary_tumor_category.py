@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Observation_ReferenceRange(BackboneElement):
 	low: Optional[Quantity] = None
@@ -28,7 +27,7 @@ class Observation_Component(BackboneElement):
 	valueInteger: Optional[int] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 
-class McodeTnmPrimaryTumorCategory(BaseModel):
+class McodeTnmPrimaryTumorCategory(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-tnm-primary-tumor-category"])
 	category: Optional[List[CodeableConcept]] = None
 	referenceRange: Optional[List[Observation_ReferenceRange]] = None
@@ -44,7 +43,7 @@ class McodeTnmPrimaryTumorCategory(BaseModel):
 	status: str
 	code: CodeableConcept
 	identifier: Optional[List[Identifier]] = None
-	effectiveTiming: Optional[str] = None
+	effectiveTiming: Optional[Timing] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
 	bodySite: Optional[CodeableConcept] = None
 	focus: Optional[List[Reference]] = None
@@ -57,10 +56,3 @@ class McodeTnmPrimaryTumorCategory(BaseModel):
 	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

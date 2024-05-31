@@ -1,26 +1,26 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class EpisodeOfCare_Diagnosis(BackboneElement):
 	condition: Reference
-	rank: Optional[str] = None
 	role: Optional[CodeableConcept] = None
+	rank: Optional[PositiveInt] = None
 
 class EpisodeOfCare_StatusHistory(BackboneElement):
-	period: Period
 	status: str
+	period: Period
 
 class EpisodeOfCare(DomainResource):
 	patient: Reference
-	diagnosis: list[EpisodeOfCare_Diagnosis] = []
+	diagnosis: Optional[List[EpisodeOfCare_Diagnosis]] = None
 	managingOrganization: Optional[Reference] = None
-	type: list[CodeableConcept] = []
-	account: list[Reference] = []
-	referralRequest: list[Reference] = []
-	team: list[Reference] = []
+	type: Optional[List[CodeableConcept]] = None
+	account: Optional[List[Reference]] = None
+	referralRequest: Optional[List[Reference]] = None
+	team: Optional[List[Reference]] = None
 	status: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	period: Optional[Period] = None
 	careManager: Optional[Reference] = None
-	statusHistory: list[EpisodeOfCare_StatusHistory] = []
-
+	statusHistory: Optional[List[EpisodeOfCare_StatusHistory]] = None

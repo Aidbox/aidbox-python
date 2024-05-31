@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Specimen_Processing(BackboneElement):
 	description: Optional[str] = None
@@ -23,14 +22,14 @@ class Specimen_Collection(BackboneElement):
 	collectedDateTime: Optional[str] = None
 	fastingStatusCodeableConcept: Optional[CodeableConcept] = None
 	method: Optional[CodeableConcept] = None
-	fastingStatusDuration: Optional[str] = None
-	duration: Optional[str] = None
+	fastingStatusDuration: Optional[Duration] = None
+	duration: Optional[Duration] = None
 	collector: Optional[Reference] = None
 	bodySite: Optional[CodeableConcept] = None
 	quantity: Optional[Quantity] = None
 	collectedPeriod: Optional[Period] = None
 
-class McodeGenomicSpecimen(BaseModel):
+class McodeGenomicSpecimen(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-genomic-specimen"])
 	request: Optional[List[Reference]] = None
 	receivedTime: Optional[str] = None
@@ -45,10 +44,3 @@ class McodeGenomicSpecimen(BaseModel):
 	accessionIdentifier: Optional[Identifier] = None
 	collection: Optional[Specimen_Collection] = None
 	subject: Optional[Reference] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

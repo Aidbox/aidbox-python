@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding387713003(Coding):
 	system: Literal["http://snomed.info/sct"] = "http://snomed.info/sct"
 	code: Literal["387713003"] = "387713003"
@@ -19,7 +18,7 @@ class Procedure_Performer(BackboneElement):
 	actor: Reference
 	onBehalfOf: Optional[Reference] = None
 
-class McodeCancerRelatedSurgicalProcedure(BaseModel):
+class McodeCancerRelatedSurgicalProcedure(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-cancer-related-surgical-procedure"])
 	category: McodeCancerRelatedSurgicalProcedureCategory = McodeCancerRelatedSurgicalProcedureCategory()
 	report: Optional[List[Reference]] = None
@@ -29,7 +28,7 @@ class McodeCancerRelatedSurgicalProcedure(BaseModel):
 	instantiatesUri: Optional[List[str]] = None
 	focalDevice: Optional[List[Procedure_FocalDevice]] = None
 	encounter: Optional[Reference] = None
-	performedAge: Optional[str] = None
+	performedAge: Optional[Age] = None
 	complicationDetail: Optional[List[Reference]] = None
 	reasonCode: Optional[List[CodeableConcept]] = None
 	performedString: Optional[str] = None
@@ -53,10 +52,3 @@ class McodeCancerRelatedSurgicalProcedure(BaseModel):
 	subject: Reference
 	performer: Optional[List[Procedure_Performer]] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

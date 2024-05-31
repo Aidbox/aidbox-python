@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class MedicationAdministration_Dosage(BackboneElement):
 	text: Optional[str] = None
@@ -16,7 +15,7 @@ class MedicationAdministration_Performer(BackboneElement):
 	function: Optional[CodeableConcept] = None
 	actor: Reference
 
-class McodeCancerRelatedMedicationAdministration(BaseModel):
+class McodeCancerRelatedMedicationAdministration(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-cancer-related-medication-administration"])
 	category: Optional[CodeableConcept] = None
 	request: Optional[Reference] = None
@@ -39,10 +38,3 @@ class McodeCancerRelatedMedicationAdministration(BaseModel):
 	performer: Optional[List[MedicationAdministration_Performer]] = None
 	effectivePeriod: Optional[Period] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

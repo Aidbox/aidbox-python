@@ -1,67 +1,67 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class InsurancePlan_Coverage_Benefit_Limit(BackboneElement):
-	code: Optional[CodeableConcept] = None
 	value: Optional[Quantity] = None
+	code: Optional[CodeableConcept] = None
 
 class InsurancePlan_Coverage_Benefit(BackboneElement):
-	limit: list[InsurancePlan_Coverage_Benefit_Limit] = []
-	requirement: Optional[str] = None
 	type: CodeableConcept
+	requirement: Optional[str] = None
+	limit: Optional[List[InsurancePlan_Coverage_Benefit_Limit]] = None
 
 class InsurancePlan_Coverage(BackboneElement):
-	benefit: list[InsurancePlan_Coverage_Benefit]
-	network: list[Reference] = []
 	type: CodeableConcept
+	network: Optional[List[Reference]] = None
+	benefit: List[InsurancePlan_Coverage_Benefit]
 
 class InsurancePlan_Plan_GeneralCost(BackboneElement):
-	comment: Optional[str] = None
-	cost: Optional[Money] = None
-	groupSize: Optional[str] = None
 	type: Optional[CodeableConcept] = None
+	groupSize: Optional[PositiveInt] = None
+	cost: Optional[Money] = None
+	comment: Optional[str] = None
 
 class InsurancePlan_Plan_SpecificCost_Benefit_Cost(BackboneElement):
-	applicability: Optional[CodeableConcept] = None
-	qualifiers: list[CodeableConcept] = []
 	type: CodeableConcept
+	applicability: Optional[CodeableConcept] = None
+	qualifiers: Optional[List[CodeableConcept]] = None
 	value: Optional[Quantity] = None
 
 class InsurancePlan_Plan_SpecificCost_Benefit(BackboneElement):
-	cost: list[InsurancePlan_Plan_SpecificCost_Benefit_Cost] = []
 	type: CodeableConcept
+	cost: Optional[List[InsurancePlan_Plan_SpecificCost_Benefit_Cost]] = None
 
 class InsurancePlan_Plan_SpecificCost(BackboneElement):
-	benefit: list[InsurancePlan_Plan_SpecificCost_Benefit] = []
 	category: CodeableConcept
+	benefit: Optional[List[InsurancePlan_Plan_SpecificCost_Benefit]] = None
 
 class InsurancePlan_Plan(BackboneElement):
-	coverageArea: list[Reference] = []
-	generalCost: list[InsurancePlan_Plan_GeneralCost] = []
-	identifier: list[Identifier] = []
-	network: list[Reference] = []
-	specificCost: list[InsurancePlan_Plan_SpecificCost] = []
+	identifier: Optional[List[Identifier]] = None
 	type: Optional[CodeableConcept] = None
+	coverageArea: Optional[List[Reference]] = None
+	network: Optional[List[Reference]] = None
+	generalCost: Optional[List[InsurancePlan_Plan_GeneralCost]] = None
+	specificCost: Optional[List[InsurancePlan_Plan_SpecificCost]] = None
 
 class InsurancePlan_Contact(BackboneElement):
-	address: Optional[Address] = None
-	name: Optional[HumanName] = None
 	purpose: Optional[CodeableConcept] = None
-	telecom: list[ContactPoint] = []
+	name: Optional[HumanName] = None
+	telecom: Optional[List[ContactPoint]] = None
+	address: Optional[Address] = None
 
 class InsurancePlan(DomainResource):
-	coverageArea: list[Reference] = []
+	coverageArea: Optional[List[Reference]] = None
 	name: Optional[str] = None
-	coverage: list[InsurancePlan_Coverage] = []
-	type: list[CodeableConcept] = []
-	alias: list[str] = []
+	coverage: Optional[List[InsurancePlan_Coverage]] = None
+	type: Optional[List[CodeableConcept]] = None
+	alias: Optional[List[str]] = None
 	status: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	administeredBy: Optional[Reference] = None
 	ownedBy: Optional[Reference] = None
-	network: list[Reference] = []
+	network: Optional[List[Reference]] = None
 	period: Optional[Period] = None
-	plan: list[InsurancePlan_Plan] = []
-	endpoint: list[Reference] = []
-	contact: list[InsurancePlan_Contact] = []
-
+	plan: Optional[List[InsurancePlan_Plan]] = None
+	endpoint: Optional[List[Reference]] = None
+	contact: Optional[List[InsurancePlan_Contact]] = None

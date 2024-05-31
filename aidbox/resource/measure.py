@@ -1,75 +1,75 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Measure_Group_Population(BackboneElement):
 	code: Optional[CodeableConcept] = None
-	criteria: Expression
 	description: Optional[str] = None
+	criteria: Expression
 
 class Measure_Group_Stratifier_Component(BackboneElement):
 	code: Optional[CodeableConcept] = None
-	criteria: Expression
 	description: Optional[str] = None
+	criteria: Expression
 
 class Measure_Group_Stratifier(BackboneElement):
 	code: Optional[CodeableConcept] = None
-	component: list[Measure_Group_Stratifier_Component] = []
-	criteria: Optional[Expression] = None
 	description: Optional[str] = None
+	criteria: Optional[Expression] = None
+	component: Optional[List[Measure_Group_Stratifier_Component]] = None
 
 class Measure_Group(BackboneElement):
 	code: Optional[CodeableConcept] = None
 	description: Optional[str] = None
-	population: list[Measure_Group_Population] = []
-	stratifier: list[Measure_Group_Stratifier] = []
+	population: Optional[List[Measure_Group_Population]] = None
+	stratifier: Optional[List[Measure_Group_Stratifier]] = None
 
 class Measure_SupplementalData(BackboneElement):
 	code: Optional[CodeableConcept] = None
-	criteria: Expression
+	usage: Optional[List[CodeableConcept]] = None
 	description: Optional[str] = None
-	usage: list[CodeableConcept] = []
+	criteria: Expression
 
 class Measure(DomainResource):
 	description: Optional[str] = None
-	definition: list[str] = []
+	definition: Optional[List[str]] = None
 	date: Optional[str] = None
-	group: list[Measure_Group] = []
-	endorser: list[ContactDetail] = []
+	group: Optional[List[Measure_Group]] = None
+	endorser: Optional[List[ContactDetail]] = None
 	publisher: Optional[str] = None
 	approvalDate: Optional[str] = None
 	compositeScoring: Optional[CodeableConcept] = None
 	disclaimer: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
 	subjectCodeableConcept: Optional[CodeableConcept] = None
 	name: Optional[str] = None
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	copyright: Optional[str] = None
 	guidance: Optional[str] = None
-	type: list[CodeableConcept] = []
+	type: Optional[List[CodeableConcept]] = None
 	experimental: Optional[bool] = None
-	topic: list[CodeableConcept] = []
+	topic: Optional[List[CodeableConcept]] = None
 	title: Optional[str] = None
-	supplementalData: list[Measure_SupplementalData] = []
-	library: list[str] = []
-	author: list[ContactDetail] = []
+	supplementalData: Optional[List[Measure_SupplementalData]] = None
+	library: Optional[List[str]] = None
+	author: Optional[List[ContactDetail]] = None
 	usage: Optional[str] = None
 	rationale: Optional[str] = None
 	status: str
 	subtitle: Optional[str] = None
 	url: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	lastReviewDate: Optional[str] = None
-	editor: list[ContactDetail] = []
+	editor: Optional[List[ContactDetail]] = None
 	riskAdjustment: Optional[str] = None
 	scoring: Optional[CodeableConcept] = None
-	reviewer: list[ContactDetail] = []
+	reviewer: Optional[List[ContactDetail]] = None
 	version: Optional[str] = None
-	relatedArtifact: list[RelatedArtifact] = []
-	contact: list[ContactDetail] = []
+	relatedArtifact: Optional[List[RelatedArtifact]] = None
+	contact: Optional[List[ContactDetail]] = None
 	subjectReference: Optional[Reference] = None
 	improvementNotation: Optional[CodeableConcept] = None
 	rateAggregation: Optional[str] = None
 	effectivePeriod: Optional[Period] = None
 	clinicalRecommendationStatement: Optional[str] = None
-

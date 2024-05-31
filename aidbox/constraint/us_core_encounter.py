@@ -1,12 +1,11 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Encounter_Diagnosis(BackboneElement):
 	condition: Reference
 	use: Optional[CodeableConcept] = None
-	rank: Optional[str] = None
+	rank: Optional[PositiveInt] = None
 
 class Encounter_Participant(BackboneElement):
 	type: Optional[List[CodeableConcept]] = None
@@ -38,7 +37,7 @@ class Encounter_StatusHistory(BackboneElement):
 	status: str
 	period: Period
 
-class UsCoreEncounter(BaseModel):
+class UsCoreEncounter(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"])
 	appointment: Optional[List[Reference]] = None
 	diagnosis: Optional[List[Encounter_Diagnosis]] = None
@@ -53,7 +52,7 @@ class UsCoreEncounter(BaseModel):
 	priority: Optional[CodeableConcept] = None
 	status: str
 	class_: Coding
-	length: Optional[str] = None
+	length: Optional[Duration] = None
 	identifier: Optional[List[Identifier]] = None
 	hospitalization: Optional[Encounter_Hospitalization] = None
 	period: Optional[Period] = None
@@ -63,10 +62,3 @@ class UsCoreEncounter(BaseModel):
 	subject: Reference
 	statusHistory: Optional[List[Encounter_StatusHistory]] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

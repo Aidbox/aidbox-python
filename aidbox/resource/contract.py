@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Contract_Rule(BackboneElement):
@@ -10,27 +11,27 @@ class Contract_Legal(BackboneElement):
 	contentReference: Optional[Reference] = None
 
 class Contract_ContentDefinition(BackboneElement):
-	copyright: Optional[str] = None
+	type: CodeableConcept
+	subType: Optional[CodeableConcept] = None
+	publisher: Optional[Reference] = None
 	publicationDate: Optional[str] = None
 	publicationStatus: str
-	publisher: Optional[Reference] = None
-	subType: Optional[CodeableConcept] = None
-	type: CodeableConcept
+	copyright: Optional[str] = None
 
 class Contract_Signer(BackboneElement):
-	party: Reference
-	signature: list[Signature]
 	type: Coding
+	party: Reference
+	signature: List[Signature]
 
 class Contract_Term_Offer_Party(BackboneElement):
-	reference: list[Reference]
+	reference: List[Reference]
 	role: CodeableConcept
 
 class Contract_Term_Offer_Answer(BackboneElement):
 	valueReference: Optional[Reference] = None
 	valueUri: Optional[str] = None
 	valueTime: Optional[str] = None
-	valueDecimal: Optional[str] = None
+	valueDecimal: Optional[float] = None
 	valueQuantity: Optional[Quantity] = None
 	valueString: Optional[str] = None
 	valueBoolean: Optional[bool] = None
@@ -41,66 +42,66 @@ class Contract_Term_Offer_Answer(BackboneElement):
 	valueAttachment: Optional[Attachment] = None
 
 class Contract_Term_Offer(BackboneElement):
-	party: list[Contract_Term_Offer_Party] = []
-	linkId: list[str] = []
-	decisionMode: list[CodeableConcept] = []
+	party: Optional[List[Contract_Term_Offer_Party]] = None
+	linkId: Optional[List[str]] = None
+	decisionMode: Optional[List[CodeableConcept]] = None
 	type: Optional[CodeableConcept] = None
 	topic: Optional[Reference] = None
-	securityLabelNumber: list[str] = []
-	answer: list[Contract_Term_Offer_Answer] = []
-	identifier: list[Identifier] = []
+	securityLabelNumber: Optional[List[NonNegativeInt]] = None
+	answer: Optional[List[Contract_Term_Offer_Answer]] = None
+	identifier: Optional[List[Identifier]] = None
 	decision: Optional[CodeableConcept] = None
 	text: Optional[str] = None
 
 class Contract_Term_Action_Subject(BackboneElement):
-	reference: list[Reference]
+	reference: List[Reference]
 	role: Optional[CodeableConcept] = None
 
 class Contract_Term_Action(BackboneElement):
-	requesterLinkId: list[str] = []
-	performerType: list[CodeableConcept] = []
-	linkId: list[str] = []
+	requesterLinkId: Optional[List[str]] = None
+	performerType: Optional[List[CodeableConcept]] = None
+	linkId: Optional[List[str]] = None
 	performerRole: Optional[CodeableConcept] = None
-	reasonLinkId: list[str] = []
-	reasonCode: list[CodeableConcept] = []
+	reasonLinkId: Optional[List[str]] = None
+	reasonCode: Optional[List[CodeableConcept]] = None
 	type: CodeableConcept
-	occurrenceTiming: Optional[str] = None
-	note: list[Annotation] = []
-	reason: list[str] = []
-	requester: list[Reference] = []
-	securityLabelNumber: list[str] = []
+	occurrenceTiming: Optional[Timing] = None
+	note: Optional[List[Annotation]] = None
+	reason: Optional[List[str]] = None
+	requester: Optional[List[Reference]] = None
+	securityLabelNumber: Optional[List[NonNegativeInt]] = None
 	occurrencePeriod: Optional[Period] = None
 	status: CodeableConcept
 	doNotPerform: Optional[bool] = None
 	context: Optional[Reference] = None
 	intent: CodeableConcept
-	performerLinkId: list[str] = []
+	performerLinkId: Optional[List[str]] = None
 	occurrenceDateTime: Optional[str] = None
-	subject: list[Contract_Term_Action_Subject] = []
+	subject: Optional[List[Contract_Term_Action_Subject]] = None
 	performer: Optional[Reference] = None
-	contextLinkId: list[str] = []
-	reasonReference: list[Reference] = []
+	contextLinkId: Optional[List[str]] = None
+	reasonReference: Optional[List[Reference]] = None
 
 class Contract_Term_SecurityLabel(BackboneElement):
-	category: list[Coding] = []
+	number: Optional[List[NonNegativeInt]] = None
 	classification: Coding
-	control: list[Coding] = []
-	number: list[str] = []
+	category: Optional[List[Coding]] = None
+	control: Optional[List[Coding]] = None
 
 class Contract_Term_Asset_Context(BackboneElement):
-	code: list[CodeableConcept] = []
 	reference: Optional[Reference] = None
+	code: Optional[List[CodeableConcept]] = None
 	text: Optional[str] = None
 
 class Contract_Term_Asset_ValuedItem(BackboneElement):
-	linkId: list[str] = []
+	linkId: Optional[List[str]] = None
 	payment: Optional[str] = None
 	recipient: Optional[Reference] = None
 	net: Optional[Money] = None
-	points: Optional[str] = None
+	points: Optional[float] = None
 	responsible: Optional[Reference] = None
-	securityLabelNumber: list[str] = []
-	factor: Optional[str] = None
+	securityLabelNumber: Optional[List[NonNegativeInt]] = None
+	factor: Optional[float] = None
 	paymentDate: Optional[str] = None
 	entityCodeableConcept: Optional[CodeableConcept] = None
 	identifier: Optional[Identifier] = None
@@ -110,35 +111,35 @@ class Contract_Term_Asset_ValuedItem(BackboneElement):
 	entityReference: Optional[Reference] = None
 
 class Contract_Term_Asset(BackboneElement):
-	periodType: list[CodeableConcept] = []
-	usePeriod: list[Period] = []
-	linkId: list[str] = []
+	periodType: Optional[List[CodeableConcept]] = None
+	usePeriod: Optional[List[Period]] = None
+	linkId: Optional[List[str]] = None
 	relationship: Optional[Coding] = None
-	type: list[CodeableConcept] = []
+	type: Optional[List[CodeableConcept]] = None
 	scope: Optional[CodeableConcept] = None
-	securityLabelNumber: list[str] = []
-	typeReference: list[Reference] = []
+	securityLabelNumber: Optional[List[NonNegativeInt]] = None
+	typeReference: Optional[List[Reference]] = None
 	condition: Optional[str] = None
-	answer: list[str] = []
-	context: list[Contract_Term_Asset_Context] = []
-	period: list[Period] = []
-	valuedItem: list[Contract_Term_Asset_ValuedItem] = []
-	subtype: list[CodeableConcept] = []
+	answer: Optional[List[str]] = None
+	context: Optional[List[Contract_Term_Asset_Context]] = None
+	period: Optional[List[Period]] = None
+	valuedItem: Optional[List[Contract_Term_Asset_ValuedItem]] = None
+	subtype: Optional[List[CodeableConcept]] = None
 	text: Optional[str] = None
 
 class Contract_Term(BackboneElement):
-	group: list[str] = []
+	group: Optional[List[str]] = None
 	applies: Optional[Period] = None
 	offer: Contract_Term_Offer
 	type: Optional[CodeableConcept] = None
 	topicCodeableConcept: Optional[CodeableConcept] = None
 	topicReference: Optional[Reference] = None
 	identifier: Optional[Identifier] = None
-	action: list[Contract_Term_Action] = []
+	action: Optional[List[Contract_Term_Action]] = None
 	issued: Optional[str] = None
 	subType: Optional[CodeableConcept] = None
-	securityLabel: list[Contract_Term_SecurityLabel] = []
-	asset: list[Contract_Term_Asset] = []
+	securityLabel: Optional[List[Contract_Term_SecurityLabel]] = None
+	asset: Optional[List[Contract_Term_Asset]] = None
 	text: Optional[str] = None
 
 class Contract_Friendly(BackboneElement):
@@ -150,35 +151,34 @@ class Contract(DomainResource):
 	instantiatesCanonical: Optional[Reference] = None
 	instantiatesUri: Optional[str] = None
 	legallyBindingReference: Optional[Reference] = None
-	site: list[Reference] = []
-	relevantHistory: list[Reference] = []
-	supportingInfo: list[Reference] = []
+	site: Optional[List[Reference]] = None
+	relevantHistory: Optional[List[Reference]] = None
+	supportingInfo: Optional[List[Reference]] = None
 	applies: Optional[Period] = None
 	name: Optional[str] = None
-	authority: list[Reference] = []
-	rule: list[Contract_Rule] = []
+	authority: Optional[List[Reference]] = None
+	rule: Optional[List[Contract_Rule]] = None
 	type: Optional[CodeableConcept] = None
-	legal: list[Contract_Legal] = []
+	legal: Optional[List[Contract_Legal]] = None
 	contentDerivative: Optional[CodeableConcept] = None
 	topicCodeableConcept: Optional[CodeableConcept] = None
 	legalState: Optional[CodeableConcept] = None
 	contentDefinition: Optional[Contract_ContentDefinition] = None
 	scope: Optional[CodeableConcept] = None
 	title: Optional[str] = None
-	signer: list[Contract_Signer] = []
+	signer: Optional[List[Contract_Signer]] = None
 	author: Optional[Reference] = None
-	term: list[Contract_Term] = []
-	friendly: list[Contract_Friendly] = []
-	alias: list[str] = []
+	term: Optional[List[Contract_Term]] = None
+	friendly: Optional[List[Contract_Friendly]] = None
+	alias: Optional[List[str]] = None
 	status: Optional[str] = None
 	subtitle: Optional[str] = None
 	topicReference: Optional[Reference] = None
 	url: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	expirationType: Optional[CodeableConcept] = None
 	issued: Optional[str] = None
-	domain: list[Reference] = []
-	subType: list[CodeableConcept] = []
+	domain: Optional[List[Reference]] = None
+	subType: Optional[List[CodeableConcept]] = None
 	version: Optional[str] = None
-	subject: list[Reference] = []
-
+	subject: Optional[List[Reference]] = None

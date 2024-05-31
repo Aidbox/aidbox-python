@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Goal_Target(BackboneElement):
@@ -11,24 +12,23 @@ class Goal_Target(BackboneElement):
 	detailCodeableConcept: Optional[CodeableConcept] = None
 	dueDate: Optional[str] = None
 	detailBoolean: Optional[bool] = None
-	dueDuration: Optional[str] = None
+	dueDuration: Optional[Duration] = None
 
 class Goal(DomainResource):
 	description: CodeableConcept
-	category: list[CodeableConcept] = []
-	addresses: list[Reference] = []
+	category: Optional[List[CodeableConcept]] = None
+	addresses: Optional[List[Reference]] = None
 	expressedBy: Optional[Reference] = None
 	startDate: Optional[str] = None
 	achievementStatus: Optional[CodeableConcept] = None
 	statusReason: Optional[str] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	startCodeableConcept: Optional[CodeableConcept] = None
 	priority: Optional[CodeableConcept] = None
-	outcomeCode: list[CodeableConcept] = []
-	identifier: list[Identifier] = []
+	outcomeCode: Optional[List[CodeableConcept]] = None
+	identifier: Optional[List[Identifier]] = None
 	statusDate: Optional[str] = None
-	target: list[Goal_Target] = []
-	outcomeReference: list[Reference] = []
+	target: Optional[List[Goal_Target]] = None
+	outcomeReference: Optional[List[Reference]] = None
 	subject: Reference
 	lifecycleStatus: str
-

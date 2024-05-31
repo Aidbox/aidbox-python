@@ -1,11 +1,10 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class FamilyMemberHistory_Condition(BackboneElement):
 	onsetRange: Optional[Range] = None
-	onsetAge: Optional[str] = None
+	onsetAge: Optional[Age] = None
 	contributedToDeath: Optional[bool] = None
 	onsetPeriod: Optional[Period] = None
 	outcome: Optional[CodeableConcept] = None
@@ -13,9 +12,9 @@ class FamilyMemberHistory_Condition(BackboneElement):
 	onsetString: Optional[str] = None
 	code: CodeableConcept
 
-class FamilymemberhistoryGenetic(BaseModel):
+class FamilymemberhistoryGenetic(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/familymemberhistory-genetic"])
-	deceasedAge: Optional[str] = None
+	deceasedAge: Optional[Age] = None
 	patient: Reference
 	date: Optional[str] = None
 	instantiatesCanonical: Optional[List[str]] = None
@@ -36,15 +35,8 @@ class FamilymemberhistoryGenetic(BaseModel):
 	deceasedDate: Optional[str] = None
 	bornPeriod: Optional[Period] = None
 	deceasedString: Optional[str] = None
-	ageAge: Optional[str] = None
+	ageAge: Optional[Age] = None
 	bornDate: Optional[str] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	reasonReference: Optional[List[Reference]] = None
 	estimatedAge: Optional[bool] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

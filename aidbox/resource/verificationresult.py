@@ -1,43 +1,43 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class VerificationResult_Validator(BackboneElement):
-	attestationSignature: Optional[Signature] = None
-	identityCertificate: Optional[str] = None
 	organization: Reference
+	identityCertificate: Optional[str] = None
+	attestationSignature: Optional[Signature] = None
 
 class VerificationResult_PrimarySource(BackboneElement):
-	canPushUpdates: Optional[CodeableConcept] = None
-	communicationMethod: list[CodeableConcept] = []
-	pushTypeAvailable: list[CodeableConcept] = []
-	type: list[CodeableConcept] = []
-	validationDate: Optional[str] = None
-	validationStatus: Optional[CodeableConcept] = None
 	who: Optional[Reference] = None
+	type: Optional[List[CodeableConcept]] = None
+	communicationMethod: Optional[List[CodeableConcept]] = None
+	validationStatus: Optional[CodeableConcept] = None
+	validationDate: Optional[str] = None
+	canPushUpdates: Optional[CodeableConcept] = None
+	pushTypeAvailable: Optional[List[CodeableConcept]] = None
 
 class VerificationResult_Attestation(BackboneElement):
+	who: Optional[Reference] = None
+	onBehalfOf: Optional[Reference] = None
 	communicationMethod: Optional[CodeableConcept] = None
 	date: Optional[str] = None
-	onBehalfOf: Optional[Reference] = None
+	sourceIdentityCertificate: Optional[str] = None
 	proxyIdentityCertificate: Optional[str] = None
 	proxySignature: Optional[Signature] = None
-	sourceIdentityCertificate: Optional[str] = None
 	sourceSignature: Optional[Signature] = None
-	who: Optional[Reference] = None
 
 class VerificationResult(DomainResource):
 	failureAction: Optional[CodeableConcept] = None
 	validationType: Optional[CodeableConcept] = None
-	targetLocation: list[str] = []
-	validator: list[VerificationResult_Validator] = []
+	targetLocation: Optional[List[str]] = None
+	validator: Optional[List[VerificationResult_Validator]] = None
 	need: Optional[CodeableConcept] = None
-	frequency: Optional[str] = None
+	frequency: Optional[Timing] = None
 	nextScheduled: Optional[str] = None
-	primarySource: list[VerificationResult_PrimarySource] = []
+	primarySource: Optional[List[VerificationResult_PrimarySource]] = None
 	attestation: Optional[VerificationResult_Attestation] = None
 	status: str
-	validationProcess: list[CodeableConcept] = []
+	validationProcess: Optional[List[CodeableConcept]] = None
 	statusDate: Optional[str] = None
-	target: list[Reference] = []
+	target: Optional[List[Reference]] = None
 	lastPerformed: Optional[str] = None
-

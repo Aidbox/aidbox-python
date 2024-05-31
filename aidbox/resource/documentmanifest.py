@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class DocumentManifest_Related(BackboneElement):
@@ -7,15 +8,14 @@ class DocumentManifest_Related(BackboneElement):
 
 class DocumentManifest(DomainResource):
 	description: Optional[str] = None
-	content: list[Reference]
-	recipient: list[Reference] = []
+	content: List[Reference]
+	recipient: Optional[List[Reference]] = None
 	type: Optional[CodeableConcept] = None
 	created: Optional[str] = None
-	related: list[DocumentManifest_Related] = []
+	related: Optional[List[DocumentManifest_Related]] = None
 	source: Optional[str] = None
-	author: list[Reference] = []
+	author: Optional[List[Reference]] = None
 	masterIdentifier: Optional[Identifier] = None
 	status: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	subject: Optional[Reference] = None
-

@@ -1,20 +1,20 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class DeviceUseStatement(DomainResource):
-	derivedFrom: list[Reference] = []
+	derivedFrom: Optional[List[Reference]] = None
 	timingPeriod: Optional[Period] = None
-	reasonCode: list[CodeableConcept] = []
+	reasonCode: Optional[List[CodeableConcept]] = None
 	source: Optional[Reference] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	timingDateTime: Optional[str] = None
-	timingTiming: Optional[str] = None
+	timingTiming: Optional[Timing] = None
 	status: str
 	recordedOn: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	bodySite: Optional[CodeableConcept] = None
 	device: Reference
-	basedOn: list[Reference] = []
+	basedOn: Optional[List[Reference]] = None
 	subject: Reference
-	reasonReference: list[Reference] = []
-
+	reasonReference: Optional[List[Reference]] = None

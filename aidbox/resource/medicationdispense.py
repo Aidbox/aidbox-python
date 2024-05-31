@@ -1,41 +1,41 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MedicationDispense_Substitution(BackboneElement):
-	reason: list[CodeableConcept] = []
-	responsibleParty: list[Reference] = []
-	type: Optional[CodeableConcept] = None
 	wasSubstituted: bool
+	type: Optional[CodeableConcept] = None
+	reason: Optional[List[CodeableConcept]] = None
+	responsibleParty: Optional[List[Reference]] = None
 
 class MedicationDispense_Performer(BackboneElement):
-	actor: Reference
 	function: Optional[CodeableConcept] = None
+	actor: Reference
 
 class MedicationDispense(DomainResource):
 	statusReasonReference: Optional[Reference] = None
 	category: Optional[CodeableConcept] = None
 	whenHandedOver: Optional[str] = None
 	whenPrepared: Optional[str] = None
-	eventHistory: list[Reference] = []
+	eventHistory: Optional[List[Reference]] = None
 	substitution: Optional[MedicationDispense_Substitution] = None
-	detectedIssue: list[Reference] = []
+	detectedIssue: Optional[List[Reference]] = None
 	medicationCodeableConcept: Optional[CodeableConcept] = None
 	type: Optional[CodeableConcept] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	statusReasonCodeableConcept: Optional[CodeableConcept] = None
-	supportingInformation: list[Reference] = []
+	supportingInformation: Optional[List[Reference]] = None
 	status: str
-	dosageInstruction: list[str] = []
+	dosageInstruction: Optional[List[Dosage]] = None
 	daysSupply: Optional[Quantity] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	context: Optional[Reference] = None
 	medicationReference: Optional[Reference] = None
 	quantity: Optional[Quantity] = None
-	partOf: list[Reference] = []
+	partOf: Optional[List[Reference]] = None
 	location: Optional[Reference] = None
-	authorizingPrescription: list[Reference] = []
-	receiver: list[Reference] = []
+	authorizingPrescription: Optional[List[Reference]] = None
+	receiver: Optional[List[Reference]] = None
 	subject: Optional[Reference] = None
 	destination: Optional[Reference] = None
-	performer: list[MedicationDispense_Performer] = []
-
+	performer: Optional[List[MedicationDispense_Performer]] = None

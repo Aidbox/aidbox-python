@@ -1,22 +1,23 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Claim_Insurance(BackboneElement):
-	businessArrangement: Optional[str] = None
-	claimResponse: Optional[Reference] = None
-	coverage: Reference
+	sequence: PositiveInt
 	focal: bool
 	identifier: Optional[Identifier] = None
-	preAuthRef: list[str] = []
-	sequence: str
+	coverage: Reference
+	businessArrangement: Optional[str] = None
+	preAuthRef: Optional[List[str]] = None
+	claimResponse: Optional[Reference] = None
 
 class Claim_Diagnosis(BackboneElement):
+	sequence: PositiveInt
 	diagnosisCodeableConcept: Optional[CodeableConcept] = None
 	diagnosisReference: Optional[Reference] = None
+	type: Optional[List[CodeableConcept]] = None
 	onAdmission: Optional[CodeableConcept] = None
 	packageCode: Optional[CodeableConcept] = None
-	sequence: str
-	type: list[CodeableConcept] = []
 
 class Claim_SupportingInfo(BackboneElement):
 	category: CodeableConcept
@@ -26,107 +27,107 @@ class Claim_SupportingInfo(BackboneElement):
 	valueString: Optional[str] = None
 	valueBoolean: Optional[bool] = None
 	reason: Optional[CodeableConcept] = None
-	sequence: str
+	sequence: PositiveInt
 	code: Optional[CodeableConcept] = None
 	timingDate: Optional[str] = None
 	valueAttachment: Optional[Attachment] = None
 
 class Claim_Item_Detail_SubDetail(BackboneElement):
 	category: Optional[CodeableConcept] = None
-	modifier: list[CodeableConcept] = []
+	modifier: Optional[List[CodeableConcept]] = None
 	revenue: Optional[CodeableConcept] = None
 	net: Optional[Money] = None
 	productOrService: CodeableConcept
-	udi: list[Reference] = []
-	programCode: list[CodeableConcept] = []
-	factor: Optional[str] = None
-	sequence: str
+	udi: Optional[List[Reference]] = None
+	programCode: Optional[List[CodeableConcept]] = None
+	factor: Optional[float] = None
+	sequence: PositiveInt
 	quantity: Optional[Quantity] = None
 	unitPrice: Optional[Money] = None
 
 class Claim_Item_Detail(BackboneElement):
 	category: Optional[CodeableConcept] = None
-	modifier: list[CodeableConcept] = []
+	modifier: Optional[List[CodeableConcept]] = None
 	revenue: Optional[CodeableConcept] = None
 	net: Optional[Money] = None
 	productOrService: CodeableConcept
-	udi: list[Reference] = []
-	programCode: list[CodeableConcept] = []
-	factor: Optional[str] = None
-	sequence: str
-	subDetail: list[Claim_Item_Detail_SubDetail] = []
+	udi: Optional[List[Reference]] = None
+	programCode: Optional[List[CodeableConcept]] = None
+	factor: Optional[float] = None
+	sequence: PositiveInt
+	subDetail: Optional[List[Claim_Item_Detail_SubDetail]] = None
 	quantity: Optional[Quantity] = None
 	unitPrice: Optional[Money] = None
 
 class Claim_Item(BackboneElement):
 	category: Optional[CodeableConcept] = None
-	diagnosisSequence: list[str] = []
-	procedureSequence: list[str] = []
+	diagnosisSequence: Optional[List[PositiveInt]] = None
+	procedureSequence: Optional[List[PositiveInt]] = None
 	locationAddress: Optional[Address] = None
-	modifier: list[CodeableConcept] = []
+	modifier: Optional[List[CodeableConcept]] = None
 	revenue: Optional[CodeableConcept] = None
-	encounter: list[Reference] = []
+	encounter: Optional[List[Reference]] = None
 	locationCodeableConcept: Optional[CodeableConcept] = None
 	net: Optional[Money] = None
-	subSite: list[CodeableConcept] = []
-	careTeamSequence: list[str] = []
+	subSite: Optional[List[CodeableConcept]] = None
+	careTeamSequence: Optional[List[PositiveInt]] = None
 	productOrService: CodeableConcept
 	locationReference: Optional[Reference] = None
-	udi: list[Reference] = []
-	informationSequence: list[str] = []
-	programCode: list[CodeableConcept] = []
-	factor: Optional[str] = None
+	udi: Optional[List[Reference]] = None
+	informationSequence: Optional[List[PositiveInt]] = None
+	programCode: Optional[List[CodeableConcept]] = None
+	factor: Optional[float] = None
 	servicedDate: Optional[str] = None
-	sequence: str
+	sequence: PositiveInt
 	bodySite: Optional[CodeableConcept] = None
 	quantity: Optional[Quantity] = None
 	unitPrice: Optional[Money] = None
 	servicedPeriod: Optional[Period] = None
-	detail: list[Claim_Item_Detail] = []
+	detail: Optional[List[Claim_Item_Detail]] = None
 
 class Claim_Procedure(BackboneElement):
+	sequence: PositiveInt
+	type: Optional[List[CodeableConcept]] = None
 	date: Optional[str] = None
 	procedureCodeableConcept: Optional[CodeableConcept] = None
 	procedureReference: Optional[Reference] = None
-	sequence: str
-	type: list[CodeableConcept] = []
-	udi: list[Reference] = []
+	udi: Optional[List[Reference]] = None
 
 class Claim_Related(BackboneElement):
 	claim: Optional[Reference] = None
-	reference: Optional[Identifier] = None
 	relationship: Optional[CodeableConcept] = None
+	reference: Optional[Identifier] = None
 
 class Claim_Accident(BackboneElement):
 	date: str
+	type: Optional[CodeableConcept] = None
 	locationAddress: Optional[Address] = None
 	locationReference: Optional[Reference] = None
-	type: Optional[CodeableConcept] = None
 
 class Claim_Payee(BackboneElement):
-	party: Optional[Reference] = None
 	type: CodeableConcept
+	party: Optional[Reference] = None
 
 class Claim_CareTeam(BackboneElement):
+	sequence: PositiveInt
 	provider: Reference
-	qualification: Optional[CodeableConcept] = None
 	responsible: Optional[bool] = None
 	role: Optional[CodeableConcept] = None
-	sequence: str
+	qualification: Optional[CodeableConcept] = None
 
 class Claim(DomainResource):
 	patient: Reference
-	insurance: list[Claim_Insurance]
+	insurance: List[Claim_Insurance]
 	facility: Optional[Reference] = None
-	diagnosis: list[Claim_Diagnosis] = []
+	diagnosis: Optional[List[Claim_Diagnosis]] = None
 	enterer: Optional[Reference] = None
-	supportingInfo: list[Claim_SupportingInfo] = []
+	supportingInfo: Optional[List[Claim_SupportingInfo]] = None
 	use: str
-	item: list[Claim_Item] = []
+	item: Optional[List[Claim_Item]] = None
 	type: CodeableConcept
 	created: str
-	procedure: list[Claim_Procedure] = []
-	related: list[Claim_Related] = []
+	procedure: Optional[List[Claim_Procedure]] = None
+	related: Optional[List[Claim_Related]] = None
 	referral: Optional[Reference] = None
 	total: Optional[Money] = None
 	insurer: Optional[Reference] = None
@@ -137,9 +138,8 @@ class Claim(DomainResource):
 	payee: Optional[Claim_Payee] = None
 	prescription: Optional[Reference] = None
 	billablePeriod: Optional[Period] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	subType: Optional[CodeableConcept] = None
 	provider: Reference
 	originalPrescription: Optional[Reference] = None
-	careTeam: list[Claim_CareTeam] = []
-
+	careTeam: Optional[List[Claim_CareTeam]] = None

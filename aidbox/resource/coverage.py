@@ -1,37 +1,37 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Coverage_CostToBeneficiary_Exception(BackboneElement):
-	period: Optional[Period] = None
 	type: CodeableConcept
+	period: Optional[Period] = None
 
 class Coverage_CostToBeneficiary(BackboneElement):
-	exception: list[Coverage_CostToBeneficiary_Exception] = []
 	type: Optional[CodeableConcept] = None
-	valueMoney: Optional[Money] = None
 	valueQuantity: Optional[Quantity] = None
+	valueMoney: Optional[Money] = None
+	exception: Optional[List[Coverage_CostToBeneficiary_Exception]] = None
 
 class Coverage_Class(BackboneElement):
-	name: Optional[str] = None
 	type: CodeableConcept
 	value: str
+	name: Optional[str] = None
 
 class Coverage(DomainResource):
 	policyHolder: Optional[Reference] = None
 	beneficiary: Reference
-	contract: list[Reference] = []
+	contract: Optional[List[Reference]] = None
 	relationship: Optional[CodeableConcept] = None
 	type: Optional[CodeableConcept] = None
-	costToBeneficiary: list[Coverage_CostToBeneficiary] = []
+	costToBeneficiary: Optional[List[Coverage_CostToBeneficiary]] = None
 	subrogation: Optional[bool] = None
 	subscriber: Optional[Reference] = None
-	payor: list[Reference]
+	payor: List[Reference]
 	status: str
-	class_: list[Coverage_Class] = []
-	identifier: list[Identifier] = []
-	order: Optional[str] = None
+	class_: Optional[List[Coverage_Class]] = None
+	identifier: Optional[List[Identifier]] = None
+	order: Optional[PositiveInt] = None
 	network: Optional[str] = None
 	period: Optional[Period] = None
 	dependent: Optional[str] = None
 	subscriberId: Optional[str] = None
-

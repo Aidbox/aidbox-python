@@ -1,37 +1,38 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ConceptMap_Group_Element_Target_DependsOn(BackboneElement):
-	display: Optional[str] = None
 	property: str
 	system: Optional[str] = None
 	value: str
+	display: Optional[str] = None
 
 class ConceptMap_Group_Element_Target(BackboneElement):
 	code: Optional[str] = None
-	comment: Optional[str] = None
-	dependsOn: list[ConceptMap_Group_Element_Target_DependsOn] = []
 	display: Optional[str] = None
 	equivalence: str
-	product: list[str] = []
+	comment: Optional[str] = None
+	dependsOn: Optional[List[ConceptMap_Group_Element_Target_DependsOn]] = None
+	product: Optional[List[str]] = None
 
 class ConceptMap_Group_Element(BackboneElement):
 	code: Optional[str] = None
 	display: Optional[str] = None
-	target: list[ConceptMap_Group_Element_Target] = []
+	target: Optional[List[ConceptMap_Group_Element_Target]] = None
 
 class ConceptMap_Group_Unmapped(BackboneElement):
+	mode: str
 	code: Optional[str] = None
 	display: Optional[str] = None
-	mode: str
 	url: Optional[str] = None
 
 class ConceptMap_Group(BackboneElement):
-	element: list[ConceptMap_Group_Element]
 	source: Optional[str] = None
 	sourceVersion: Optional[str] = None
 	target: Optional[str] = None
 	targetVersion: Optional[str] = None
+	element: List[ConceptMap_Group_Element]
 	unmapped: Optional[ConceptMap_Group_Unmapped] = None
 
 class ConceptMap(DomainResource):
@@ -39,12 +40,12 @@ class ConceptMap(DomainResource):
 	sourceCanonical: Optional[str] = None
 	date: Optional[str] = None
 	targetUri: Optional[str] = None
-	group: list[ConceptMap_Group] = []
+	group: Optional[List[ConceptMap_Group]] = None
 	publisher: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
 	name: Optional[str] = None
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	copyright: Optional[str] = None
 	experimental: Optional[bool] = None
 	title: Optional[str] = None
@@ -54,5 +55,4 @@ class ConceptMap(DomainResource):
 	url: Optional[str] = None
 	identifier: Optional[Identifier] = None
 	version: Optional[str] = None
-	contact: list[ContactDetail] = []
-
+	contact: Optional[List[ContactDetail]] = None

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class CodingC19700(Coding):
 	system: Literal["http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl"] = "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl"
 	code: Literal["C19700"] = "C19700"
@@ -25,7 +24,7 @@ class Group_Characteristic(BackboneElement):
 	period: Optional[Period] = None
 	valueRange: Optional[Range] = None
 
-class McodePatientGroup(BaseModel):
+class McodePatientGroup(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-patient-group"])
 	name: Optional[str] = None
 	type: str
@@ -34,13 +33,6 @@ class McodePatientGroup(BaseModel):
 	active: Optional[bool] = None
 	code: Optional[McodePatientGroupCode] = None
 	identifier: Optional[List[Identifier]] = None
-	quantity: Optional[str] = None
+	quantity: Optional[NonNegativeInt] = None
 	managingEntity: Optional[Reference] = None
 	actual: bool
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

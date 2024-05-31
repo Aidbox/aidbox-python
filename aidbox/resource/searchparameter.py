@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class SearchParameter_Component(BackboneElement):
@@ -9,27 +10,26 @@ class SearchParameter(DomainResource):
 	description: str
 	date: Optional[str] = None
 	expression: Optional[str] = None
-	modifier: list[str] = []
+	modifier: Optional[List[str]] = None
 	publisher: Optional[str] = None
 	multipleAnd: Optional[bool] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	derivedFrom: Optional[str] = None
 	purpose: Optional[str] = None
 	multipleOr: Optional[bool] = None
 	name: str
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	xpath: Optional[str] = None
 	xpathUsage: Optional[str] = None
 	type: str
 	experimental: Optional[bool] = None
-	component: list[SearchParameter_Component] = []
+	component: Optional[List[SearchParameter_Component]] = None
 	status: str
-	chain: list[str] = []
+	chain: Optional[List[str]] = None
 	url: str
 	code: str
-	comparator: list[str] = []
-	target: list[str] = []
-	base: list[str]
+	comparator: Optional[List[str]] = None
+	target: Optional[List[str]] = None
+	base: List[str]
 	version: Optional[str] = None
-	contact: list[ContactDetail] = []
-
+	contact: Optional[List[ContactDetail]] = None

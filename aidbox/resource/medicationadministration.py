@@ -1,39 +1,39 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MedicationAdministration_Dosage(BackboneElement):
-	dose: Optional[Quantity] = None
-	method: Optional[CodeableConcept] = None
-	rateQuantity: Optional[Quantity] = None
-	rateRatio: Optional[Ratio] = None
-	route: Optional[CodeableConcept] = None
-	site: Optional[CodeableConcept] = None
 	text: Optional[str] = None
+	site: Optional[CodeableConcept] = None
+	route: Optional[CodeableConcept] = None
+	method: Optional[CodeableConcept] = None
+	dose: Optional[Quantity] = None
+	rateRatio: Optional[Ratio] = None
+	rateQuantity: Optional[Quantity] = None
 
 class MedicationAdministration_Performer(BackboneElement):
-	actor: Reference
 	function: Optional[CodeableConcept] = None
+	actor: Reference
 
 class MedicationAdministration(DomainResource):
 	category: Optional[CodeableConcept] = None
 	request: Optional[Reference] = None
-	eventHistory: list[Reference] = []
+	eventHistory: Optional[List[Reference]] = None
 	dosage: Optional[MedicationAdministration_Dosage] = None
-	instantiates: list[str] = []
-	reasonCode: list[CodeableConcept] = []
+	instantiates: Optional[List[str]] = None
+	reasonCode: Optional[List[CodeableConcept]] = None
 	medicationCodeableConcept: Optional[CodeableConcept] = None
-	statusReason: list[CodeableConcept] = []
-	note: list[Annotation] = []
-	supportingInformation: list[Reference] = []
+	statusReason: Optional[List[CodeableConcept]] = None
+	note: Optional[List[Annotation]] = None
+	supportingInformation: Optional[List[Reference]] = None
 	effectiveDateTime: Optional[str] = None
 	status: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	context: Optional[Reference] = None
-	device: list[Reference] = []
+	device: Optional[List[Reference]] = None
 	medicationReference: Optional[Reference] = None
-	partOf: list[Reference] = []
+	partOf: Optional[List[Reference]] = None
 	subject: Reference
-	performer: list[MedicationAdministration_Performer] = []
+	performer: Optional[List[MedicationAdministration_Performer]] = None
 	effectivePeriod: Optional[Period] = None
-	reasonReference: list[Reference] = []
-
+	reasonReference: Optional[List[Reference]] = None

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding352179(Coding):
 	display: Literal["Triglyceride [Moles/​volume] in Serum or Plasma"] = "Triglyceride [Moles/​volume] in Serum or Plasma"
 	system: Literal["http://loinc.org"] = "http://loinc.org"
@@ -36,7 +35,7 @@ class Observation_Component(BackboneElement):
 	valueInteger: Optional[int] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 
-class Triglyceride(BaseModel):
+class Triglyceride(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/triglyceride"])
 	category: Optional[List[CodeableConcept]] = None
 	referenceRange: List[Observation_ReferenceRange]
@@ -57,7 +56,7 @@ class Triglyceride(BaseModel):
 	status: str
 	code: TriglycerideCode = TriglycerideCode()
 	identifier: Optional[List[Identifier]] = None
-	effectiveTiming: Optional[str] = None
+	effectiveTiming: Optional[Timing] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
 	bodySite: Optional[CodeableConcept] = None
 	focus: Optional[List[Reference]] = None
@@ -73,10 +72,3 @@ class Triglyceride(BaseModel):
 	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

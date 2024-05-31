@@ -1,14 +1,13 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class PlanDefinition_Goal_Target(BackboneElement):
 	measure: Optional[CodeableConcept] = None
 	detailQuantity: Optional[Quantity] = None
 	detailRange: Optional[Range] = None
 	detailCodeableConcept: Optional[CodeableConcept] = None
-	due: Optional[str] = None
+	due: Optional[Duration] = None
 
 class PlanDefinition_Goal(BackboneElement):
 	category: Optional[CodeableConcept] = None
@@ -22,7 +21,7 @@ class PlanDefinition_Goal(BackboneElement):
 class PlanDefinition_Action_RelatedAction(BackboneElement):
 	actionId: str
 	relationship: str
-	offsetDuration: Optional[str] = None
+	offsetDuration: Optional[Duration] = None
 	offsetRange: Optional[Range] = None
 
 class PlanDefinition_Action_Participant(BackboneElement):
@@ -57,15 +56,15 @@ class PlanDefinition_Action(BackboneElement):
 	selectionBehavior: Optional[str] = None
 	reason: Optional[List[CodeableConcept]] = None
 	timingDateTime: Optional[str] = None
-	timingTiming: Optional[str] = None
-	timingDuration: Optional[str] = None
+	timingTiming: Optional[Timing] = None
+	timingDuration: Optional[Duration] = None
 	priority: Optional[str] = None
 	requiredBehavior: Optional[str] = None
 	condition: Optional[List[PlanDefinition_Action_Condition]] = None
 	groupingBehavior: Optional[str] = None
 	dynamicValue: Optional[List[PlanDefinition_Action_DynamicValue]] = None
 	code: Optional[List[CodeableConcept]] = None
-	timingAge: Optional[str] = None
+	timingAge: Optional[Age] = None
 	action: Optional[List[str]] = None
 	precheckBehavior: Optional[str] = None
 	input: Optional[List[DataRequirement]] = None
@@ -73,7 +72,7 @@ class PlanDefinition_Action(BackboneElement):
 	subjectReference: Optional[Reference] = None
 	cardinalityBehavior: Optional[str] = None
 
-class Cdshooksserviceplandefinition(BaseModel):
+class Cdshooksserviceplandefinition(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/cdshooksserviceplandefinition"])
 	description: Optional[str] = None
 	date: Optional[str] = None
@@ -107,10 +106,3 @@ class Cdshooksserviceplandefinition(BaseModel):
 	contact: Optional[List[ContactDetail]] = None
 	subjectReference: Optional[Reference] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

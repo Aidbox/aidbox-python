@@ -1,13 +1,13 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class AppointmentResponse(DomainResource):
-	actor: Optional[Reference] = None
+	identifier: Optional[List[Identifier]] = None
 	appointment: Reference
-	comment: Optional[str] = None
-	end: Optional[str] = None
-	identifier: list[Identifier] = []
-	participantStatus: str
-	participantType: list[CodeableConcept] = []
 	start: Optional[str] = None
-
+	end: Optional[str] = None
+	participantType: Optional[List[CodeableConcept]] = None
+	actor: Optional[Reference] = None
+	participantStatus: str
+	comment: Optional[str] = None

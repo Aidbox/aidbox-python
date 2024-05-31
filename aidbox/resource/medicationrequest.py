@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MedicationRequest_Substitution(BackboneElement):
@@ -7,51 +8,50 @@ class MedicationRequest_Substitution(BackboneElement):
 	reason: Optional[CodeableConcept] = None
 
 class MedicationRequest_DispenseRequest_InitialFill(BackboneElement):
-	duration: Optional[str] = None
 	quantity: Optional[Quantity] = None
+	duration: Optional[Duration] = None
 
 class MedicationRequest_DispenseRequest(BackboneElement):
-	dispenseInterval: Optional[str] = None
-	expectedSupplyDuration: Optional[str] = None
 	initialFill: Optional[MedicationRequest_DispenseRequest_InitialFill] = None
-	numberOfRepeatsAllowed: Optional[str] = None
-	performer: Optional[Reference] = None
-	quantity: Optional[Quantity] = None
+	dispenseInterval: Optional[Duration] = None
 	validityPeriod: Optional[Period] = None
+	numberOfRepeatsAllowed: Optional[NonNegativeInt] = None
+	quantity: Optional[Quantity] = None
+	expectedSupplyDuration: Optional[Duration] = None
+	performer: Optional[Reference] = None
 
 class MedicationRequest(DomainResource):
 	performerType: Optional[CodeableConcept] = None
-	category: list[CodeableConcept] = []
-	insurance: list[Reference] = []
-	instantiatesCanonical: list[str] = []
-	eventHistory: list[Reference] = []
-	instantiatesUri: list[str] = []
+	category: Optional[List[CodeableConcept]] = None
+	insurance: Optional[List[Reference]] = None
+	instantiatesCanonical: Optional[List[str]] = None
+	eventHistory: Optional[List[Reference]] = None
+	instantiatesUri: Optional[List[str]] = None
 	substitution: Optional[MedicationRequest_Substitution] = None
-	detectedIssue: list[Reference] = []
+	detectedIssue: Optional[List[Reference]] = None
 	encounter: Optional[Reference] = None
 	dispenseRequest: Optional[MedicationRequest_DispenseRequest] = None
-	reasonCode: list[CodeableConcept] = []
+	reasonCode: Optional[List[CodeableConcept]] = None
 	medicationCodeableConcept: Optional[CodeableConcept] = None
 	statusReason: Optional[CodeableConcept] = None
 	authoredOn: Optional[str] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	requester: Optional[Reference] = None
-	supportingInformation: list[Reference] = []
+	supportingInformation: Optional[List[Reference]] = None
 	reportedReference: Optional[Reference] = None
 	priority: Optional[str] = None
 	status: str
-	dosageInstruction: list[str] = []
+	dosageInstruction: Optional[List[Dosage]] = None
 	groupIdentifier: Optional[Identifier] = None
 	recorder: Optional[Reference] = None
 	reportedBoolean: Optional[bool] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	doNotPerform: Optional[bool] = None
 	intent: str
-	basedOn: list[Reference] = []
+	basedOn: Optional[List[Reference]] = None
 	priorPrescription: Optional[Reference] = None
 	medicationReference: Optional[Reference] = None
 	courseOfTherapyType: Optional[CodeableConcept] = None
 	subject: Reference
 	performer: Optional[Reference] = None
-	reasonReference: list[Reference] = []
-
+	reasonReference: Optional[List[Reference]] = None

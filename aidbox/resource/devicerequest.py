@@ -1,26 +1,27 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class DeviceRequest_Parameter(BackboneElement):
 	code: Optional[CodeableConcept] = None
-	valueBoolean: Optional[bool] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
 	valueQuantity: Optional[Quantity] = None
 	valueRange: Optional[Range] = None
+	valueBoolean: Optional[bool] = None
 
 class DeviceRequest(DomainResource):
 	performerType: Optional[CodeableConcept] = None
-	insurance: list[Reference] = []
-	instantiatesCanonical: list[str] = []
-	instantiatesUri: list[str] = []
-	relevantHistory: list[Reference] = []
-	supportingInfo: list[Reference] = []
+	insurance: Optional[List[Reference]] = None
+	instantiatesCanonical: Optional[List[str]] = None
+	instantiatesUri: Optional[List[str]] = None
+	relevantHistory: Optional[List[Reference]] = None
+	supportingInfo: Optional[List[Reference]] = None
 	encounter: Optional[Reference] = None
-	priorRequest: list[Reference] = []
-	reasonCode: list[CodeableConcept] = []
+	priorRequest: Optional[List[Reference]] = None
+	reasonCode: Optional[List[CodeableConcept]] = None
 	authoredOn: Optional[str] = None
-	occurrenceTiming: Optional[str] = None
-	note: list[Annotation] = []
+	occurrenceTiming: Optional[Timing] = None
+	note: Optional[List[Annotation]] = None
 	codeReference: Optional[Reference] = None
 	requester: Optional[Reference] = None
 	priority: Optional[str] = None
@@ -28,12 +29,11 @@ class DeviceRequest(DomainResource):
 	status: Optional[str] = None
 	codeCodeableConcept: Optional[CodeableConcept] = None
 	groupIdentifier: Optional[Identifier] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	intent: str
-	basedOn: list[Reference] = []
+	basedOn: Optional[List[Reference]] = None
 	occurrenceDateTime: Optional[str] = None
 	subject: Reference
-	parameter: list[DeviceRequest_Parameter] = []
+	parameter: Optional[List[DeviceRequest_Parameter]] = None
 	performer: Optional[Reference] = None
-	reasonReference: list[Reference] = []
-
+	reasonReference: Optional[List[Reference]] = None

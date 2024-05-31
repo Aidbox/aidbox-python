@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Patient_Link(BackboneElement):
 	other: Reference
@@ -20,7 +19,7 @@ class Patient_Contact(BackboneElement):
 	organization: Optional[Reference] = None
 	period: Optional[Period] = None
 
-class UsCorePatient(BaseModel):
+class UsCorePatient(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient"])
 	multipleBirthBoolean: Optional[bool] = None
 	address: Optional[List[Address]] = None
@@ -40,10 +39,3 @@ class UsCorePatient(BaseModel):
 	gender: str
 	maritalStatus: Optional[CodeableConcept] = None
 	contact: Optional[List[Patient_Contact]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

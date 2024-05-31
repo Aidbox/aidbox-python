@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MedicinalProductPharmaceutical_Characteristics(BackboneElement):
@@ -6,29 +7,28 @@ class MedicinalProductPharmaceutical_Characteristics(BackboneElement):
 	status: Optional[CodeableConcept] = None
 
 class MedicinalProductPharmaceutical_RouteOfAdministration_TargetSpecies_WithdrawalPeriod(BackboneElement):
-	supportingInformation: Optional[str] = None
 	tissue: CodeableConcept
 	value: Quantity
+	supportingInformation: Optional[str] = None
 
 class MedicinalProductPharmaceutical_RouteOfAdministration_TargetSpecies(BackboneElement):
 	code: CodeableConcept
-	withdrawalPeriod: list[MedicinalProductPharmaceutical_RouteOfAdministration_TargetSpecies_WithdrawalPeriod] = []
+	withdrawalPeriod: Optional[List[MedicinalProductPharmaceutical_RouteOfAdministration_TargetSpecies_WithdrawalPeriod]] = None
 
 class MedicinalProductPharmaceutical_RouteOfAdministration(BackboneElement):
 	code: CodeableConcept
 	firstDose: Optional[Quantity] = None
+	maxSingleDose: Optional[Quantity] = None
 	maxDosePerDay: Optional[Quantity] = None
 	maxDosePerTreatmentPeriod: Optional[Ratio] = None
-	maxSingleDose: Optional[Quantity] = None
-	maxTreatmentPeriod: Optional[str] = None
-	targetSpecies: list[MedicinalProductPharmaceutical_RouteOfAdministration_TargetSpecies] = []
+	maxTreatmentPeriod: Optional[Duration] = None
+	targetSpecies: Optional[List[MedicinalProductPharmaceutical_RouteOfAdministration_TargetSpecies]] = None
 
 class MedicinalProductPharmaceutical(DomainResource):
+	identifier: Optional[List[Identifier]] = None
 	administrableDoseForm: CodeableConcept
-	characteristics: list[MedicinalProductPharmaceutical_Characteristics] = []
-	device: list[Reference] = []
-	identifier: list[Identifier] = []
-	ingredient: list[Reference] = []
-	routeOfAdministration: list[MedicinalProductPharmaceutical_RouteOfAdministration]
 	unitOfPresentation: Optional[CodeableConcept] = None
-
+	ingredient: Optional[List[Reference]] = None
+	device: Optional[List[Reference]] = None
+	characteristics: Optional[List[MedicinalProductPharmaceutical_Characteristics]] = None
+	routeOfAdministration: List[MedicinalProductPharmaceutical_RouteOfAdministration]
