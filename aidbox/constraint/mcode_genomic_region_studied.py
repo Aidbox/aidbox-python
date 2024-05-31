@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding530410(Coding):
 	system: Literal["http://loinc.org"] = "http://loinc.org"
 	code: Literal["53041-0"] = "53041-0"
@@ -35,7 +34,7 @@ class Observation_Component(BackboneElement):
 	valueInteger: Optional[int] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 
-class McodeGenomicRegionStudied(BaseModel):
+class McodeGenomicRegionStudied(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-genomic-region-studied"])
 	category: List[CodeableConcept]
 	referenceRange: Optional[List[Observation_ReferenceRange]] = None
@@ -58,7 +57,7 @@ class McodeGenomicRegionStudied(BaseModel):
 	status: str
 	code: McodeGenomicRegionStudiedCode = McodeGenomicRegionStudiedCode()
 	identifier: Optional[List[Identifier]] = None
-	effectiveTiming: Optional[str] = None
+	effectiveTiming: Optional[Timing] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
 	bodySite: Optional[CodeableConcept] = None
 	focus: Optional[List[Reference]] = None
@@ -74,10 +73,3 @@ class McodeGenomicRegionStudied(BaseModel):
 	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

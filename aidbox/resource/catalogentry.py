@@ -1,22 +1,22 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class CatalogEntry_RelatedEntry(BackboneElement):
-	item: Reference
 	relationtype: str
+	item: Reference
 
 class CatalogEntry(DomainResource):
-	additionalCharacteristic: list[CodeableConcept] = []
-	additionalClassification: list[CodeableConcept] = []
+	additionalCharacteristic: Optional[List[CodeableConcept]] = None
+	additionalClassification: Optional[List[CodeableConcept]] = None
 	referencedItem: Reference
 	type: Optional[CodeableConcept] = None
-	classification: list[CodeableConcept] = []
+	classification: Optional[List[CodeableConcept]] = None
 	validityPeriod: Optional[Period] = None
 	orderable: bool
 	status: Optional[str] = None
 	validTo: Optional[str] = None
-	identifier: list[Identifier] = []
-	additionalIdentifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
+	additionalIdentifier: Optional[List[Identifier]] = None
 	lastUpdated: Optional[str] = None
-	relatedEntry: list[CatalogEntry_RelatedEntry] = []
-
+	relatedEntry: Optional[List[CatalogEntry_RelatedEntry]] = None

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding892430(Coding):
 	system: Literal["http://loinc.org"] = "http://loinc.org"
 	code: Literal["89243-0"] = "89243-0"
@@ -35,7 +34,7 @@ class Observation_Component(BackboneElement):
 	valueInteger: Optional[int] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 
-class McodeKarnofskyPerformanceStatus(BaseModel):
+class McodeKarnofskyPerformanceStatus(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-karnofsky-performance-status"])
 	category: List[CodeableConcept]
 	referenceRange: Optional[List[Observation_ReferenceRange]] = None
@@ -62,10 +61,3 @@ class McodeKarnofskyPerformanceStatus(BaseModel):
 	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

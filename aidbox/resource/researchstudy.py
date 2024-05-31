@@ -1,10 +1,11 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ResearchStudy_Arm(BackboneElement):
-	description: Optional[str] = None
 	name: str
 	type: Optional[CodeableConcept] = None
+	description: Optional[str] = None
 
 class ResearchStudy_Objective(BackboneElement):
 	name: Optional[str] = None
@@ -12,27 +13,26 @@ class ResearchStudy_Objective(BackboneElement):
 
 class ResearchStudy(DomainResource):
 	description: Optional[str] = None
-	category: list[CodeableConcept] = []
-	enrollment: list[Reference] = []
-	arm: list[ResearchStudy_Arm] = []
-	site: list[Reference] = []
-	protocol: list[Reference] = []
+	category: Optional[List[CodeableConcept]] = None
+	enrollment: Optional[List[Reference]] = None
+	arm: Optional[List[ResearchStudy_Arm]] = None
+	site: Optional[List[Reference]] = None
+	protocol: Optional[List[Reference]] = None
 	principalInvestigator: Optional[Reference] = None
 	phase: Optional[CodeableConcept] = None
 	reasonStopped: Optional[CodeableConcept] = None
 	title: Optional[str] = None
-	note: list[Annotation] = []
-	keyword: list[CodeableConcept] = []
+	note: Optional[List[Annotation]] = None
+	keyword: Optional[List[CodeableConcept]] = None
 	status: str
-	condition: list[CodeableConcept] = []
-	identifier: list[Identifier] = []
+	condition: Optional[List[CodeableConcept]] = None
+	identifier: Optional[List[Identifier]] = None
 	primaryPurposeType: Optional[CodeableConcept] = None
-	focus: list[CodeableConcept] = []
-	objective: list[ResearchStudy_Objective] = []
+	focus: Optional[List[CodeableConcept]] = None
+	objective: Optional[List[ResearchStudy_Objective]] = None
 	period: Optional[Period] = None
-	partOf: list[Reference] = []
-	relatedArtifact: list[RelatedArtifact] = []
-	location: list[CodeableConcept] = []
-	contact: list[ContactDetail] = []
+	partOf: Optional[List[Reference]] = None
+	relatedArtifact: Optional[List[RelatedArtifact]] = None
+	location: Optional[List[CodeableConcept]] = None
+	contact: Optional[List[ContactDetail]] = None
 	sponsor: Optional[Reference] = None
-

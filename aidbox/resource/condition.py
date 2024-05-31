@@ -1,28 +1,29 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Condition_Stage(BackboneElement):
-	assessment: list[Reference] = []
 	summary: Optional[CodeableConcept] = None
+	assessment: Optional[List[Reference]] = None
 	type: Optional[CodeableConcept] = None
 
 class Condition_Evidence(BackboneElement):
-	code: list[CodeableConcept] = []
-	detail: list[Reference] = []
+	code: Optional[List[CodeableConcept]] = None
+	detail: Optional[List[Reference]] = None
 
 class Condition(DomainResource):
-	category: list[CodeableConcept] = []
+	category: Optional[List[CodeableConcept]] = None
 	clinicalStatus: Optional[CodeableConcept] = None
-	abatementAge: Optional[str] = None
+	abatementAge: Optional[Age] = None
 	onsetRange: Optional[Range] = None
-	onsetAge: Optional[str] = None
-	stage: list[Condition_Stage] = []
+	onsetAge: Optional[Age] = None
+	stage: Optional[List[Condition_Stage]] = None
 	encounter: Optional[Reference] = None
-	evidence: list[Condition_Evidence] = []
+	evidence: Optional[List[Condition_Evidence]] = None
 	onsetPeriod: Optional[Period] = None
 	abatementPeriod: Optional[Period] = None
 	asserter: Optional[Reference] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	abatementString: Optional[str] = None
 	abatementRange: Optional[Range] = None
 	recordedDate: Optional[str] = None
@@ -30,10 +31,9 @@ class Condition(DomainResource):
 	recorder: Optional[Reference] = None
 	severity: Optional[CodeableConcept] = None
 	code: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	onsetDateTime: Optional[str] = None
-	bodySite: list[CodeableConcept] = []
+	bodySite: Optional[List[CodeableConcept]] = None
 	abatementDateTime: Optional[str] = None
 	verificationStatus: Optional[CodeableConcept] = None
 	subject: Reference
-

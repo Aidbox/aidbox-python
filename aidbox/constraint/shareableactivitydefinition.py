@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class ActivityDefinition_Participant(BackboneElement):
 	type: str
@@ -11,7 +10,7 @@ class ActivityDefinition_DynamicValue(BackboneElement):
 	path: str
 	expression: Expression
 
-class Shareableactivitydefinition(BaseModel):
+class Shareableactivitydefinition(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/shareableactivitydefinition"])
 	observationResultRequirement: Optional[List[Reference]] = None
 	timingRange: Optional[Range] = None
@@ -22,7 +21,7 @@ class Shareableactivitydefinition(BaseModel):
 	publisher: str
 	approvalDate: Optional[str] = None
 	jurisdiction: Optional[List[CodeableConcept]] = None
-	dosage: Optional[List[str]] = None
+	dosage: Optional[List[Dosage]] = None
 	observationRequirement: Optional[List[Reference]] = None
 	purpose: Optional[str] = None
 	subjectCodeableConcept: Optional[CodeableConcept] = None
@@ -39,9 +38,9 @@ class Shareableactivitydefinition(BaseModel):
 	library: Optional[List[str]] = None
 	author: Optional[List[ContactDetail]] = None
 	timingDateTime: Optional[str] = None
-	timingTiming: Optional[str] = None
+	timingTiming: Optional[Timing] = None
 	usage: Optional[str] = None
-	timingDuration: Optional[str] = None
+	timingDuration: Optional[Duration] = None
 	priority: Optional[str] = None
 	status: str
 	subtitle: Optional[str] = None
@@ -54,7 +53,7 @@ class Shareableactivitydefinition(BaseModel):
 	editor: Optional[List[ContactDetail]] = None
 	doNotPerform: Optional[bool] = None
 	bodySite: Optional[List[CodeableConcept]] = None
-	timingAge: Optional[str] = None
+	timingAge: Optional[Age] = None
 	intent: Optional[str] = None
 	specimenRequirement: Optional[List[Reference]] = None
 	reviewer: Optional[List[ContactDetail]] = None
@@ -66,10 +65,3 @@ class Shareableactivitydefinition(BaseModel):
 	subjectReference: Optional[Reference] = None
 	profile: Optional[str] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

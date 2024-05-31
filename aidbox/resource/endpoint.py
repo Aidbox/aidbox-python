@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Endpoint(DomainResource):
@@ -6,11 +7,10 @@ class Endpoint(DomainResource):
 	address: str
 	managingOrganization: Optional[Reference] = None
 	name: Optional[str] = None
-	payloadMimeType: list[str] = []
-	payloadType: list[CodeableConcept]
-	header: list[str] = []
+	payloadMimeType: Optional[List[str]] = None
+	payloadType: List[CodeableConcept]
+	header: Optional[List[str]] = None
 	status: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	period: Optional[Period] = None
-	contact: list[ContactPoint] = []
-
+	contact: Optional[List[ContactPoint]] = None

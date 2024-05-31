@@ -1,33 +1,33 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class VisionPrescription_LensSpecification_Prism(BackboneElement):
-	amount: str
+	amount: float
 	base: str
 
 class VisionPrescription_LensSpecification(BackboneElement):
-	sphere: Optional[str] = None
+	sphere: Optional[float] = None
 	color: Optional[str] = None
 	eye: str
-	diameter: Optional[str] = None
+	diameter: Optional[float] = None
 	duration: Optional[Quantity] = None
 	brand: Optional[str] = None
-	note: list[Annotation] = []
-	power: Optional[str] = None
+	note: Optional[List[Annotation]] = None
+	power: Optional[float] = None
 	product: CodeableConcept
-	cylinder: Optional[str] = None
-	prism: list[VisionPrescription_LensSpecification_Prism] = []
+	cylinder: Optional[float] = None
+	prism: Optional[List[VisionPrescription_LensSpecification_Prism]] = None
 	axis: Optional[int] = None
-	add: Optional[str] = None
-	backCurve: Optional[str] = None
+	add: Optional[float] = None
+	backCurve: Optional[float] = None
 
 class VisionPrescription(DomainResource):
-	created: str
-	dateWritten: str
-	encounter: Optional[Reference] = None
-	identifier: list[Identifier] = []
-	lensSpecification: list[VisionPrescription_LensSpecification]
-	patient: Reference
-	prescriber: Reference
+	identifier: Optional[List[Identifier]] = None
 	status: str
-
+	created: str
+	patient: Reference
+	encounter: Optional[Reference] = None
+	dateWritten: str
+	prescriber: Reference
+	lensSpecification: List[VisionPrescription_LensSpecification]

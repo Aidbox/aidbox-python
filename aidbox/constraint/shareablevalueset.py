@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class ValueSet_Compose_Include_Concept_Designation(BackboneElement):
 	language: Optional[str] = None
@@ -34,7 +33,7 @@ class ValueSet_Compose(BackboneElement):
 class ValueSet_Expansion_Parameter(BackboneElement):
 	valueCode: Optional[str] = None
 	valueUri: Optional[str] = None
-	valueDecimal: Optional[str] = None
+	valueDecimal: Optional[float] = None
 	name: str
 	valueString: Optional[str] = None
 	valueBoolean: Optional[bool] = None
@@ -59,7 +58,7 @@ class ValueSet_Expansion(BackboneElement):
 	parameter: Optional[List[ValueSet_Expansion_Parameter]] = None
 	contains: Optional[List[ValueSet_Expansion_Contains]] = None
 
-class Shareablevalueset(BaseModel):
+class Shareablevalueset(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/shareablevalueset"])
 	description: str
 	compose: Optional[ValueSet_Compose] = None
@@ -79,10 +78,3 @@ class Shareablevalueset(BaseModel):
 	immutable: Optional[bool] = None
 	version: str
 	contact: Optional[List[ContactDetail]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

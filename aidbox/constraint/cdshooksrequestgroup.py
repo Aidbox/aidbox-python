@@ -1,12 +1,11 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class RequestGroup_Action_RelatedAction(BackboneElement):
 	actionId: str
 	relationship: str
-	offsetDuration: Optional[str] = None
+	offsetDuration: Optional[Duration] = None
 	offsetRange: Optional[Range] = None
 
 class RequestGroup_Action_Condition(BackboneElement):
@@ -26,20 +25,20 @@ class RequestGroup_Action(BackboneElement):
 	prefix: Optional[str] = None
 	selectionBehavior: Optional[str] = None
 	timingDateTime: Optional[str] = None
-	timingTiming: Optional[str] = None
-	timingDuration: Optional[str] = None
+	timingTiming: Optional[Timing] = None
+	timingDuration: Optional[Duration] = None
 	priority: Optional[str] = None
 	requiredBehavior: Optional[str] = None
 	condition: Optional[List[RequestGroup_Action_Condition]] = None
 	resource: Optional[Reference] = None
 	groupingBehavior: Optional[str] = None
 	code: Optional[List[CodeableConcept]] = None
-	timingAge: Optional[str] = None
+	timingAge: Optional[Age] = None
 	action: Optional[List[str]] = None
 	precheckBehavior: Optional[str] = None
 	cardinalityBehavior: Optional[str] = None
 
-class Cdshooksrequestgroup(BaseModel):
+class Cdshooksrequestgroup(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/cdshooksrequestgroup"])
 	instantiatesCanonical: Optional[List[str]] = None
 	instantiatesUri: List[str]
@@ -59,10 +58,3 @@ class Cdshooksrequestgroup(BaseModel):
 	basedOn: Optional[List[Reference]] = None
 	subject: Optional[Reference] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Practitioner_Qualification(BackboneElement):
 	identifier: Optional[List[Identifier]] = None
@@ -9,7 +8,7 @@ class Practitioner_Qualification(BackboneElement):
 	period: Optional[Period] = None
 	issuer: Optional[Reference] = None
 
-class UsCorePractitioner(BaseModel):
+class UsCorePractitioner(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner"])
 	address: Optional[List[Address]] = None
 	name: List[HumanName]
@@ -21,10 +20,3 @@ class UsCorePractitioner(BaseModel):
 	qualification: Optional[List[Practitioner_Qualification]] = None
 	telecom: Optional[List[ContactPoint]] = None
 	gender: Optional[str] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

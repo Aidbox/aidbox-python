@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding975094(Coding):
 	system: Literal["http://loinc.org"] = "http://loinc.org"
 	code: Literal["97509-4"] = "97509-4"
@@ -35,7 +34,7 @@ class Observation_Component(BackboneElement):
 	valueInteger: Optional[int] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 
-class CodexrtRadiotherapyDiseaseStatus(BaseModel):
+class CodexrtRadiotherapyDiseaseStatus(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/codex-radiation-therapy/StructureDefinition/codexrt-radiotherapy-disease-status"])
 	category: Optional[List[CodeableConcept]] = None
 	referenceRange: Optional[List[Observation_ReferenceRange]] = None
@@ -61,10 +60,3 @@ class CodexrtRadiotherapyDiseaseStatus(BaseModel):
 	subject: Reference
 	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

@@ -1,15 +1,16 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class CoverageEligibilityRequest_Insurance(BackboneElement):
-	businessArrangement: Optional[str] = None
-	coverage: Reference
 	focal: Optional[bool] = None
+	coverage: Reference
+	businessArrangement: Optional[str] = None
 
 class CoverageEligibilityRequest_SupportingInfo(BackboneElement):
-	appliesToAll: Optional[bool] = None
+	sequence: PositiveInt
 	information: Reference
-	sequence: str
+	appliesToAll: Optional[bool] = None
 
 class CoverageEligibilityRequest_Item_Diagnosis(BackboneElement):
 	diagnosisCodeableConcept: Optional[CodeableConcept] = None
@@ -18,29 +19,28 @@ class CoverageEligibilityRequest_Item_Diagnosis(BackboneElement):
 class CoverageEligibilityRequest_Item(BackboneElement):
 	category: Optional[CodeableConcept] = None
 	facility: Optional[Reference] = None
-	diagnosis: list[CoverageEligibilityRequest_Item_Diagnosis] = []
-	modifier: list[CodeableConcept] = []
+	diagnosis: Optional[List[CoverageEligibilityRequest_Item_Diagnosis]] = None
+	modifier: Optional[List[CodeableConcept]] = None
 	productOrService: Optional[CodeableConcept] = None
 	quantity: Optional[Quantity] = None
 	provider: Optional[Reference] = None
-	supportingInfoSequence: list[str] = []
+	supportingInfoSequence: Optional[List[PositiveInt]] = None
 	unitPrice: Optional[Money] = None
-	detail: list[Reference] = []
+	detail: Optional[List[Reference]] = None
 
 class CoverageEligibilityRequest(DomainResource):
 	patient: Reference
-	insurance: list[CoverageEligibilityRequest_Insurance] = []
+	insurance: Optional[List[CoverageEligibilityRequest_Insurance]] = None
 	facility: Optional[Reference] = None
 	enterer: Optional[Reference] = None
-	supportingInfo: list[CoverageEligibilityRequest_SupportingInfo] = []
-	purpose: list[str]
-	item: list[CoverageEligibilityRequest_Item] = []
+	supportingInfo: Optional[List[CoverageEligibilityRequest_SupportingInfo]] = None
+	purpose: List[str]
+	item: Optional[List[CoverageEligibilityRequest_Item]] = None
 	created: str
 	insurer: Reference
 	priority: Optional[CodeableConcept] = None
 	status: str
 	servicedDate: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	provider: Optional[Reference] = None
 	servicedPeriod: Optional[Period] = None
-

@@ -1,16 +1,17 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Task_Restriction(BackboneElement):
+	repetitions: Optional[PositiveInt] = None
 	period: Optional[Period] = None
-	recipient: list[Reference] = []
-	repetitions: Optional[str] = None
+	recipient: Optional[List[Reference]] = None
 
 class Task_Output(BackboneElement):
 	valueBase64Binary: Optional[str] = None
-	valueAge: Optional[str] = None
+	valueAge: Optional[Age] = None
 	valueParameterDefinition: Optional[ParameterDefinition] = None
-	valueTiming: Optional[str] = None
+	valueTiming: Optional[Timing] = None
 	valueCode: Optional[str] = None
 	valueReference: Optional[Reference] = None
 	valueContributor: Optional[Contributor] = None
@@ -18,13 +19,13 @@ class Task_Output(BackboneElement):
 	valueUri: Optional[str] = None
 	valueUsageContext: Optional[UsageContext] = None
 	valueTime: Optional[str] = None
-	valueDecimal: Optional[str] = None
+	valueDecimal: Optional[float] = None
 	valueCanonical: Optional[str] = None
 	valueMarkdown: Optional[str] = None
 	valueIdentifier: Optional[Identifier] = None
 	valueTriggerDefinition: Optional[TriggerDefinition] = None
 	valueQuantity: Optional[Quantity] = None
-	valueCount: Optional[str] = None
+	valueCount: Optional[Count] = None
 	valueString: Optional[str] = None
 	valueRatio: Optional[Ratio] = None
 	valueBoolean: Optional[bool] = None
@@ -32,38 +33,38 @@ class Task_Output(BackboneElement):
 	valueDateTime: Optional[str] = None
 	valueDate: Optional[str] = None
 	type: CodeableConcept
-	valueDuration: Optional[str] = None
+	valueDuration: Optional[Duration] = None
 	valueDataRequirement: Optional[DataRequirement] = None
 	valueMeta: Optional[Meta] = None
 	valueMoney: Optional[Money] = None
 	valueCoding: Optional[Coding] = None
 	valueExpression: Optional[Expression] = None
 	valueSampledData: Optional[SampledData] = None
-	valueDosage: Optional[str] = None
+	valueDosage: Optional[Dosage] = None
 	valueContactPoint: Optional[ContactPoint] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
 	valueAnnotation: Optional[Annotation] = None
 	valuePeriod: Optional[Period] = None
-	valueDistance: Optional[str] = None
+	valueDistance: Optional[Distance] = None
 	valueRange: Optional[Range] = None
 	valueSignature: Optional[Signature] = None
 	valueUuid: Optional[str] = None
 	valueInteger: Optional[int] = None
 	valueHumanName: Optional[HumanName] = None
-	valueUnsignedInt: Optional[str] = None
+	valueUnsignedInt: Optional[NonNegativeInt] = None
 	valueAttachment: Optional[Attachment] = None
 	valueOid: Optional[str] = None
 	valueAddress: Optional[Address] = None
 	valueRelatedArtifact: Optional[RelatedArtifact] = None
-	valuePositiveInt: Optional[str] = None
+	valuePositiveInt: Optional[PositiveInt] = None
 	valueId: Optional[str] = None
 	valueUrl: Optional[str] = None
 
 class Task_Input(BackboneElement):
 	valueBase64Binary: Optional[str] = None
-	valueAge: Optional[str] = None
+	valueAge: Optional[Age] = None
 	valueParameterDefinition: Optional[ParameterDefinition] = None
-	valueTiming: Optional[str] = None
+	valueTiming: Optional[Timing] = None
 	valueCode: Optional[str] = None
 	valueReference: Optional[Reference] = None
 	valueContributor: Optional[Contributor] = None
@@ -71,13 +72,13 @@ class Task_Input(BackboneElement):
 	valueUri: Optional[str] = None
 	valueUsageContext: Optional[UsageContext] = None
 	valueTime: Optional[str] = None
-	valueDecimal: Optional[str] = None
+	valueDecimal: Optional[float] = None
 	valueCanonical: Optional[str] = None
 	valueMarkdown: Optional[str] = None
 	valueIdentifier: Optional[Identifier] = None
 	valueTriggerDefinition: Optional[TriggerDefinition] = None
 	valueQuantity: Optional[Quantity] = None
-	valueCount: Optional[str] = None
+	valueCount: Optional[Count] = None
 	valueString: Optional[str] = None
 	valueRatio: Optional[Ratio] = None
 	valueBoolean: Optional[bool] = None
@@ -85,49 +86,49 @@ class Task_Input(BackboneElement):
 	valueDateTime: Optional[str] = None
 	valueDate: Optional[str] = None
 	type: CodeableConcept
-	valueDuration: Optional[str] = None
+	valueDuration: Optional[Duration] = None
 	valueDataRequirement: Optional[DataRequirement] = None
 	valueMeta: Optional[Meta] = None
 	valueMoney: Optional[Money] = None
 	valueCoding: Optional[Coding] = None
 	valueExpression: Optional[Expression] = None
 	valueSampledData: Optional[SampledData] = None
-	valueDosage: Optional[str] = None
+	valueDosage: Optional[Dosage] = None
 	valueContactPoint: Optional[ContactPoint] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
 	valueAnnotation: Optional[Annotation] = None
 	valuePeriod: Optional[Period] = None
-	valueDistance: Optional[str] = None
+	valueDistance: Optional[Distance] = None
 	valueRange: Optional[Range] = None
 	valueSignature: Optional[Signature] = None
 	valueUuid: Optional[str] = None
 	valueInteger: Optional[int] = None
 	valueHumanName: Optional[HumanName] = None
-	valueUnsignedInt: Optional[str] = None
+	valueUnsignedInt: Optional[NonNegativeInt] = None
 	valueAttachment: Optional[Attachment] = None
 	valueOid: Optional[str] = None
 	valueAddress: Optional[Address] = None
 	valueRelatedArtifact: Optional[RelatedArtifact] = None
-	valuePositiveInt: Optional[str] = None
+	valuePositiveInt: Optional[PositiveInt] = None
 	valueId: Optional[str] = None
 	valueUrl: Optional[str] = None
 
 class Task(DomainResource):
 	restriction: Optional[Task_Restriction] = None
 	description: Optional[str] = None
-	performerType: list[CodeableConcept] = []
+	performerType: Optional[List[CodeableConcept]] = None
 	executionPeriod: Optional[Period] = None
-	insurance: list[Reference] = []
+	insurance: Optional[List[Reference]] = None
 	instantiatesCanonical: Optional[str] = None
 	instantiatesUri: Optional[str] = None
-	relevantHistory: list[Reference] = []
+	relevantHistory: Optional[List[Reference]] = None
 	encounter: Optional[Reference] = None
 	reasonCode: Optional[CodeableConcept] = None
 	statusReason: Optional[CodeableConcept] = None
 	authoredOn: Optional[str] = None
-	output: list[Task_Output] = []
+	output: Optional[List[Task_Output]] = None
 	businessStatus: Optional[CodeableConcept] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	for_: Optional[Reference] = None
 	requester: Optional[Reference] = None
 	lastModified: Optional[str] = None
@@ -135,13 +136,12 @@ class Task(DomainResource):
 	status: str
 	groupIdentifier: Optional[Identifier] = None
 	code: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	intent: str
 	focus: Optional[Reference] = None
-	input: list[Task_Input] = []
-	basedOn: list[Reference] = []
-	partOf: list[Reference] = []
+	input: Optional[List[Task_Input]] = None
+	basedOn: Optional[List[Reference]] = None
+	partOf: Optional[List[Reference]] = None
 	location: Optional[Reference] = None
 	owner: Optional[Reference] = None
 	reasonReference: Optional[Reference] = None
-

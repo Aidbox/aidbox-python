@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class CarePlan_Activity_Detail(BackboneElement):
 	description: Optional[str] = None
@@ -13,7 +12,7 @@ class CarePlan_Activity_Detail(BackboneElement):
 	goal: Optional[List[Reference]] = None
 	reasonCode: Optional[List[CodeableConcept]] = None
 	statusReason: Optional[CodeableConcept] = None
-	scheduledTiming: Optional[str] = None
+	scheduledTiming: Optional[Timing] = None
 	dailyAmount: Optional[Quantity] = None
 	scheduledString: Optional[str] = None
 	status: str
@@ -32,7 +31,7 @@ class CarePlan_Activity(BackboneElement):
 	reference: Optional[Reference] = None
 	detail: Optional[CarePlan_Activity_Detail] = None
 
-class UsCoreCareplan(BaseModel):
+class UsCoreCareplan(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-careplan"])
 	description: Optional[str] = None
 	category: List[CodeableConcept]
@@ -57,10 +56,3 @@ class UsCoreCareplan(BaseModel):
 	partOf: Optional[List[Reference]] = None
 	subject: Reference
 	careTeam: Optional[List[Reference]] = None
-	text: Narrative
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

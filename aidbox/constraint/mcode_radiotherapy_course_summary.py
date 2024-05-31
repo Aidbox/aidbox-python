@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding108290001(Coding):
 	system: Literal["http://snomed.info/sct"] = "http://snomed.info/sct"
 	code: Literal["108290001"] = "108290001"
@@ -26,7 +25,7 @@ class Procedure_Performer(BackboneElement):
 	actor: Reference
 	onBehalfOf: Optional[Reference] = None
 
-class McodeRadiotherapyCourseSummary(BaseModel):
+class McodeRadiotherapyCourseSummary(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-radiotherapy-course-summary"])
 	category: McodeRadiotherapyCourseSummaryCategory = McodeRadiotherapyCourseSummaryCategory()
 	report: Optional[List[Reference]] = None
@@ -56,10 +55,3 @@ class McodeRadiotherapyCourseSummary(BaseModel):
 	subject: Reference
 	performer: Optional[List[Procedure_Performer]] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

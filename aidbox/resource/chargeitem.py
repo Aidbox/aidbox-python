@@ -1,38 +1,38 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ChargeItem_Performer(BackboneElement):
-	actor: Reference
 	function: Optional[CodeableConcept] = None
+	actor: Reference
 
 class ChargeItem(DomainResource):
-	service: list[Reference] = []
-	definitionUri: list[str] = []
+	service: Optional[List[Reference]] = None
+	definitionUri: Optional[List[str]] = None
 	enterer: Optional[Reference] = None
 	requestingOrganization: Optional[Reference] = None
 	productCodeableConcept: Optional[CodeableConcept] = None
 	productReference: Optional[Reference] = None
-	definitionCanonical: list[str] = []
-	bodysite: list[CodeableConcept] = []
-	occurrenceTiming: Optional[str] = None
+	definitionCanonical: Optional[List[str]] = None
+	bodysite: Optional[List[CodeableConcept]] = None
+	occurrenceTiming: Optional[Timing] = None
 	costCenter: Optional[Reference] = None
-	note: list[Annotation] = []
-	account: list[Reference] = []
-	reason: list[CodeableConcept] = []
-	supportingInformation: list[Reference] = []
+	note: Optional[List[Annotation]] = None
+	account: Optional[List[Reference]] = None
+	reason: Optional[List[CodeableConcept]] = None
+	supportingInformation: Optional[List[Reference]] = None
 	occurrencePeriod: Optional[Period] = None
 	status: str
 	code: CodeableConcept
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	context: Optional[Reference] = None
 	quantity: Optional[Quantity] = None
-	partOf: list[Reference] = []
+	partOf: Optional[List[Reference]] = None
 	priceOverride: Optional[Money] = None
 	enteredDate: Optional[str] = None
 	occurrenceDateTime: Optional[str] = None
 	overrideReason: Optional[str] = None
 	performingOrganization: Optional[Reference] = None
 	subject: Reference
-	factorOverride: Optional[str] = None
-	performer: list[ChargeItem_Performer] = []
-
+	factorOverride: Optional[float] = None
+	performer: Optional[List[ChargeItem_Performer]] = None

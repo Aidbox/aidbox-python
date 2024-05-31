@@ -1,17 +1,18 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class CarePlan_Activity_Detail(BackboneElement):
 	description: Optional[str] = None
-	instantiatesCanonical: list[str] = []
-	instantiatesUri: list[str] = []
+	instantiatesCanonical: Optional[List[str]] = None
+	instantiatesUri: Optional[List[str]] = None
 	productCodeableConcept: Optional[CodeableConcept] = None
 	productReference: Optional[Reference] = None
 	scheduledPeriod: Optional[Period] = None
-	goal: list[Reference] = []
-	reasonCode: list[CodeableConcept] = []
+	goal: Optional[List[Reference]] = None
+	reasonCode: Optional[List[CodeableConcept]] = None
 	statusReason: Optional[CodeableConcept] = None
-	scheduledTiming: Optional[str] = None
+	scheduledTiming: Optional[Timing] = None
 	dailyAmount: Optional[Quantity] = None
 	scheduledString: Optional[str] = None
 	status: str
@@ -20,38 +21,37 @@ class CarePlan_Activity_Detail(BackboneElement):
 	doNotPerform: Optional[bool] = None
 	quantity: Optional[Quantity] = None
 	location: Optional[Reference] = None
-	performer: list[Reference] = []
-	reasonReference: list[Reference] = []
+	performer: Optional[List[Reference]] = None
+	reasonReference: Optional[List[Reference]] = None
 
 class CarePlan_Activity(BackboneElement):
-	detail: Optional[CarePlan_Activity_Detail] = None
-	outcomeCodeableConcept: list[CodeableConcept] = []
-	outcomeReference: list[Reference] = []
-	progress: list[Annotation] = []
+	outcomeCodeableConcept: Optional[List[CodeableConcept]] = None
+	outcomeReference: Optional[List[Reference]] = None
+	progress: Optional[List[Annotation]] = None
 	reference: Optional[Reference] = None
+	detail: Optional[CarePlan_Activity_Detail] = None
 
 class CarePlan(DomainResource):
 	description: Optional[str] = None
-	category: list[CodeableConcept] = []
-	addresses: list[Reference] = []
-	instantiatesCanonical: list[str] = []
-	instantiatesUri: list[str] = []
-	supportingInfo: list[Reference] = []
+	category: Optional[List[CodeableConcept]] = None
+	addresses: Optional[List[Reference]] = None
+	instantiatesCanonical: Optional[List[str]] = None
+	instantiatesUri: Optional[List[str]] = None
+	supportingInfo: Optional[List[Reference]] = None
 	encounter: Optional[Reference] = None
-	goal: list[Reference] = []
+	goal: Optional[List[Reference]] = None
 	created: Optional[str] = None
 	title: Optional[str] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	author: Optional[Reference] = None
-	activity: list[CarePlan_Activity] = []
-	contributor: list[Reference] = []
+	activity: Optional[List[CarePlan_Activity]] = None
+	contributor: Optional[List[Reference]] = None
 	status: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	intent: str
-	replaces: list[Reference] = []
+	replaces: Optional[List[Reference]] = None
 	period: Optional[Period] = None
-	basedOn: list[Reference] = []
-	partOf: list[Reference] = []
+	basedOn: Optional[List[Reference]] = None
+	partOf: Optional[List[Reference]] = None
 	subject: Reference
-	careTeam: list[Reference] = []
-
+	careTeam: Optional[List[Reference]] = None

@@ -1,11 +1,10 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Questionnaire_Item_EnableWhen(BackboneElement):
 	answerQuantity: Optional[Quantity] = None
-	answerDecimal: Optional[str] = None
+	answerDecimal: Optional[float] = None
 	answerDate: Optional[str] = None
 	answerReference: Optional[Reference] = None
 	answerInteger: Optional[int] = None
@@ -30,7 +29,7 @@ class Questionnaire_Item_Initial(BackboneElement):
 	valueReference: Optional[Reference] = None
 	valueUri: Optional[str] = None
 	valueTime: Optional[str] = None
-	valueDecimal: Optional[str] = None
+	valueDecimal: Optional[float] = None
 	valueQuantity: Optional[Quantity] = None
 	valueString: Optional[str] = None
 	valueBoolean: Optional[bool] = None
@@ -58,7 +57,7 @@ class Questionnaire_Item(BackboneElement):
 	required: Optional[bool] = None
 	text: Optional[str] = None
 
-class CqfQuestionnaire(BaseModel):
+class CqfQuestionnaire(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/cqf-questionnaire"])
 	description: Optional[str] = None
 	subjectType: Optional[List[str]] = None
@@ -82,10 +81,3 @@ class CqfQuestionnaire(BaseModel):
 	version: Optional[str] = None
 	contact: Optional[List[ContactDetail]] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

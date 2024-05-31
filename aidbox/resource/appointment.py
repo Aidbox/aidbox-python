@@ -1,34 +1,34 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Appointment_Participant(BackboneElement):
+	type: Optional[List[CodeableConcept]] = None
 	actor: Optional[Reference] = None
-	period: Optional[Period] = None
 	required: Optional[str] = None
 	status: str
-	type: list[CodeableConcept] = []
+	period: Optional[Period] = None
 
 class Appointment(DomainResource):
 	description: Optional[str] = None
-	serviceCategory: list[CodeableConcept] = []
-	slot: list[Reference] = []
-	specialty: list[CodeableConcept] = []
+	serviceCategory: Optional[List[CodeableConcept]] = None
+	slot: Optional[List[Reference]] = None
+	specialty: Optional[List[CodeableConcept]] = None
 	cancelationReason: Optional[CodeableConcept] = None
-	requestedPeriod: list[Period] = []
+	requestedPeriod: Optional[List[Period]] = None
 	patientInstruction: Optional[str] = None
 	start: Optional[str] = None
-	reasonCode: list[CodeableConcept] = []
+	reasonCode: Optional[List[CodeableConcept]] = None
 	created: Optional[str] = None
-	participant: list[Appointment_Participant]
-	serviceType: list[CodeableConcept] = []
-	supportingInformation: list[Reference] = []
-	priority: Optional[str] = None
+	participant: List[Appointment_Participant]
+	serviceType: Optional[List[CodeableConcept]] = None
+	supportingInformation: Optional[List[Reference]] = None
+	priority: Optional[NonNegativeInt] = None
 	appointmentType: Optional[CodeableConcept] = None
 	status: str
 	comment: Optional[str] = None
-	minutesDuration: Optional[str] = None
-	identifier: list[Identifier] = []
-	basedOn: list[Reference] = []
+	minutesDuration: Optional[PositiveInt] = None
+	identifier: Optional[List[Identifier]] = None
+	basedOn: Optional[List[Reference]] = None
 	end: Optional[str] = None
-	reasonReference: list[Reference] = []
-
+	reasonReference: Optional[List[Reference]] = None

@@ -1,23 +1,23 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
-class Medication_Batch(BackboneElement):
-	expirationDate: Optional[str] = None
-	lotNumber: Optional[str] = None
-
 class Medication_Ingredient(BackboneElement):
-	isActive: Optional[bool] = None
 	itemCodeableConcept: Optional[CodeableConcept] = None
 	itemReference: Optional[Reference] = None
+	isActive: Optional[bool] = None
 	strength: Optional[Ratio] = None
 
-class Medication(DomainResource):
-	amount: Optional[Ratio] = None
-	batch: Optional[Medication_Batch] = None
-	code: Optional[CodeableConcept] = None
-	form: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
-	ingredient: list[Medication_Ingredient] = []
-	manufacturer: Optional[Reference] = None
-	status: Optional[str] = None
+class Medication_Batch(BackboneElement):
+	lotNumber: Optional[str] = None
+	expirationDate: Optional[str] = None
 
+class Medication(DomainResource):
+	identifier: Optional[List[Identifier]] = None
+	code: Optional[CodeableConcept] = None
+	status: Optional[str] = None
+	manufacturer: Optional[Reference] = None
+	form: Optional[CodeableConcept] = None
+	amount: Optional[Ratio] = None
+	ingredient: Optional[List[Medication_Ingredient]] = None
+	batch: Optional[Medication_Batch] = None

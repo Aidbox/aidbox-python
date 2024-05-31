@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class RelatedPerson_Communication(BackboneElement):
@@ -7,15 +8,14 @@ class RelatedPerson_Communication(BackboneElement):
 
 class RelatedPerson(DomainResource):
 	patient: Reference
-	address: list[Address] = []
-	name: list[HumanName] = []
+	address: Optional[List[Address]] = None
+	name: Optional[List[HumanName]] = None
 	birthDate: Optional[str] = None
-	relationship: list[CodeableConcept] = []
-	photo: list[Attachment] = []
+	relationship: Optional[List[CodeableConcept]] = None
+	photo: Optional[List[Attachment]] = None
 	active: Optional[bool] = None
-	communication: list[RelatedPerson_Communication] = []
-	identifier: list[Identifier] = []
-	telecom: list[ContactPoint] = []
+	communication: Optional[List[RelatedPerson_Communication]] = None
+	identifier: Optional[List[Identifier]] = None
+	telecom: Optional[List[ContactPoint]] = None
 	gender: Optional[str] = None
 	period: Optional[Period] = None
-

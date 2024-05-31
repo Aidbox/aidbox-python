@@ -1,27 +1,28 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Composition_Section(BackboneElement):
 	orderedBy: Optional[CodeableConcept] = None
-	section: list[str] = []
+	section: Optional[List[str]] = None
 	mode: Optional[str] = None
 	title: Optional[str] = None
 	emptyReason: Optional[CodeableConcept] = None
-	author: list[Reference] = []
+	author: Optional[List[Reference]] = None
 	code: Optional[CodeableConcept] = None
 	focus: Optional[Reference] = None
-	entry: list[Reference] = []
+	entry: Optional[List[Reference]] = None
 	text: Optional[Narrative] = None
 
 class Composition_Attester(BackboneElement):
 	mode: str
-	party: Optional[Reference] = None
 	time: Optional[str] = None
+	party: Optional[Reference] = None
 
 class Composition_Event(BackboneElement):
-	code: list[CodeableConcept] = []
-	detail: list[Reference] = []
+	code: Optional[List[CodeableConcept]] = None
 	period: Optional[Period] = None
+	detail: Optional[List[Reference]] = None
 
 class Composition_RelatesTo(BackboneElement):
 	code: str
@@ -29,19 +30,18 @@ class Composition_RelatesTo(BackboneElement):
 	targetReference: Optional[Reference] = None
 
 class Composition(DomainResource):
-	category: list[CodeableConcept] = []
+	category: Optional[List[CodeableConcept]] = None
 	date: str
 	encounter: Optional[Reference] = None
-	section: list[Composition_Section] = []
-	attester: list[Composition_Attester] = []
+	section: Optional[List[Composition_Section]] = None
+	attester: Optional[List[Composition_Attester]] = None
 	type: CodeableConcept
 	title: str
-	author: list[Reference]
-	event: list[Composition_Event] = []
+	author: List[Reference]
+	event: Optional[List[Composition_Event]] = None
 	custodian: Optional[Reference] = None
 	status: str
 	identifier: Optional[Identifier] = None
-	relatesTo: list[Composition_RelatesTo] = []
+	relatesTo: Optional[List[Composition_RelatesTo]] = None
 	subject: Optional[Reference] = None
 	confidentiality: Optional[str] = None
-

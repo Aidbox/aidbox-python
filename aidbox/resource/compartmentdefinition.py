@@ -1,10 +1,11 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class CompartmentDefinition_Resource(BackboneElement):
 	code: str
+	param: Optional[List[str]] = None
 	documentation: Optional[str] = None
-	param: list[str] = []
 
 class CompartmentDefinition(DomainResource):
 	description: Optional[str] = None
@@ -12,13 +13,12 @@ class CompartmentDefinition(DomainResource):
 	publisher: Optional[str] = None
 	purpose: Optional[str] = None
 	name: str
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	experimental: Optional[bool] = None
 	search: bool
 	status: str
-	resource: list[CompartmentDefinition_Resource] = []
+	resource: Optional[List[CompartmentDefinition_Resource]] = None
 	url: str
 	code: str
 	version: Optional[str] = None
-	contact: list[ContactDetail] = []
-
+	contact: Optional[List[ContactDetail]] = None

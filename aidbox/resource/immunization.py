@@ -1,20 +1,21 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Immunization_ProtocolApplied(BackboneElement):
-	seriesDosesPositiveInt: Optional[int] = None
-	doseNumberPositiveInt: Optional[int] = None
+	seriesDosesPositiveInt: Optional[PositiveInt] = None
+	doseNumberPositiveInt: Optional[PositiveInt] = None
 	series: Optional[str] = None
 	authority: Optional[Reference] = None
 	doseNumberString: Optional[str] = None
 	seriesDosesString: Optional[str] = None
-	targetDisease: list[CodeableConcept] = []
+	targetDisease: Optional[List[CodeableConcept]] = None
 
 class Immunization_Education(BackboneElement):
 	documentType: Optional[str] = None
-	presentationDate: Optional[str] = None
-	publicationDate: Optional[str] = None
 	reference: Optional[str] = None
+	publicationDate: Optional[str] = None
+	presentationDate: Optional[str] = None
 
 class Immunization_Reaction(BackboneElement):
 	date: Optional[str] = None
@@ -22,37 +23,36 @@ class Immunization_Reaction(BackboneElement):
 	reported: Optional[bool] = None
 
 class Immunization_Performer(BackboneElement):
-	actor: Reference
 	function: Optional[CodeableConcept] = None
+	actor: Reference
 
 class Immunization(DomainResource):
 	patient: Reference
 	isSubpotent: Optional[bool] = None
 	reportOrigin: Optional[CodeableConcept] = None
-	protocolApplied: list[Immunization_ProtocolApplied] = []
+	protocolApplied: Optional[List[Immunization_ProtocolApplied]] = None
 	site: Optional[CodeableConcept] = None
 	encounter: Optional[Reference] = None
 	vaccineCode: CodeableConcept
 	doseQuantity: Optional[Quantity] = None
-	reasonCode: list[CodeableConcept] = []
+	reasonCode: Optional[List[CodeableConcept]] = None
 	statusReason: Optional[CodeableConcept] = None
 	route: Optional[CodeableConcept] = None
 	recorded: Optional[str] = None
-	programEligibility: list[CodeableConcept] = []
-	note: list[Annotation] = []
+	programEligibility: Optional[List[CodeableConcept]] = None
+	note: Optional[List[Annotation]] = None
 	primarySource: Optional[bool] = None
 	status: str
 	lotNumber: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	manufacturer: Optional[Reference] = None
-	education: list[Immunization_Education] = []
+	education: Optional[List[Immunization_Education]] = None
 	occurrenceString: Optional[str] = None
-	reaction: list[Immunization_Reaction] = []
+	reaction: Optional[List[Immunization_Reaction]] = None
 	location: Optional[Reference] = None
 	occurrenceDateTime: Optional[str] = None
 	fundingSource: Optional[CodeableConcept] = None
-	subpotentReason: list[CodeableConcept] = []
+	subpotentReason: Optional[List[CodeableConcept]] = None
 	expirationDate: Optional[str] = None
-	performer: list[Immunization_Performer] = []
-	reasonReference: list[Reference] = []
-
+	performer: Optional[List[Immunization_Performer]] = None
+	reasonReference: Optional[List[Reference]] = None

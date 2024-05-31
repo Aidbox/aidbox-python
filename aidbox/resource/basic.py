@@ -1,10 +1,10 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Basic(DomainResource):
-	author: Optional[Reference] = None
+	identifier: Optional[List[Identifier]] = None
 	code: CodeableConcept
-	created: Optional[str] = None
-	identifier: list[Identifier] = []
 	subject: Optional[Reference] = None
-
+	created: Optional[str] = None
+	author: Optional[Reference] = None

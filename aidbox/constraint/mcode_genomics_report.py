@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding812479(Coding):
 	system: Literal["http://loinc.org"] = "http://loinc.org"
 	code: Literal["81247-9"] = "81247-9"
@@ -14,7 +13,7 @@ class DiagnosticReport_Media(BackboneElement):
 	comment: Optional[str] = None
 	link: Reference
 
-class McodeGenomicsReport(BaseModel):
+class McodeGenomicsReport(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-genomics-report"])
 	category: List[CodeableConcept]
 	conclusionCode: Optional[List[CodeableConcept]] = None
@@ -35,10 +34,3 @@ class McodeGenomicsReport(BaseModel):
 	subject: Reference
 	performer: Optional[List[Reference]] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

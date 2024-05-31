@@ -1,130 +1,130 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ClaimResponse_Insurance(BackboneElement):
+	sequence: PositiveInt
+	focal: bool
+	coverage: Reference
 	businessArrangement: Optional[str] = None
 	claimResponse: Optional[Reference] = None
-	coverage: Reference
-	focal: bool
-	sequence: str
 
 class ClaimResponse_ProcessNote(BackboneElement):
-	language: Optional[CodeableConcept] = None
-	number: Optional[str] = None
-	text: str
+	number: Optional[PositiveInt] = None
 	type: Optional[str] = None
+	text: str
+	language: Optional[CodeableConcept] = None
 
 class ClaimResponse_Payment(BackboneElement):
+	type: CodeableConcept
 	adjustment: Optional[Money] = None
 	adjustmentReason: Optional[CodeableConcept] = None
-	amount: Money
 	date: Optional[str] = None
+	amount: Money
 	identifier: Optional[Identifier] = None
-	type: CodeableConcept
 
 class ClaimResponse_Item_Adjudication(BackboneElement):
-	amount: Optional[Money] = None
 	category: CodeableConcept
 	reason: Optional[CodeableConcept] = None
-	value: Optional[str] = None
+	amount: Optional[Money] = None
+	value: Optional[float] = None
 
 class ClaimResponse_Item_Detail_SubDetail(BackboneElement):
-	adjudication: list[str] = []
-	noteNumber: list[str] = []
-	subDetailSequence: str
+	subDetailSequence: PositiveInt
+	noteNumber: Optional[List[PositiveInt]] = None
+	adjudication: Optional[List[str]] = None
 
 class ClaimResponse_Item_Detail(BackboneElement):
-	adjudication: list[str]
-	detailSequence: str
-	noteNumber: list[str] = []
-	subDetail: list[ClaimResponse_Item_Detail_SubDetail] = []
+	detailSequence: PositiveInt
+	noteNumber: Optional[List[PositiveInt]] = None
+	adjudication: List[str]
+	subDetail: Optional[List[ClaimResponse_Item_Detail_SubDetail]] = None
 
 class ClaimResponse_Item(BackboneElement):
-	adjudication: list[ClaimResponse_Item_Adjudication]
-	detail: list[ClaimResponse_Item_Detail] = []
-	itemSequence: str
-	noteNumber: list[str] = []
+	itemSequence: PositiveInt
+	noteNumber: Optional[List[PositiveInt]] = None
+	adjudication: List[ClaimResponse_Item_Adjudication]
+	detail: Optional[List[ClaimResponse_Item_Detail]] = None
 
 class ClaimResponse_Total(BackboneElement):
-	amount: Money
 	category: CodeableConcept
+	amount: Money
 
 class ClaimResponse_Error(BackboneElement):
+	itemSequence: Optional[PositiveInt] = None
+	detailSequence: Optional[PositiveInt] = None
+	subDetailSequence: Optional[PositiveInt] = None
 	code: CodeableConcept
-	detailSequence: Optional[str] = None
-	itemSequence: Optional[str] = None
-	subDetailSequence: Optional[str] = None
 
 class ClaimResponse_AddItem_Detail_SubDetail(BackboneElement):
-	adjudication: list[str]
-	factor: Optional[str] = None
-	modifier: list[CodeableConcept] = []
-	net: Optional[Money] = None
-	noteNumber: list[str] = []
 	productOrService: CodeableConcept
+	modifier: Optional[List[CodeableConcept]] = None
 	quantity: Optional[Quantity] = None
 	unitPrice: Optional[Money] = None
+	factor: Optional[float] = None
+	net: Optional[Money] = None
+	noteNumber: Optional[List[PositiveInt]] = None
+	adjudication: List[str]
 
 class ClaimResponse_AddItem_Detail(BackboneElement):
-	modifier: list[CodeableConcept] = []
-	adjudication: list[str]
+	modifier: Optional[List[CodeableConcept]] = None
+	adjudication: List[str]
 	net: Optional[Money] = None
 	productOrService: CodeableConcept
-	factor: Optional[str] = None
-	subDetail: list[ClaimResponse_AddItem_Detail_SubDetail] = []
+	factor: Optional[float] = None
+	subDetail: Optional[List[ClaimResponse_AddItem_Detail_SubDetail]] = None
 	quantity: Optional[Quantity] = None
-	noteNumber: list[str] = []
+	noteNumber: Optional[List[PositiveInt]] = None
 	unitPrice: Optional[Money] = None
 
 class ClaimResponse_AddItem(BackboneElement):
 	locationAddress: Optional[Address] = None
-	modifier: list[CodeableConcept] = []
-	adjudication: list[str]
-	subdetailSequence: list[str] = []
+	modifier: Optional[List[CodeableConcept]] = None
+	adjudication: List[str]
+	subdetailSequence: Optional[List[PositiveInt]] = None
 	locationCodeableConcept: Optional[CodeableConcept] = None
-	itemSequence: list[str] = []
+	itemSequence: Optional[List[PositiveInt]] = None
 	net: Optional[Money] = None
-	detailSequence: list[str] = []
-	subSite: list[CodeableConcept] = []
+	detailSequence: Optional[List[PositiveInt]] = None
+	subSite: Optional[List[CodeableConcept]] = None
 	productOrService: CodeableConcept
 	locationReference: Optional[Reference] = None
-	programCode: list[CodeableConcept] = []
-	factor: Optional[str] = None
+	programCode: Optional[List[CodeableConcept]] = None
+	factor: Optional[float] = None
 	servicedDate: Optional[str] = None
 	bodySite: Optional[CodeableConcept] = None
 	quantity: Optional[Quantity] = None
-	provider: list[Reference] = []
-	noteNumber: list[str] = []
+	provider: Optional[List[Reference]] = None
+	noteNumber: Optional[List[PositiveInt]] = None
 	unitPrice: Optional[Money] = None
 	servicedPeriod: Optional[Period] = None
-	detail: list[ClaimResponse_AddItem_Detail] = []
+	detail: Optional[List[ClaimResponse_AddItem_Detail]] = None
 
 class ClaimResponse(DomainResource):
 	patient: Reference
 	requestor: Optional[Reference] = None
 	payeeType: Optional[CodeableConcept] = None
-	insurance: list[ClaimResponse_Insurance] = []
+	insurance: Optional[List[ClaimResponse_Insurance]] = None
 	request: Optional[Reference] = None
-	processNote: list[ClaimResponse_ProcessNote] = []
+	processNote: Optional[List[ClaimResponse_ProcessNote]] = None
 	preAuthRef: Optional[str] = None
-	adjudication: list[str] = []
+	adjudication: Optional[List[str]] = None
 	use: str
 	payment: Optional[ClaimResponse_Payment] = None
-	item: list[ClaimResponse_Item] = []
+	item: Optional[List[ClaimResponse_Item]] = None
 	type: CodeableConcept
 	created: str
 	preAuthPeriod: Optional[Period] = None
 	outcome: str
 	disposition: Optional[str] = None
-	communicationRequest: list[Reference] = []
-	total: list[ClaimResponse_Total] = []
+	communicationRequest: Optional[List[Reference]] = None
+	total: Optional[List[ClaimResponse_Total]] = None
 	insurer: Reference
 	fundsReserve: Optional[CodeableConcept] = None
 	status: str
-	identifier: list[Identifier] = []
-	error: list[ClaimResponse_Error] = []
+	identifier: Optional[List[Identifier]] = None
+	error: Optional[List[ClaimResponse_Error]] = None
 	form: Optional[Attachment] = None
 	subType: Optional[CodeableConcept] = None
 	formCode: Optional[CodeableConcept] = None
-	addItem: list[ClaimResponse_AddItem] = []
-
+	addItem: Optional[List[ClaimResponse_AddItem]] = None

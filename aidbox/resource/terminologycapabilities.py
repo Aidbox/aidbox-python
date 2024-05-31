@@ -1,15 +1,16 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class TerminologyCapabilities_Expansion_Parameter(BackboneElement):
-	documentation: Optional[str] = None
 	name: str
+	documentation: Optional[str] = None
 
 class TerminologyCapabilities_Expansion(BackboneElement):
 	hierarchical: Optional[bool] = None
-	incomplete: Optional[bool] = None
 	paging: Optional[bool] = None
-	parameter: list[TerminologyCapabilities_Expansion_Parameter] = []
+	incomplete: Optional[bool] = None
+	parameter: Optional[List[TerminologyCapabilities_Expansion_Parameter]] = None
 	textFilter: Optional[str] = None
 
 class TerminologyCapabilities_ValidateCode(BackboneElement):
@@ -20,20 +21,20 @@ class TerminologyCapabilities_Translation(BackboneElement):
 
 class TerminologyCapabilities_CodeSystem_Version_Filter(BackboneElement):
 	code: str
-	op: list[str]
+	op: List[str]
 
 class TerminologyCapabilities_CodeSystem_Version(BackboneElement):
 	code: Optional[str] = None
-	compositional: Optional[bool] = None
-	filter: list[TerminologyCapabilities_CodeSystem_Version_Filter] = []
 	isDefault: Optional[bool] = None
-	language: list[str] = []
-	property: list[str] = []
+	compositional: Optional[bool] = None
+	language: Optional[List[str]] = None
+	filter: Optional[List[TerminologyCapabilities_CodeSystem_Version_Filter]] = None
+	property: Optional[List[str]] = None
 
 class TerminologyCapabilities_CodeSystem(BackboneElement):
-	subsumption: Optional[bool] = None
 	uri: Optional[str] = None
-	version: list[TerminologyCapabilities_CodeSystem_Version] = []
+	version: Optional[List[TerminologyCapabilities_CodeSystem_Version]] = None
+	subsumption: Optional[bool] = None
 
 class TerminologyCapabilities_Software(BackboneElement):
 	name: str
@@ -50,10 +51,10 @@ class TerminologyCapabilities(DomainResource):
 	description: Optional[str] = None
 	date: str
 	publisher: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
 	name: Optional[str] = None
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	copyright: Optional[str] = None
 	experimental: Optional[bool] = None
 	expansion: Optional[TerminologyCapabilities_Expansion] = None
@@ -63,12 +64,11 @@ class TerminologyCapabilities(DomainResource):
 	kind: str
 	translation: Optional[TerminologyCapabilities_Translation] = None
 	url: Optional[str] = None
-	codeSystem: list[TerminologyCapabilities_CodeSystem] = []
+	codeSystem: Optional[List[TerminologyCapabilities_CodeSystem]] = None
 	software: Optional[TerminologyCapabilities_Software] = None
 	version: Optional[str] = None
-	contact: list[ContactDetail] = []
+	contact: Optional[List[ContactDetail]] = None
 	implementation: Optional[TerminologyCapabilities_Implementation] = None
 	codeSearch: Optional[str] = None
 	lockedDate: Optional[bool] = None
 	closure: Optional[TerminologyCapabilities_Closure] = None
-

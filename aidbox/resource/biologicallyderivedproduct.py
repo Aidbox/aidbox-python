@@ -1,18 +1,19 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class BiologicallyDerivedProduct_Processing(BackboneElement):
-	additive: Optional[Reference] = None
 	description: Optional[str] = None
 	procedure: Optional[CodeableConcept] = None
+	additive: Optional[Reference] = None
 	timeDateTime: Optional[str] = None
 	timePeriod: Optional[Period] = None
 
 class BiologicallyDerivedProduct_Storage(BackboneElement):
 	description: Optional[str] = None
-	duration: Optional[Period] = None
+	temperature: Optional[float] = None
 	scale: Optional[str] = None
-	temperature: Optional[str] = None
+	duration: Optional[Period] = None
 
 class BiologicallyDerivedProduct_Manipulation(BackboneElement):
 	description: Optional[str] = None
@@ -20,21 +21,20 @@ class BiologicallyDerivedProduct_Manipulation(BackboneElement):
 	timePeriod: Optional[Period] = None
 
 class BiologicallyDerivedProduct_Collection(BackboneElement):
-	collectedDateTime: Optional[str] = None
-	collectedPeriod: Optional[Period] = None
 	collector: Optional[Reference] = None
 	source: Optional[Reference] = None
+	collectedDateTime: Optional[str] = None
+	collectedPeriod: Optional[Period] = None
 
 class BiologicallyDerivedProduct(DomainResource):
-	request: list[Reference] = []
-	processing: list[BiologicallyDerivedProduct_Processing] = []
-	parent: list[Reference] = []
+	request: Optional[List[Reference]] = None
+	processing: Optional[List[BiologicallyDerivedProduct_Processing]] = None
+	parent: Optional[List[Reference]] = None
 	status: Optional[str] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	productCode: Optional[CodeableConcept] = None
-	storage: list[BiologicallyDerivedProduct_Storage] = []
+	storage: Optional[List[BiologicallyDerivedProduct_Storage]] = None
 	quantity: Optional[int] = None
 	productCategory: Optional[str] = None
 	manipulation: Optional[BiologicallyDerivedProduct_Manipulation] = None
 	collection: Optional[BiologicallyDerivedProduct_Collection] = None
-

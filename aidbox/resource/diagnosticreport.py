@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class DiagnosticReport_Media(BackboneElement):
@@ -6,23 +7,22 @@ class DiagnosticReport_Media(BackboneElement):
 	link: Reference
 
 class DiagnosticReport(DomainResource):
-	category: list[CodeableConcept] = []
-	conclusionCode: list[CodeableConcept] = []
+	category: Optional[List[CodeableConcept]] = None
+	conclusionCode: Optional[List[CodeableConcept]] = None
 	conclusion: Optional[str] = None
 	encounter: Optional[Reference] = None
-	specimen: list[Reference] = []
+	specimen: Optional[List[Reference]] = None
 	effectiveDateTime: Optional[str] = None
-	resultsInterpreter: list[Reference] = []
+	resultsInterpreter: Optional[List[Reference]] = None
 	status: str
-	result: list[Reference] = []
+	result: Optional[List[Reference]] = None
 	code: CodeableConcept
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	issued: Optional[str] = None
-	presentedForm: list[Attachment] = []
-	basedOn: list[Reference] = []
-	imagingStudy: list[Reference] = []
-	media: list[DiagnosticReport_Media] = []
+	presentedForm: Optional[List[Attachment]] = None
+	basedOn: Optional[List[Reference]] = None
+	imagingStudy: Optional[List[Reference]] = None
+	media: Optional[List[DiagnosticReport_Media]] = None
 	subject: Optional[Reference] = None
-	performer: list[Reference] = []
+	performer: Optional[List[Reference]] = None
 	effectivePeriod: Optional[Period] = None
-

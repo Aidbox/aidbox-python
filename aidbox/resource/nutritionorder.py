@@ -1,27 +1,28 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class NutritionOrder_OralDiet_Nutrient(BackboneElement):
-	amount: Optional[Quantity] = None
 	modifier: Optional[CodeableConcept] = None
+	amount: Optional[Quantity] = None
 
 class NutritionOrder_OralDiet_Texture(BackboneElement):
-	foodType: Optional[CodeableConcept] = None
 	modifier: Optional[CodeableConcept] = None
+	foodType: Optional[CodeableConcept] = None
 
 class NutritionOrder_OralDiet(BackboneElement):
-	fluidConsistencyType: list[CodeableConcept] = []
+	type: Optional[List[CodeableConcept]] = None
+	schedule: Optional[List[Timing]] = None
+	nutrient: Optional[List[NutritionOrder_OralDiet_Nutrient]] = None
+	texture: Optional[List[NutritionOrder_OralDiet_Texture]] = None
+	fluidConsistencyType: Optional[List[CodeableConcept]] = None
 	instruction: Optional[str] = None
-	nutrient: list[NutritionOrder_OralDiet_Nutrient] = []
-	schedule: list[str] = []
-	texture: list[NutritionOrder_OralDiet_Texture] = []
-	type: list[CodeableConcept] = []
 
 class NutritionOrder_EnteralFormula_Administration(BackboneElement):
+	schedule: Optional[Timing] = None
 	quantity: Optional[Quantity] = None
 	rateQuantity: Optional[Quantity] = None
 	rateRatio: Optional[Ratio] = None
-	schedule: Optional[str] = None
 
 class NutritionOrder_EnteralFormula(BackboneElement):
 	additiveType: Optional[CodeableConcept] = None
@@ -31,32 +32,31 @@ class NutritionOrder_EnteralFormula(BackboneElement):
 	additiveProductName: Optional[str] = None
 	caloricDensity: Optional[Quantity] = None
 	administrationInstruction: Optional[str] = None
-	administration: list[NutritionOrder_EnteralFormula_Administration] = []
+	administration: Optional[List[NutritionOrder_EnteralFormula_Administration]] = None
 	baseFormulaProductName: Optional[str] = None
 
 class NutritionOrder_Supplement(BackboneElement):
-	instruction: Optional[str] = None
-	productName: Optional[str] = None
-	quantity: Optional[Quantity] = None
-	schedule: list[str] = []
 	type: Optional[CodeableConcept] = None
+	productName: Optional[str] = None
+	schedule: Optional[List[Timing]] = None
+	quantity: Optional[Quantity] = None
+	instruction: Optional[str] = None
 
 class NutritionOrder(DomainResource):
 	patient: Reference
 	oralDiet: Optional[NutritionOrder_OralDiet] = None
-	instantiatesCanonical: list[str] = []
-	instantiatesUri: list[str] = []
-	instantiates: list[str] = []
+	instantiatesCanonical: Optional[List[str]] = None
+	instantiatesUri: Optional[List[str]] = None
+	instantiates: Optional[List[str]] = None
 	encounter: Optional[Reference] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	dateTime: str
 	enteralFormula: Optional[NutritionOrder_EnteralFormula] = None
-	foodPreferenceModifier: list[CodeableConcept] = []
+	foodPreferenceModifier: Optional[List[CodeableConcept]] = None
 	status: str
-	excludeFoodModifier: list[CodeableConcept] = []
-	identifier: list[Identifier] = []
+	excludeFoodModifier: Optional[List[CodeableConcept]] = None
+	identifier: Optional[List[Identifier]] = None
 	intent: str
 	orderer: Optional[Reference] = None
-	supplement: list[NutritionOrder_Supplement] = []
-	allergyIntolerance: list[Reference] = []
-
+	supplement: Optional[List[NutritionOrder_Supplement]] = None
+	allergyIntolerance: Optional[List[Reference]] = None

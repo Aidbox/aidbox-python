@@ -1,81 +1,82 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ImplementationGuide_Definition_Grouping(BackboneElement):
-	description: Optional[str] = None
 	name: str
+	description: Optional[str] = None
+
+class ImplementationGuide_Definition_Resource(BackboneElement):
+	reference: Reference
+	fhirVersion: Optional[List[str]] = None
+	name: Optional[str] = None
+	description: Optional[str] = None
+	exampleBoolean: Optional[bool] = None
+	exampleCanonical: Optional[str] = None
+	groupingId: Optional[str] = None
 
 class ImplementationGuide_Definition_Page(BackboneElement):
-	generation: str
-	nameReference: Optional[Reference] = None
 	nameUrl: Optional[str] = None
-	page: list[str] = []
+	nameReference: Optional[Reference] = None
 	title: str
+	generation: str
+	page: Optional[List[str]] = None
 
 class ImplementationGuide_Definition_Parameter(BackboneElement):
 	code: str
 	value: str
 
-class ImplementationGuide_Definition_Resource(BackboneElement):
-	description: Optional[str] = None
-	exampleBoolean: Optional[bool] = None
-	exampleCanonical: Optional[str] = None
-	fhirVersion: list[str] = []
-	groupingId: Optional[str] = None
-	name: Optional[str] = None
-	reference: Reference
-
 class ImplementationGuide_Definition_Template(BackboneElement):
 	code: str
-	scope: Optional[str] = None
 	source: str
+	scope: Optional[str] = None
 
 class ImplementationGuide_Definition(BackboneElement):
-	grouping: list[ImplementationGuide_Definition_Grouping] = []
+	grouping: Optional[List[ImplementationGuide_Definition_Grouping]] = None
+	resource: List[ImplementationGuide_Definition_Resource]
 	page: Optional[ImplementationGuide_Definition_Page] = None
-	parameter: list[ImplementationGuide_Definition_Parameter] = []
-	resource: list[ImplementationGuide_Definition_Resource]
-	template: list[ImplementationGuide_Definition_Template] = []
+	parameter: Optional[List[ImplementationGuide_Definition_Parameter]] = None
+	template: Optional[List[ImplementationGuide_Definition_Template]] = None
 
 class ImplementationGuide_Global(BackboneElement):
-	profile: str
 	type: str
+	profile: str
 
 class ImplementationGuide_DependsOn(BackboneElement):
-	packageId: Optional[str] = None
 	uri: str
+	packageId: Optional[str] = None
 	version: Optional[str] = None
 
-class ImplementationGuide_Manifest_Page(BackboneElement):
-	anchor: list[str] = []
-	name: str
-	title: Optional[str] = None
-
 class ImplementationGuide_Manifest_Resource(BackboneElement):
+	reference: Reference
 	exampleBoolean: Optional[bool] = None
 	exampleCanonical: Optional[str] = None
-	reference: Reference
 	relativePath: Optional[str] = None
 
+class ImplementationGuide_Manifest_Page(BackboneElement):
+	name: str
+	title: Optional[str] = None
+	anchor: Optional[List[str]] = None
+
 class ImplementationGuide_Manifest(BackboneElement):
-	image: list[str] = []
-	other: list[str] = []
-	page: list[ImplementationGuide_Manifest_Page] = []
 	rendering: Optional[str] = None
-	resource: list[ImplementationGuide_Manifest_Resource]
+	resource: List[ImplementationGuide_Manifest_Resource]
+	page: Optional[List[ImplementationGuide_Manifest_Page]] = None
+	image: Optional[List[str]] = None
+	other: Optional[List[str]] = None
 
 class ImplementationGuide(DomainResource):
 	description: Optional[str] = None
 	definition: Optional[ImplementationGuide_Definition] = None
 	date: Optional[str] = None
 	publisher: Optional[str] = None
-	fhirVersion: list[str]
+	fhirVersion: List[str]
 	license: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
-	global_: list[ImplementationGuide_Global] = []
-	dependsOn: list[ImplementationGuide_DependsOn] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
+	global_: Optional[List[ImplementationGuide_Global]] = None
+	dependsOn: Optional[List[ImplementationGuide_DependsOn]] = None
 	name: str
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	copyright: Optional[str] = None
 	experimental: Optional[bool] = None
 	manifest: Optional[ImplementationGuide_Manifest] = None
@@ -84,5 +85,4 @@ class ImplementationGuide(DomainResource):
 	url: str
 	version: Optional[str] = None
 	packageId: str
-	contact: list[ContactDetail] = []
-
+	contact: Optional[List[ContactDetail]] = None

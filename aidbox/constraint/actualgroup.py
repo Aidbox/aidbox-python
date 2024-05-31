@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Group_Member(BackboneElement):
 	entity: Reference
@@ -18,7 +17,7 @@ class Group_Characteristic(BackboneElement):
 	period: Optional[Period] = None
 	valueRange: Optional[Range] = None
 
-class Actualgroup(BaseModel):
+class Actualgroup(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/actualgroup"])
 	name: Optional[str] = None
 	type: str
@@ -26,13 +25,6 @@ class Actualgroup(BaseModel):
 	active: Optional[bool] = None
 	code: Optional[CodeableConcept] = None
 	identifier: Optional[List[Identifier]] = None
-	quantity: Optional[str] = None
+	quantity: Optional[NonNegativeInt] = None
 	managingEntity: Optional[Reference] = None
 	actual: bool
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

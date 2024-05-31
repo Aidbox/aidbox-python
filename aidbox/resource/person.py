@@ -1,19 +1,19 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Person_Link(BackboneElement):
-	assurance: Optional[str] = None
 	target: Reference
+	assurance: Optional[str] = None
 
 class Person(DomainResource):
-	address: list[Address] = []
+	address: Optional[List[Address]] = None
 	managingOrganization: Optional[Reference] = None
-	name: list[HumanName] = []
+	name: Optional[List[HumanName]] = None
 	birthDate: Optional[str] = None
 	photo: Optional[Attachment] = None
-	link: list[Person_Link] = []
+	link: Optional[List[Person_Link]] = None
 	active: Optional[bool] = None
-	identifier: list[Identifier] = []
-	telecom: list[ContactPoint] = []
+	identifier: Optional[List[Identifier]] = None
+	telecom: Optional[List[ContactPoint]] = None
 	gender: Optional[str] = None
-

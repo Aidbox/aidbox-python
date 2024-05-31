@@ -1,102 +1,102 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MedicationKnowledge_Monograph(BackboneElement):
-	source: Optional[Reference] = None
 	type: Optional[CodeableConcept] = None
+	source: Optional[Reference] = None
 
-class MedicationKnowledge_Regulatory_MaxDispense(BackboneElement):
-	period: Optional[str] = None
-	quantity: Quantity
+class MedicationKnowledge_Regulatory_Substitution(BackboneElement):
+	type: CodeableConcept
+	allowed: bool
 
 class MedicationKnowledge_Regulatory_Schedule(BackboneElement):
 	schedule: CodeableConcept
 
-class MedicationKnowledge_Regulatory_Substitution(BackboneElement):
-	allowed: bool
-	type: CodeableConcept
+class MedicationKnowledge_Regulatory_MaxDispense(BackboneElement):
+	quantity: Quantity
+	period: Optional[Duration] = None
 
 class MedicationKnowledge_Regulatory(BackboneElement):
-	maxDispense: Optional[MedicationKnowledge_Regulatory_MaxDispense] = None
 	regulatoryAuthority: Reference
-	schedule: list[MedicationKnowledge_Regulatory_Schedule] = []
-	substitution: list[MedicationKnowledge_Regulatory_Substitution] = []
+	substitution: Optional[List[MedicationKnowledge_Regulatory_Substitution]] = None
+	schedule: Optional[List[MedicationKnowledge_Regulatory_Schedule]] = None
+	maxDispense: Optional[MedicationKnowledge_Regulatory_MaxDispense] = None
 
 class MedicationKnowledge_DrugCharacteristic(BackboneElement):
 	type: Optional[CodeableConcept] = None
-	valueBase64Binary: Optional[str] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
-	valueQuantity: Optional[Quantity] = None
 	valueString: Optional[str] = None
+	valueQuantity: Optional[Quantity] = None
+	valueBase64Binary: Optional[str] = None
 
 class MedicationKnowledge_Packaging(BackboneElement):
-	quantity: Optional[Quantity] = None
 	type: Optional[CodeableConcept] = None
+	quantity: Optional[Quantity] = None
 
 class MedicationKnowledge_RelatedMedicationKnowledge(BackboneElement):
-	reference: list[Reference]
 	type: CodeableConcept
+	reference: List[Reference]
 
 class MedicationKnowledge_MedicineClassification(BackboneElement):
-	classification: list[CodeableConcept] = []
 	type: CodeableConcept
+	classification: Optional[List[CodeableConcept]] = None
 
 class MedicationKnowledge_Kinetics(BackboneElement):
-	areaUnderCurve: list[Quantity] = []
-	halfLifePeriod: Optional[str] = None
-	lethalDose50: list[Quantity] = []
+	areaUnderCurve: Optional[List[Quantity]] = None
+	lethalDose50: Optional[List[Quantity]] = None
+	halfLifePeriod: Optional[Duration] = None
 
 class MedicationKnowledge_Ingredient(BackboneElement):
-	isActive: Optional[bool] = None
 	itemCodeableConcept: Optional[CodeableConcept] = None
 	itemReference: Optional[Reference] = None
+	isActive: Optional[bool] = None
 	strength: Optional[Ratio] = None
 
 class MedicationKnowledge_MonitoringProgram(BackboneElement):
-	name: Optional[str] = None
 	type: Optional[CodeableConcept] = None
+	name: Optional[str] = None
 
 class MedicationKnowledge_AdministrationGuidelines_Dosage(BackboneElement):
-	dosage: list[str]
 	type: CodeableConcept
+	dosage: List[Dosage]
 
 class MedicationKnowledge_AdministrationGuidelines_PatientCharacteristics(BackboneElement):
 	characteristicCodeableConcept: Optional[CodeableConcept] = None
 	characteristicQuantity: Optional[Quantity] = None
-	value: list[str] = []
+	value: Optional[List[str]] = None
 
 class MedicationKnowledge_AdministrationGuidelines(BackboneElement):
-	dosage: list[MedicationKnowledge_AdministrationGuidelines_Dosage] = []
+	dosage: Optional[List[MedicationKnowledge_AdministrationGuidelines_Dosage]] = None
 	indicationCodeableConcept: Optional[CodeableConcept] = None
 	indicationReference: Optional[Reference] = None
-	patientCharacteristics: list[MedicationKnowledge_AdministrationGuidelines_PatientCharacteristics] = []
+	patientCharacteristics: Optional[List[MedicationKnowledge_AdministrationGuidelines_PatientCharacteristics]] = None
 
 class MedicationKnowledge_Cost(BackboneElement):
-	cost: Money
-	source: Optional[str] = None
 	type: CodeableConcept
+	source: Optional[str] = None
+	cost: Money
 
 class MedicationKnowledge(DomainResource):
 	preparationInstruction: Optional[str] = None
 	amount: Optional[Quantity] = None
-	monograph: list[MedicationKnowledge_Monograph] = []
-	regulatory: list[MedicationKnowledge_Regulatory] = []
+	monograph: Optional[List[MedicationKnowledge_Monograph]] = None
+	regulatory: Optional[List[MedicationKnowledge_Regulatory]] = None
 	doseForm: Optional[CodeableConcept] = None
-	intendedRoute: list[CodeableConcept] = []
-	drugCharacteristic: list[MedicationKnowledge_DrugCharacteristic] = []
+	intendedRoute: Optional[List[CodeableConcept]] = None
+	drugCharacteristic: Optional[List[MedicationKnowledge_DrugCharacteristic]] = None
 	packaging: Optional[MedicationKnowledge_Packaging] = None
-	relatedMedicationKnowledge: list[MedicationKnowledge_RelatedMedicationKnowledge] = []
-	medicineClassification: list[MedicationKnowledge_MedicineClassification] = []
-	kinetics: list[MedicationKnowledge_Kinetics] = []
-	associatedMedication: list[Reference] = []
-	ingredient: list[MedicationKnowledge_Ingredient] = []
-	monitoringProgram: list[MedicationKnowledge_MonitoringProgram] = []
-	contraindication: list[Reference] = []
+	relatedMedicationKnowledge: Optional[List[MedicationKnowledge_RelatedMedicationKnowledge]] = None
+	medicineClassification: Optional[List[MedicationKnowledge_MedicineClassification]] = None
+	kinetics: Optional[List[MedicationKnowledge_Kinetics]] = None
+	associatedMedication: Optional[List[Reference]] = None
+	ingredient: Optional[List[MedicationKnowledge_Ingredient]] = None
+	monitoringProgram: Optional[List[MedicationKnowledge_MonitoringProgram]] = None
+	contraindication: Optional[List[Reference]] = None
 	status: Optional[str] = None
-	productType: list[CodeableConcept] = []
-	synonym: list[str] = []
+	productType: Optional[List[CodeableConcept]] = None
+	synonym: Optional[List[str]] = None
 	code: Optional[CodeableConcept] = None
-	administrationGuidelines: list[MedicationKnowledge_AdministrationGuidelines] = []
+	administrationGuidelines: Optional[List[MedicationKnowledge_AdministrationGuidelines]] = None
 	manufacturer: Optional[Reference] = None
-	cost: list[MedicationKnowledge_Cost] = []
-
+	cost: Optional[List[MedicationKnowledge_Cost]] = None

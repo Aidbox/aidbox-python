@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Procedure_FocalDevice(BackboneElement):
@@ -6,41 +7,40 @@ class Procedure_FocalDevice(BackboneElement):
 	manipulated: Reference
 
 class Procedure_Performer(BackboneElement):
-	actor: Reference
 	function: Optional[CodeableConcept] = None
+	actor: Reference
 	onBehalfOf: Optional[Reference] = None
 
 class Procedure(DomainResource):
 	category: Optional[CodeableConcept] = None
-	report: list[Reference] = []
-	usedCode: list[CodeableConcept] = []
-	usedReference: list[Reference] = []
-	instantiatesCanonical: list[str] = []
-	instantiatesUri: list[str] = []
-	focalDevice: list[Procedure_FocalDevice] = []
+	report: Optional[List[Reference]] = None
+	usedCode: Optional[List[CodeableConcept]] = None
+	usedReference: Optional[List[Reference]] = None
+	instantiatesCanonical: Optional[List[str]] = None
+	instantiatesUri: Optional[List[str]] = None
+	focalDevice: Optional[List[Procedure_FocalDevice]] = None
 	encounter: Optional[Reference] = None
-	performedAge: Optional[str] = None
-	complicationDetail: list[Reference] = []
-	reasonCode: list[CodeableConcept] = []
+	performedAge: Optional[Age] = None
+	complicationDetail: Optional[List[Reference]] = None
+	reasonCode: Optional[List[CodeableConcept]] = None
 	performedString: Optional[str] = None
 	statusReason: Optional[CodeableConcept] = None
 	outcome: Optional[CodeableConcept] = None
 	asserter: Optional[Reference] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	performedRange: Optional[Range] = None
-	complication: list[CodeableConcept] = []
+	complication: Optional[List[CodeableConcept]] = None
 	status: str
 	performedDateTime: Optional[str] = None
 	recorder: Optional[Reference] = None
 	code: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
-	bodySite: list[CodeableConcept] = []
-	basedOn: list[Reference] = []
-	partOf: list[Reference] = []
+	identifier: Optional[List[Identifier]] = None
+	bodySite: Optional[List[CodeableConcept]] = None
+	basedOn: Optional[List[Reference]] = None
+	partOf: Optional[List[Reference]] = None
 	performedPeriod: Optional[Period] = None
 	location: Optional[Reference] = None
-	followUp: list[CodeableConcept] = []
+	followUp: Optional[List[CodeableConcept]] = None
 	subject: Reference
-	performer: list[Procedure_Performer] = []
-	reasonReference: list[Reference] = []
-
+	performer: Optional[List[Procedure_Performer]] = None
+	reasonReference: Optional[List[Reference]] = None

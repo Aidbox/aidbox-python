@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding1217123003(Coding):
 	display: Literal["Radiotherapy course of treatment (regime/therapy)"] = "Radiotherapy course of treatment (regime/therapy)"
 	system: Literal["http://snomed.info/sct"] = "http://snomed.info/sct"
@@ -11,7 +10,7 @@ class CodexrtRadiotherapyPlannedCourseCode(CodeableConcept):
 	coding: List[Coding1217123003] = [Coding1217123003()]
 
 
-class CodexrtRadiotherapyPlannedCourse(BaseModel):
+class CodexrtRadiotherapyPlannedCourse(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/codex-radiation-therapy/StructureDefinition/codexrt-radiotherapy-planned-course"])
 	performerType: Optional[CodeableConcept] = None
 	category: List[CodeableConcept]
@@ -24,7 +23,7 @@ class CodexrtRadiotherapyPlannedCourse(BaseModel):
 	patientInstruction: Optional[str] = None
 	reasonCode: Optional[List[CodeableConcept]] = None
 	authoredOn: Optional[str] = None
-	occurrenceTiming: Optional[str] = None
+	occurrenceTiming: Optional[Timing] = None
 	note: Optional[List[Annotation]] = None
 	asNeededBoolean: Optional[bool] = None
 	requisition: Optional[Identifier] = None
@@ -49,10 +48,3 @@ class CodexrtRadiotherapyPlannedCourse(BaseModel):
 	asNeededCodeableConcept: Optional[CodeableConcept] = None
 	performer: Optional[List[Reference]] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Condition_Stage(BackboneElement):
 	summary: Optional[CodeableConcept] = None
@@ -12,13 +11,13 @@ class Condition_Evidence(BackboneElement):
 	code: Optional[List[CodeableConcept]] = None
 	detail: Optional[List[Reference]] = None
 
-class UsCoreCondition(BaseModel):
+class UsCoreCondition(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition"])
 	category: List[CodeableConcept]
 	clinicalStatus: Optional[CodeableConcept] = None
-	abatementAge: Optional[str] = None
+	abatementAge: Optional[Age] = None
 	onsetRange: Optional[Range] = None
-	onsetAge: Optional[str] = None
+	onsetAge: Optional[Age] = None
 	stage: Optional[List[Condition_Stage]] = None
 	encounter: Optional[Reference] = None
 	evidence: Optional[List[Condition_Evidence]] = None
@@ -39,10 +38,3 @@ class UsCoreCondition(BaseModel):
 	abatementDateTime: Optional[str] = None
 	verificationStatus: Optional[CodeableConcept] = None
 	subject: Reference
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

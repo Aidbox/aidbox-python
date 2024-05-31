@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class SubstanceSpecification_Property(BackboneElement):
@@ -12,28 +13,28 @@ class SubstanceSpecification_Property(BackboneElement):
 
 class SubstanceSpecification_Name_Official(BackboneElement):
 	authority: Optional[CodeableConcept] = None
-	date: Optional[str] = None
 	status: Optional[CodeableConcept] = None
+	date: Optional[str] = None
 
 class SubstanceSpecification_Name(BackboneElement):
-	official: list[SubstanceSpecification_Name_Official] = []
-	jurisdiction: list[CodeableConcept] = []
+	official: Optional[List[SubstanceSpecification_Name_Official]] = None
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	name: str
 	type: Optional[CodeableConcept] = None
-	source: list[Reference] = []
+	source: Optional[List[Reference]] = None
 	status: Optional[CodeableConcept] = None
-	language: list[CodeableConcept] = []
-	synonym: list[str] = []
-	translation: list[str] = []
+	language: Optional[List[CodeableConcept]] = None
+	synonym: Optional[List[str]] = None
+	translation: Optional[List[str]] = None
 	preferred: Optional[bool] = None
-	domain: list[CodeableConcept] = []
+	domain: Optional[List[CodeableConcept]] = None
 
 class SubstanceSpecification_Relationship(BackboneElement):
 	substanceCodeableConcept: Optional[CodeableConcept] = None
 	amountRatioLowLimit: Optional[Ratio] = None
 	amountType: Optional[CodeableConcept] = None
 	relationship: Optional[CodeableConcept] = None
-	source: list[Reference] = []
+	source: Optional[List[Reference]] = None
 	substanceReference: Optional[Reference] = None
 	amountRatio: Optional[Ratio] = None
 	amountQuantity: Optional[Quantity] = None
@@ -52,57 +53,56 @@ class SubstanceSpecification_Moiety(BackboneElement):
 	stereochemistry: Optional[CodeableConcept] = None
 
 class SubstanceSpecification_Structure_Isotope_MolecularWeight(BackboneElement):
-	amount: Optional[Quantity] = None
 	method: Optional[CodeableConcept] = None
 	type: Optional[CodeableConcept] = None
+	amount: Optional[Quantity] = None
 
 class SubstanceSpecification_Structure_Isotope(BackboneElement):
-	halfLife: Optional[Quantity] = None
 	identifier: Optional[Identifier] = None
-	molecularWeight: Optional[SubstanceSpecification_Structure_Isotope_MolecularWeight] = None
 	name: Optional[CodeableConcept] = None
 	substitution: Optional[CodeableConcept] = None
+	halfLife: Optional[Quantity] = None
+	molecularWeight: Optional[SubstanceSpecification_Structure_Isotope_MolecularWeight] = None
 
 class SubstanceSpecification_Structure_Representation(BackboneElement):
-	attachment: Optional[Attachment] = None
-	representation: Optional[str] = None
 	type: Optional[CodeableConcept] = None
+	representation: Optional[str] = None
+	attachment: Optional[Attachment] = None
 
 class SubstanceSpecification_Structure(BackboneElement):
-	isotope: list[SubstanceSpecification_Structure_Isotope] = []
+	stereochemistry: Optional[CodeableConcept] = None
+	opticalActivity: Optional[CodeableConcept] = None
 	molecularFormula: Optional[str] = None
 	molecularFormulaByMoiety: Optional[str] = None
+	isotope: Optional[List[SubstanceSpecification_Structure_Isotope]] = None
 	molecularWeight: Optional[str] = None
-	opticalActivity: Optional[CodeableConcept] = None
-	representation: list[SubstanceSpecification_Structure_Representation] = []
-	source: list[Reference] = []
-	stereochemistry: Optional[CodeableConcept] = None
+	source: Optional[List[Reference]] = None
+	representation: Optional[List[SubstanceSpecification_Structure_Representation]] = None
 
 class SubstanceSpecification_Code(BackboneElement):
 	code: Optional[CodeableConcept] = None
-	comment: Optional[str] = None
-	source: list[Reference] = []
 	status: Optional[CodeableConcept] = None
 	statusDate: Optional[str] = None
+	comment: Optional[str] = None
+	source: Optional[List[Reference]] = None
 
 class SubstanceSpecification(DomainResource):
 	description: Optional[str] = None
-	property: list[SubstanceSpecification_Property] = []
-	name: list[SubstanceSpecification_Name] = []
+	property: Optional[List[SubstanceSpecification_Property]] = None
+	name: Optional[List[SubstanceSpecification_Name]] = None
 	referenceInformation: Optional[Reference] = None
-	relationship: list[SubstanceSpecification_Relationship] = []
+	relationship: Optional[List[SubstanceSpecification_Relationship]] = None
 	type: Optional[CodeableConcept] = None
-	moiety: list[SubstanceSpecification_Moiety] = []
-	source: list[Reference] = []
+	moiety: Optional[List[SubstanceSpecification_Moiety]] = None
+	source: Optional[List[Reference]] = None
 	nucleicAcid: Optional[Reference] = None
 	structure: Optional[SubstanceSpecification_Structure] = None
 	status: Optional[CodeableConcept] = None
 	comment: Optional[str] = None
-	code: list[SubstanceSpecification_Code] = []
+	code: Optional[List[SubstanceSpecification_Code]] = None
 	identifier: Optional[Identifier] = None
-	molecularWeight: list[str] = []
+	molecularWeight: Optional[List[str]] = None
 	polymer: Optional[Reference] = None
 	protein: Optional[Reference] = None
 	domain: Optional[CodeableConcept] = None
 	sourceMaterial: Optional[Reference] = None
-

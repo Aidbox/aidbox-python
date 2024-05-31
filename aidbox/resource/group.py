@@ -1,10 +1,11 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Group_Member(BackboneElement):
 	entity: Reference
-	inactive: Optional[bool] = None
 	period: Optional[Period] = None
+	inactive: Optional[bool] = None
 
 class Group_Characteristic(BackboneElement):
 	exclude: bool
@@ -19,12 +20,11 @@ class Group_Characteristic(BackboneElement):
 class Group(DomainResource):
 	name: Optional[str] = None
 	type: str
-	member: list[Group_Member] = []
-	characteristic: list[Group_Characteristic] = []
+	member: Optional[List[Group_Member]] = None
+	characteristic: Optional[List[Group_Characteristic]] = None
 	active: Optional[bool] = None
 	code: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
-	quantity: Optional[str] = None
+	identifier: Optional[List[Identifier]] = None
+	quantity: Optional[NonNegativeInt] = None
 	managingEntity: Optional[Reference] = None
 	actual: bool
-

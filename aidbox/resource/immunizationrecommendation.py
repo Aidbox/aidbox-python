@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class ImmunizationRecommendation_Recommendation_DateCriterion(BackboneElement):
@@ -7,24 +8,23 @@ class ImmunizationRecommendation_Recommendation_DateCriterion(BackboneElement):
 
 class ImmunizationRecommendation_Recommendation(BackboneElement):
 	description: Optional[str] = None
-	seriesDosesPositiveInt: Optional[str] = None
-	contraindicatedVaccineCode: list[CodeableConcept] = []
-	doseNumberPositiveInt: Optional[str] = None
+	seriesDosesPositiveInt: Optional[PositiveInt] = None
+	contraindicatedVaccineCode: Optional[List[CodeableConcept]] = None
+	doseNumberPositiveInt: Optional[PositiveInt] = None
 	series: Optional[str] = None
-	vaccineCode: list[CodeableConcept] = []
+	vaccineCode: Optional[List[CodeableConcept]] = None
 	doseNumberString: Optional[str] = None
 	seriesDosesString: Optional[str] = None
 	forecastStatus: CodeableConcept
-	forecastReason: list[CodeableConcept] = []
-	dateCriterion: list[ImmunizationRecommendation_Recommendation_DateCriterion] = []
+	forecastReason: Optional[List[CodeableConcept]] = None
+	dateCriterion: Optional[List[ImmunizationRecommendation_Recommendation_DateCriterion]] = None
 	targetDisease: Optional[CodeableConcept] = None
-	supportingImmunization: list[Reference] = []
-	supportingPatientInformation: list[Reference] = []
+	supportingImmunization: Optional[List[Reference]] = None
+	supportingPatientInformation: Optional[List[Reference]] = None
 
 class ImmunizationRecommendation(DomainResource):
-	authority: Optional[Reference] = None
-	date: str
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	patient: Reference
-	recommendation: list[ImmunizationRecommendation_Recommendation]
-
+	date: str
+	authority: Optional[Reference] = None
+	recommendation: List[ImmunizationRecommendation_Recommendation]

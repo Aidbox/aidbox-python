@@ -1,9 +1,10 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class OperationDefinition_Overload(BackboneElement):
+	parameterName: Optional[List[str]] = None
 	comment: Optional[str] = None
-	parameterName: list[str] = []
 
 class OperationDefinition_Parameter_ReferencedFrom(BackboneElement):
 	source: str
@@ -18,13 +19,13 @@ class OperationDefinition_Parameter(BackboneElement):
 	searchType: Optional[str] = None
 	use: str
 	name: str
-	part: list[str] = []
+	part: Optional[List[str]] = None
 	type: Optional[str] = None
-	referencedFrom: list[OperationDefinition_Parameter_ReferencedFrom] = []
+	referencedFrom: Optional[List[OperationDefinition_Parameter_ReferencedFrom]] = None
 	documentation: Optional[str] = None
 	binding: Optional[OperationDefinition_Parameter_Binding] = None
 	max: str
-	targetProfile: list[str] = []
+	targetProfile: Optional[List[str]] = None
 
 class OperationDefinition(DomainResource):
 	description: Optional[str] = None
@@ -32,17 +33,17 @@ class OperationDefinition(DomainResource):
 	system: bool
 	publisher: Optional[str] = None
 	instance: bool
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
 	name: str
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	type: bool
-	overload: list[OperationDefinition_Overload] = []
+	overload: Optional[List[OperationDefinition_Overload]] = None
 	experimental: Optional[bool] = None
 	outputProfile: Optional[str] = None
 	title: Optional[str] = None
 	status: str
-	resource: list[str] = []
+	resource: Optional[List[str]] = None
 	affectsState: Optional[bool] = None
 	kind: str
 	comment: Optional[str] = None
@@ -50,7 +51,6 @@ class OperationDefinition(DomainResource):
 	code: str
 	base: Optional[str] = None
 	version: Optional[str] = None
-	contact: list[ContactDetail] = []
+	contact: Optional[List[ContactDetail]] = None
 	inputProfile: Optional[str] = None
-	parameter: list[OperationDefinition_Parameter] = []
-
+	parameter: Optional[List[OperationDefinition_Parameter]] = None

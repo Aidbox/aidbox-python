@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Procedure_FocalDevice(BackboneElement):
 	action: Optional[CodeableConcept] = None
@@ -12,7 +11,7 @@ class Procedure_Performer(BackboneElement):
 	actor: Reference
 	onBehalfOf: Optional[Reference] = None
 
-class UsCoreProcedure(BaseModel):
+class UsCoreProcedure(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"])
 	category: Optional[CodeableConcept] = None
 	report: Optional[List[Reference]] = None
@@ -22,7 +21,7 @@ class UsCoreProcedure(BaseModel):
 	instantiatesUri: Optional[List[str]] = None
 	focalDevice: Optional[List[Procedure_FocalDevice]] = None
 	encounter: Optional[Reference] = None
-	performedAge: Optional[str] = None
+	performedAge: Optional[Age] = None
 	complicationDetail: Optional[List[Reference]] = None
 	reasonCode: Optional[List[CodeableConcept]] = None
 	performedString: Optional[str] = None
@@ -46,10 +45,3 @@ class UsCoreProcedure(BaseModel):
 	subject: Reference
 	performer: Optional[List[Procedure_Performer]] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

@@ -1,16 +1,17 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Location_HoursOfOperation(BackboneElement):
+	daysOfWeek: Optional[List[str]] = None
 	allDay: Optional[bool] = None
-	closingTime: Optional[str] = None
-	daysOfWeek: list[str] = []
 	openingTime: Optional[str] = None
+	closingTime: Optional[str] = None
 
 class Location_Position(BackboneElement):
-	altitude: Optional[str] = None
-	latitude: str
-	longitude: str
+	longitude: float
+	latitude: float
+	altitude: Optional[float] = None
 
 class Location(DomainResource):
 	description: Optional[str] = None
@@ -18,16 +19,15 @@ class Location(DomainResource):
 	managingOrganization: Optional[Reference] = None
 	name: Optional[str] = None
 	mode: Optional[str] = None
-	type: list[CodeableConcept] = []
-	alias: list[str] = []
+	type: Optional[List[CodeableConcept]] = None
+	alias: Optional[List[str]] = None
 	status: Optional[str] = None
-	identifier: list[Identifier] = []
-	hoursOfOperation: list[Location_HoursOfOperation] = []
+	identifier: Optional[List[Identifier]] = None
+	hoursOfOperation: Optional[List[Location_HoursOfOperation]] = None
 	availabilityExceptions: Optional[str] = None
 	position: Optional[Location_Position] = None
-	telecom: list[ContactPoint] = []
+	telecom: Optional[List[ContactPoint]] = None
 	operationalStatus: Optional[Coding] = None
 	partOf: Optional[Reference] = None
 	physicalType: Optional[CodeableConcept] = None
-	endpoint: list[Reference] = []
-
+	endpoint: Optional[List[Reference]] = None

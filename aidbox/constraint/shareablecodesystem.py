@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class CodeSystem_Property(BackboneElement):
 	code: str
@@ -22,7 +21,7 @@ class CodeSystem_Concept_Designation(BackboneElement):
 
 class CodeSystem_Concept_Property(BackboneElement):
 	valueCode: Optional[str] = None
-	valueDecimal: Optional[str] = None
+	valueDecimal: Optional[float] = None
 	valueString: Optional[str] = None
 	valueBoolean: Optional[bool] = None
 	valueDateTime: Optional[str] = None
@@ -38,7 +37,7 @@ class CodeSystem_Concept(BackboneElement):
 	property: Optional[List[CodeSystem_Concept_Property]] = None
 	concept: Optional[List[str]] = None
 
-class Shareablecodesystem(BaseModel):
+class Shareablecodesystem(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/shareablecodesystem"])
 	description: str
 	date: Optional[str] = None
@@ -59,17 +58,10 @@ class Shareablecodesystem(BaseModel):
 	status: str
 	hierarchyMeaning: Optional[str] = None
 	valueSet: Optional[str] = None
-	count: Optional[str] = None
+	count: Optional[NonNegativeInt] = None
 	url: str
 	identifier: Optional[List[Identifier]] = None
 	concept: List[CodeSystem_Concept]
 	caseSensitive: Optional[bool] = None
 	version: str
 	contact: Optional[List[ContactDetail]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

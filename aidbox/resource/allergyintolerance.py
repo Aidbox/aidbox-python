@@ -1,34 +1,34 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class AllergyIntolerance_Reaction(BackboneElement):
+	substance: Optional[CodeableConcept] = None
+	manifestation: List[CodeableConcept]
 	description: Optional[str] = None
-	exposureRoute: Optional[CodeableConcept] = None
-	manifestation: list[CodeableConcept]
-	note: list[Annotation] = []
 	onset: Optional[str] = None
 	severity: Optional[str] = None
-	substance: Optional[CodeableConcept] = None
+	exposureRoute: Optional[CodeableConcept] = None
+	note: Optional[List[Annotation]] = None
 
 class AllergyIntolerance(DomainResource):
 	patient: Reference
-	category: list[str] = []
+	category: Optional[List[str]] = None
 	criticality: Optional[str] = None
 	clinicalStatus: Optional[CodeableConcept] = None
 	onsetRange: Optional[Range] = None
-	onsetAge: Optional[str] = None
+	onsetAge: Optional[Age] = None
 	encounter: Optional[Reference] = None
 	onsetPeriod: Optional[Period] = None
 	type: Optional[str] = None
 	asserter: Optional[Reference] = None
-	note: list[Annotation] = []
+	note: Optional[List[Annotation]] = None
 	recordedDate: Optional[str] = None
 	onsetString: Optional[str] = None
 	recorder: Optional[Reference] = None
 	code: Optional[CodeableConcept] = None
-	identifier: list[Identifier] = []
+	identifier: Optional[List[Identifier]] = None
 	onsetDateTime: Optional[str] = None
 	lastOccurrence: Optional[str] = None
 	verificationStatus: Optional[CodeableConcept] = None
-	reaction: list[AllergyIntolerance_Reaction] = []
-
+	reaction: Optional[List[AllergyIntolerance_Reaction]] = None

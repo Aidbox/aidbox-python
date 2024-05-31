@@ -1,42 +1,42 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class GraphDefinition_Link_Target_Compartment(BackboneElement):
-	code: str
-	description: Optional[str] = None
-	expression: Optional[str] = None
-	rule: str
 	use: str
+	code: str
+	rule: str
+	expression: Optional[str] = None
+	description: Optional[str] = None
 
 class GraphDefinition_Link_Target(BackboneElement):
-	compartment: list[GraphDefinition_Link_Target_Compartment] = []
-	link: list[str] = []
+	type: str
 	params: Optional[str] = None
 	profile: Optional[str] = None
-	type: str
+	compartment: Optional[List[GraphDefinition_Link_Target_Compartment]] = None
+	link: Optional[List[str]] = None
 
 class GraphDefinition_Link(BackboneElement):
-	description: Optional[str] = None
-	max: Optional[str] = None
-	min: Optional[int] = None
 	path: Optional[str] = None
 	sliceName: Optional[str] = None
-	target: list[GraphDefinition_Link_Target] = []
+	min: Optional[int] = None
+	max: Optional[str] = None
+	description: Optional[str] = None
+	target: Optional[List[GraphDefinition_Link_Target]] = None
 
 class GraphDefinition(DomainResource):
 	description: Optional[str] = None
 	date: Optional[str] = None
 	publisher: Optional[str] = None
-	jurisdiction: list[CodeableConcept] = []
+	jurisdiction: Optional[List[CodeableConcept]] = None
 	purpose: Optional[str] = None
 	name: str
 	start: str
-	useContext: list[UsageContext] = []
+	useContext: Optional[List[UsageContext]] = None
 	experimental: Optional[bool] = None
 	status: str
-	link: list[GraphDefinition_Link] = []
+	link: Optional[List[GraphDefinition_Link]] = None
 	url: Optional[str] = None
 	version: Optional[str] = None
-	contact: list[ContactDetail] = []
+	contact: Optional[List[ContactDetail]] = None
 	profile: Optional[str] = None
-

@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 class Coding595769(Coding):
 	system: Literal["http://loinc.org"] = "http://loinc.org"
 	code: Literal["59576-9"] = "59576-9"
@@ -35,7 +34,7 @@ class Observation_Component(BackboneElement):
 	valueInteger: Optional[int] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 
-class PediatricBmiForAge(BaseModel):
+class PediatricBmiForAge(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/pediatric-bmi-for-age"])
 	category: List[CodeableConcept]
 	referenceRange: Optional[List[Observation_ReferenceRange]] = None
@@ -72,10 +71,3 @@ class PediatricBmiForAge(BaseModel):
 	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	effectivePeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

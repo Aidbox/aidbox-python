@@ -1,19 +1,19 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MedicinalProductIndication_OtherTherapy(BackboneElement):
+	therapyRelationshipType: CodeableConcept
 	medicationCodeableConcept: Optional[CodeableConcept] = None
 	medicationReference: Optional[Reference] = None
-	therapyRelationshipType: CodeableConcept
 
 class MedicinalProductIndication(DomainResource):
 	diseaseSymptomProcedure: Optional[CodeableConcept] = None
-	undesirableEffect: list[Reference] = []
+	undesirableEffect: Optional[List[Reference]] = None
 	duration: Optional[Quantity] = None
-	otherTherapy: list[MedicinalProductIndication_OtherTherapy] = []
-	comorbidity: list[CodeableConcept] = []
+	otherTherapy: Optional[List[MedicinalProductIndication_OtherTherapy]] = None
+	comorbidity: Optional[List[CodeableConcept]] = None
 	intendedEffect: Optional[CodeableConcept] = None
-	population: list[Population] = []
+	population: Optional[List[Population]] = None
 	diseaseStatus: Optional[CodeableConcept] = None
-	subject: list[Reference] = []
-
+	subject: Optional[List[Reference]] = None

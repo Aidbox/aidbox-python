@@ -1,9 +1,8 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
+from ..base import *
 
-
-class Cdshooksguidanceresponse(BaseModel):
+class Cdshooksguidanceresponse(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/cdshooksguidanceresponse"])
 	dataRequirement: Optional[List[DataRequirement]] = None
 	moduleCanonical: Optional[str] = None
@@ -22,10 +21,3 @@ class Cdshooksguidanceresponse(BaseModel):
 	subject: Optional[Reference] = None
 	performer: Optional[Reference] = None
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

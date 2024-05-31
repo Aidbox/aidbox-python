@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class CareTeam_Participant(BackboneElement):
 	role: Optional[List[CodeableConcept]] = None
@@ -9,7 +8,7 @@ class CareTeam_Participant(BackboneElement):
 	onBehalfOf: Optional[Reference] = None
 	period: Optional[Period] = None
 
-class UsCoreCareteam(BaseModel):
+class UsCoreCareteam(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-careteam"])
 	category: Optional[List[CodeableConcept]] = None
 	managingOrganization: Optional[List[Reference]] = None
@@ -24,10 +23,3 @@ class UsCoreCareteam(BaseModel):
 	period: Optional[Period] = None
 	subject: Reference
 	reasonReference: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

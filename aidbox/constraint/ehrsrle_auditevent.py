@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class AuditEvent_Source(BackboneElement):
 	site: Optional[str] = None
@@ -41,7 +40,7 @@ class AuditEvent_Entity(BackboneElement):
 	what: Optional[Reference] = None
 	detail: Optional[List[AuditEvent_Entity_Detail]] = None
 
-class EhrsrleAuditevent(BaseModel):
+class EhrsrleAuditevent(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/StructureDefinition/ehrsrle-auditevent"])
 	outcomeDesc: Optional[str] = None
 	type: Coding
@@ -54,10 +53,3 @@ class EhrsrleAuditevent(BaseModel):
 	period: Optional[Period] = None
 	entity: Optional[List[AuditEvent_Entity]] = None
 	subtype: Optional[List[Coding]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

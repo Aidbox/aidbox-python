@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class PractitionerRole_AvailableTime(BackboneElement):
 	daysOfWeek: Optional[List[str]] = None
@@ -13,7 +12,7 @@ class PractitionerRole_NotAvailable(BackboneElement):
 	description: str
 	during: Optional[Period] = None
 
-class UsCorePractitionerrole(BaseModel):
+class UsCorePractitionerrole(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole"])
 	availableTime: Optional[List[PractitionerRole_AvailableTime]] = None
 	specialty: Optional[List[CodeableConcept]] = None
@@ -29,10 +28,3 @@ class UsCorePractitionerrole(BaseModel):
 	location: Optional[List[Reference]] = None
 	endpoint: Optional[List[Reference]] = None
 	healthcareService: Optional[List[Reference]] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

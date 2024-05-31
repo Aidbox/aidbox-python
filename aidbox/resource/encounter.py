@@ -1,15 +1,16 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Encounter_Diagnosis(BackboneElement):
 	condition: Reference
-	rank: Optional[str] = None
 	use: Optional[CodeableConcept] = None
+	rank: Optional[PositiveInt] = None
 
 class Encounter_Participant(BackboneElement):
-	individual: Optional[Reference] = None
+	type: Optional[List[CodeableConcept]] = None
 	period: Optional[Period] = None
-	type: list[CodeableConcept] = []
+	individual: Optional[Reference] = None
 
 class Encounter_ClassHistory(BackboneElement):
 	class_: Coding
@@ -18,46 +19,45 @@ class Encounter_ClassHistory(BackboneElement):
 class Encounter_Hospitalization(BackboneElement):
 	dischargeDisposition: Optional[CodeableConcept] = None
 	preAdmissionIdentifier: Optional[Identifier] = None
-	specialArrangement: list[CodeableConcept] = []
-	dietPreference: list[CodeableConcept] = []
+	specialArrangement: Optional[List[CodeableConcept]] = None
+	dietPreference: Optional[List[CodeableConcept]] = None
 	admitSource: Optional[CodeableConcept] = None
-	specialCourtesy: list[CodeableConcept] = []
+	specialCourtesy: Optional[List[CodeableConcept]] = None
 	reAdmission: Optional[CodeableConcept] = None
 	origin: Optional[Reference] = None
 	destination: Optional[Reference] = None
 
 class Encounter_Location(BackboneElement):
 	location: Reference
-	period: Optional[Period] = None
-	physicalType: Optional[CodeableConcept] = None
 	status: Optional[str] = None
+	physicalType: Optional[CodeableConcept] = None
+	period: Optional[Period] = None
 
 class Encounter_StatusHistory(BackboneElement):
-	period: Period
 	status: str
+	period: Period
 
 class Encounter(DomainResource):
-	appointment: list[Reference] = []
-	diagnosis: list[Encounter_Diagnosis] = []
+	appointment: Optional[List[Reference]] = None
+	diagnosis: Optional[List[Encounter_Diagnosis]] = None
 	serviceProvider: Optional[Reference] = None
-	episodeOfCare: list[Reference] = []
-	reasonCode: list[CodeableConcept] = []
-	type: list[CodeableConcept] = []
-	participant: list[Encounter_Participant] = []
+	episodeOfCare: Optional[List[Reference]] = None
+	reasonCode: Optional[List[CodeableConcept]] = None
+	type: Optional[List[CodeableConcept]] = None
+	participant: Optional[List[Encounter_Participant]] = None
 	serviceType: Optional[CodeableConcept] = None
-	account: list[Reference] = []
-	classHistory: list[Encounter_ClassHistory] = []
+	account: Optional[List[Reference]] = None
+	classHistory: Optional[List[Encounter_ClassHistory]] = None
 	priority: Optional[CodeableConcept] = None
 	status: str
 	class_: Coding
-	length: Optional[str] = None
-	identifier: list[Identifier] = []
+	length: Optional[Duration] = None
+	identifier: Optional[List[Identifier]] = None
 	hospitalization: Optional[Encounter_Hospitalization] = None
 	period: Optional[Period] = None
-	basedOn: list[Reference] = []
+	basedOn: Optional[List[Reference]] = None
 	partOf: Optional[Reference] = None
-	location: list[Encounter_Location] = []
+	location: Optional[List[Encounter_Location]] = None
 	subject: Optional[Reference] = None
-	statusHistory: list[Encounter_StatusHistory] = []
-	reasonReference: list[Reference] = []
-
+	statusHistory: Optional[List[Encounter_StatusHistory]] = None
+	reasonReference: Optional[List[Reference]] = None

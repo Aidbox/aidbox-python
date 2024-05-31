@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import *
 from typing import Optional, List, Literal
-from base import *
-
+from ..base import *
 
 class Provenance_Agent(BackboneElement):
 	type: Optional[CodeableConcept] = None
@@ -14,7 +13,7 @@ class Provenance_Entity(BackboneElement):
 	what: Reference
 	agent: Optional[List[str]] = None
 
-class UsCoreProvenance(BaseModel):
+class UsCoreProvenance(DomainResource):
 	meta: Meta = Meta(profile=["http://hl7.org/fhir/us/core/StructureDefinition/us-core-provenance"])
 	signature: Optional[List[Signature]] = None
 	occurredDateTime: Optional[str] = None
@@ -27,10 +26,3 @@ class UsCoreProvenance(BaseModel):
 	location: Optional[Reference] = None
 	entity: Optional[List[Provenance_Entity]] = None
 	occurredPeriod: Optional[Period] = None
-	text: Optional[Narrative] = None
-	contained: Optional[List[Resource]] = None
-	extension: Optional[List[Extension]] = None
-	modifierExtension: Optional[List[Extension]] = None
-	id: Optional[str] = None
-	implicitRules: Optional[str] = None
-	language: Optional[str] = None

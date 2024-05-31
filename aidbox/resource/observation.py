@@ -1,17 +1,18 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class Observation_ReferenceRange(BackboneElement):
-	age: Optional[Range] = None
-	appliesTo: list[CodeableConcept] = []
-	high: Optional[Quantity] = None
 	low: Optional[Quantity] = None
-	text: Optional[str] = None
+	high: Optional[Quantity] = None
 	type: Optional[CodeableConcept] = None
+	appliesTo: Optional[List[CodeableConcept]] = None
+	age: Optional[Range] = None
+	text: Optional[str] = None
 
 class Observation_Component(BackboneElement):
-	referenceRange: list[str] = []
-	interpretation: list[CodeableConcept] = []
+	referenceRange: Optional[List[str]] = None
+	interpretation: Optional[List[CodeableConcept]] = None
 	valueTime: Optional[str] = None
 	valueQuantity: Optional[Quantity] = None
 	valueString: Optional[str] = None
@@ -27,11 +28,11 @@ class Observation_Component(BackboneElement):
 	dataAbsentReason: Optional[CodeableConcept] = None
 
 class Observation(DomainResource):
-	category: list[CodeableConcept] = []
-	referenceRange: list[Observation_ReferenceRange] = []
-	hasMember: list[Reference] = []
-	derivedFrom: list[Reference] = []
-	interpretation: list[CodeableConcept] = []
+	category: Optional[List[CodeableConcept]] = None
+	referenceRange: Optional[List[Observation_ReferenceRange]] = None
+	hasMember: Optional[List[Reference]] = None
+	derivedFrom: Optional[List[Reference]] = None
+	interpretation: Optional[List[CodeableConcept]] = None
 	encounter: Optional[Reference] = None
 	method: Optional[CodeableConcept] = None
 	valueTime: Optional[str] = None
@@ -41,27 +42,26 @@ class Observation(DomainResource):
 	valueRatio: Optional[Ratio] = None
 	valueBoolean: Optional[bool] = None
 	valueDateTime: Optional[str] = None
-	component: list[Observation_Component] = []
-	note: list[Annotation] = []
+	component: Optional[List[Observation_Component]] = None
+	note: Optional[List[Annotation]] = None
 	valueSampledData: Optional[SampledData] = None
 	effectiveDateTime: Optional[str] = None
 	status: str
 	code: CodeableConcept
-	identifier: list[Identifier] = []
-	effectiveTiming: Optional[str] = None
+	identifier: Optional[List[Identifier]] = None
+	effectiveTiming: Optional[Timing] = None
 	valueCodeableConcept: Optional[CodeableConcept] = None
 	bodySite: Optional[CodeableConcept] = None
-	focus: list[Reference] = []
+	focus: Optional[List[Reference]] = None
 	issued: Optional[str] = None
 	valuePeriod: Optional[Period] = None
 	device: Optional[Reference] = None
 	effectiveInstant: Optional[str] = None
-	basedOn: list[Reference] = []
+	basedOn: Optional[List[Reference]] = None
 	valueRange: Optional[Range] = None
-	partOf: list[Reference] = []
+	partOf: Optional[List[Reference]] = None
 	valueInteger: Optional[int] = None
 	subject: Optional[Reference] = None
-	performer: list[Reference] = []
+	performer: Optional[List[Reference]] = None
 	dataAbsentReason: Optional[CodeableConcept] = None
 	effectivePeriod: Optional[Period] = None
-

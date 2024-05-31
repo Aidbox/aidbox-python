@@ -1,4 +1,5 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class SubstanceNucleicAcid_Subunit_Linkage(BackboneElement):
@@ -13,19 +14,18 @@ class SubstanceNucleicAcid_Subunit_Sugar(BackboneElement):
 	residueSite: Optional[str] = None
 
 class SubstanceNucleicAcid_Subunit(BackboneElement):
-	fivePrime: Optional[CodeableConcept] = None
-	length: Optional[int] = None
-	linkage: list[SubstanceNucleicAcid_Subunit_Linkage] = []
-	sequence: Optional[str] = None
-	sequenceAttachment: Optional[Attachment] = None
 	subunit: Optional[int] = None
-	sugar: list[SubstanceNucleicAcid_Subunit_Sugar] = []
+	sequence: Optional[str] = None
+	length: Optional[int] = None
+	sequenceAttachment: Optional[Attachment] = None
+	fivePrime: Optional[CodeableConcept] = None
 	threePrime: Optional[CodeableConcept] = None
+	linkage: Optional[List[SubstanceNucleicAcid_Subunit_Linkage]] = None
+	sugar: Optional[List[SubstanceNucleicAcid_Subunit_Sugar]] = None
 
 class SubstanceNucleicAcid(DomainResource):
-	areaOfHybridisation: Optional[str] = None
-	numberOfSubunits: Optional[int] = None
-	oligoNucleotideType: Optional[CodeableConcept] = None
 	sequenceType: Optional[CodeableConcept] = None
-	subunit: list[SubstanceNucleicAcid_Subunit] = []
-
+	numberOfSubunits: Optional[int] = None
+	areaOfHybridisation: Optional[str] = None
+	oligoNucleotideType: Optional[CodeableConcept] = None
+	subunit: Optional[List[SubstanceNucleicAcid_Subunit]] = None

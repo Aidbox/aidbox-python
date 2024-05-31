@@ -1,23 +1,24 @@
-from typing import Optional
+from pydantic import *
+from typing import Optional, List
 from ..base import *
 
 class MessageHeader_Response(BackboneElement):
+	identifier: str
 	code: str
 	details: Optional[Reference] = None
-	identifier: str
 
 class MessageHeader_Source(BackboneElement):
-	contact: Optional[ContactPoint] = None
-	endpoint: str
 	name: Optional[str] = None
 	software: Optional[str] = None
 	version: Optional[str] = None
+	contact: Optional[ContactPoint] = None
+	endpoint: str
 
 class MessageHeader_Destination(BackboneElement):
-	endpoint: str
 	name: Optional[str] = None
-	receiver: Optional[Reference] = None
 	target: Optional[Reference] = None
+	endpoint: str
+	receiver: Optional[Reference] = None
 
 class MessageHeader(DomainResource):
 	response: Optional[MessageHeader_Response] = None
@@ -28,8 +29,7 @@ class MessageHeader(DomainResource):
 	reason: Optional[CodeableConcept] = None
 	responsible: Optional[Reference] = None
 	sender: Optional[Reference] = None
-	focus: list[Reference] = []
+	focus: Optional[List[Reference]] = None
 	eventUri: Optional[str] = None
-	destination: list[MessageHeader_Destination] = []
+	destination: Optional[List[MessageHeader_Destination]] = None
 	eventCoding: Optional[Coding] = None
-
